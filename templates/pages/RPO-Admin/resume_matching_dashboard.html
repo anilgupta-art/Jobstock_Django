@@ -1,21 +1,56 @@
-{% extends "Layout/base.html" %}
+{% extends "Base/base.html" %}
 {% load static %}
 
-{% block title %}Resume Matching Dashboard - RPO Admin{% endblock %}
+<!-- {% block title %}Resume Matching Dashboard - RPO Admin{% endblock %} -->
 
-{% block content %}
-<!-- Page Title -->
-<section class="page-title">
-    <div class="auto-container">
-        <div class="title-outer">
-            <h1>Resume Matching Dashboard</h1>
-            <ul class="page-breadcrumb">
-                <li><a href="{% url 'App:rpo_dashboard' %}">Dashboard</a></li>
-                <li>Resume Matching</li>
-            </ul>
-        </div>
-    </div>
-</section>
+{% block hero_content %}
+
+{% include 'Base/navbar.html' %}
+
+<!-- Dashboard -->
+<div class="dashboard-wrap bg-light">
+	<a class="mobNavigation" data-bs-toggle="collapse" href="#MobNav" role="button" aria-expanded="false" aria-controls="MobNav">
+		<i class="fas fa-bars mr-2"></i>Dashboard Navigation
+	</a>
+	<div class="collapse" id="MobNav">
+		<div class="dashboard-nav">
+			<div class="dash-user-blocks pt-5">
+				<div class="jbs-grid-usrs-thumb">
+					<div class="jbs-grid-yuo">
+						<figure><img src="{% static 'app/img/l-12.png' %}" class="img-fluid circle" alt=""></figure>
+					</div>
+				</div>
+				<div class="jbs-grid-usrs-caption mb-3">
+					<div class="jbs-kioyer">
+						<span class="label text-light bg-main">RPO Admin</span>
+					</div>
+					<div class="jbs-tiosk">
+						<h4 class="jbs-tiosk-title">{{ request.user.get_full_name|default:request.user.username }}</h4>
+						<div class="jbs-tiosk-subtitle"><span><i class="fa-solid fa-user-tie me-2"></i>RPO Administrator</span></div>
+					</div>
+				</div>
+			</div>
+			{% include 'Components/For-Employer/dashboard_nav.html' with dashboard_active='resume_matching' %}
+		</div>
+	</div>
+	
+	<!-- Page Title -->
+	<div class="dashboard-content">
+		<div class="dashboard-tlbar d-block mb-4">
+			<div class="row">
+				<div class="col-xl-12 col-lg-12 col-md-12">
+					
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item text-muted"><a href="{% url 'App:rpo_dashboard' %}">Dashboard</a></li>
+							<li class="breadcrumb-item active" aria-current="page">Resume Matching</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+		
+		
 <!-- End Page Title -->
 
 <!-- Dashboard -->

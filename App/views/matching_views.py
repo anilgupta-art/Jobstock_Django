@@ -58,7 +58,11 @@ def resume_matching_dashboard(request):
     if search:
         matches = matches.filter(
             Q(job__title__icontains=search) |
-            Q(resume__candidate_name__icontains=search)
+            Q(resume__user__username__icontains=search) |
+            Q(resume__user__first_name__icontains=search) |
+            Q(resume__user__last_name__icontains=search) |
+            Q(resume__profile__full_name__icontains=search) |
+            Q(resume__original_filename__icontains=search)
         )
     
     # Order by match percentage
@@ -90,7 +94,7 @@ def resume_matching_dashboard(request):
     }
     
     # Get active jobs and completed resumes for filters
-    active_jobs = Job.objects.filter(status='active').order_by('-created_at')[:50]
+    active_jobs = Job.objects.filter(is_active=True).order_by('-created_at')[:50]
     completed_resumes = ResumeProcessing.objects.filter(
         status='completed'
     ).order_by('-created_at')[:50]
@@ -133,7 +137,7 @@ def match_resume_to_jobs(request, resume_id):
         return redirect('App:resume_matching_dashboard')
     
     # Show confirmation page
-    active_jobs_count = Job.objects.filter(status='active').count()
+    active_jobs_count = Job.objects.filter(is_active=True).count()
     context = {
         'resume': resume,
         'active_jobs_count': active_jobs_count
@@ -150,7 +154,7 @@ def match_job_to_resumes(request, job_id):
     if not check_rpo_admin_access(request):
         messages.error(request, 'Access denied. RPO Admin role required.')
         return redirect('App:index')
-    job = get_object_or_404(Job, id=job_id, status='active')
+    job = get_object_or_404(Job, id=job_id, is_active=True)
     
     if request.method == 'POST':
         # Run background task
