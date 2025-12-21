@@ -103,6 +103,16 @@ urlpatterns = [
     path("rpo-process-resume/<int:resume_id>/", views.rpo_process_single_resume, name="rpo_process_single_resume"),
     path("rpo-posted-jobs/", views.rpo_posted_jobs, name="rpo_posted_jobs"),
     
+    # Resume-Job Matching
+    path("resume-matching/", views.resume_matching_dashboard, name="resume_matching_dashboard"),
+    path("resume-matching/match-details/<int:match_id>/", views.view_match_details, name="view_match_details"),
+    path("resume-matching/match-resume/<int:resume_id>/", views.match_resume_to_jobs, name="match_resume_to_jobs"),
+    path("resume-matching/match-job/<int:job_id>/", views.match_job_to_resumes, name="match_job_to_resumes"),
+    path("resume-matching/top-candidates/<int:job_id>/", views.top_candidates_for_job, name="top_candidates_for_job"),
+    path("resume-matching/top-jobs/<int:resume_id>/", views.top_jobs_for_resume, name="top_jobs_for_resume"),
+    path("resume-matching/recalculate/<int:match_id>/", views.recalculate_match, name="recalculate_match"),
+    path("resume-matching/match-single/", views.match_single_resume_job, name="match_single_resume_job"),
+    
     # Menu Demo
     path("menu-demo/", views.menu_demo, name="menu_demo"),
     
