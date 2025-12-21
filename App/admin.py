@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import (
     Blog, Candidate, Employer, Job, Profile, DropdownGroup, DropdownMaster,
     CandidateSkill, CandidateEducation, CandidateExperience, CandidateCertification,
-    ResumeProcessing, ErrorLog
+    ResumeProcessing, ErrorLog, ResumeJobMatch
 )
 
 admin.site.register(Blog)
@@ -275,3 +275,130 @@ class ErrorLogAdmin(admin.ModelAdmin):
 		response['Content-Disposition'] = 'attachment; filename="error_report.json"'
 		return response
 	export_error_report.short_description = 'Export error report (JSON)'
+
+@admin.register(ResumeJobMatch)
+class ResumeJobMatchAdmin(admin.ModelAdmin):
+	list_display = (
+		'id', 
+		'job_title', 
+		'resume_user', 
+		'overall_match_display',
+		'match_quality_badge',
+		'status_badge',
+		'is_recommended',
+		'created_at'
+	)
+	list_filter = (
+		'match_quality',
+		'is_recommended',
+		'status',
+		'created_at'
+	)
+	search_fields = (
+		'job__title',
+		'resume__user__username',
+		'resume__original_filename'
+	)
+	readonly_fields = (
+		'job',
+		'resume',
+		'overall_match_percentage',
+		'skills_match_percentage',
+		'experience_match_percentage',
+		'qualification_match_percentage',
+		'location_match_percentage',
+		'sentiment_score',
+		'sentiment_impact',
+		'matching_skills',
+		'missing_skills',
+		'additional_skills',
+		'success_reasons',
+		'failure_reasons',
+		'improvement_suggestions',
+		'match_quality',
+		'is_recommended',
+		'detailed_analysis',
+		'processing_started_at',
+		'processing_completed_at',
+		'created_at',
+		'updated_at'
+	)
+	fieldsets = (
+		('Match Information', {
+			'fields': ('job', 'resume', 'matched_by', 'status')
+		}),
+		('Match Scores', {
+			'fields': (
+				'overall_match_percentage',
+				'skills_match_percentage',
+				'experience_match_percentage',
+				'qualification_match_percentage',
+				'location_match_percentage'
+			)
+		}),
+		('Skills Analysis', {
+			'fields': ('matching_skills', 'missing_skills', 'additional_skills'),
+			'classes': ('collapse',)
+		}),
+		('Sentiment Analysis', {
+			'fields': ('sentiment_score', 'sentiment_impact'),
+			'classes': ('collapse',)
+		}),
+		('Match Analysis', {
+			'fields': (
+				'match_quality',
+				'is_recommended',
+				'success_reasons',
+				'failure_reasons',
+				'improvement_suggestions'
+			)
+		}),
+		('Processing Details', {
+			'fields': (
+				'processing_started_at',
+				'processing_completed_at',
+				'error_message',
+				'detailed_analysis'
+			),
+			'classes': ('collapse',)
+		}),
+		('Timestamps', {
+			'fields': ('created_at', 'updated_at'),
+			'classes': ('collapse',)
+		}),
+	)
+	
+	def job_title(self, obj):
+		return obj.job.title
+	job_title.short_description = 'Job'
+	job_title.admin_order_field = 'job__title'
+	
+	def resume_user(self, obj):
+		return obj.resume.user.get_full_name() or obj.resume.user.username
+	resume_user.short_description = 'Candidate'
+	resume_user.admin_order_field = 'resume__user__username'
+	
+	def overall_match_display(self, obj):
+		return f"{obj.overall_match_percentage}%"
+	overall_match_display.short_description = 'Match %'
+	overall_match_display.admin_order_field = 'overall_match_percentage'
+	
+	def match_quality_badge(self, obj):
+		from django.utils.html import format_html
+		badge_class = obj.get_match_quality_badge_class()
+		return format_html(
+			'<span class="badge {}">{}</span>',
+			badge_class,
+			obj.get_match_quality_display() if obj.match_quality else 'N/A'
+		)
+	match_quality_badge.short_description = 'Quality'
+	
+	def status_badge(self, obj):
+		from django.utils.html import format_html
+		badge_class = obj.get_status_badge_class()
+		return format_html(
+			'<span class="badge {}">{}</span>',
+			badge_class,
+			obj.get_status_display()
+		)
+	status_badge.short_description = 'Status'
