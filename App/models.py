@@ -4,6 +4,9 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 import os
 
+# Import job board models
+from App.models.job_board_models import JobBoardMapping, ExternalApplication, BoardSyncLog
+
 # Create your models here.
 
 def validate_resume_file(file):

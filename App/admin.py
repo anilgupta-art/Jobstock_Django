@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import (
-    Blog, Candidate, Employer, Job, Profile, DropdownGroup, DropdownMaster,
+# Import job board admin
+from App.admin.job_board_admin import JobBoardMappingAdmin, ExternalApplicationAdmin, BoardSyncLogAdmin    Blog, Candidate, Employer, Job, Profile, DropdownGroup, DropdownMaster,
     CandidateSkill, CandidateEducation, CandidateExperience, CandidateCertification,
     ResumeProcessing, ErrorLog, ResumeJobMatch
 )
