@@ -598,7 +598,7 @@ class JobBoardIntegrationService:
     def _save_board_job_mapping(self, job_id: int, board: str, 
                                external_id: str) -> None:
         """Save mapping between internal job and external board job"""
-        from App.models.job_board_models import JobBoardMapping
+        from App.job_board_models import JobBoardMapping
         
         logger.info(f"Job {job_id} posted to {board} with external ID {external_id}")
         
@@ -619,7 +619,7 @@ class JobBoardIntegrationService:
     
     def _get_board_mappings(self, job_id: int) -> List[Dict[str, str]]:
         """Get all board mappings for a job"""
-        from App.models.job_board_models import JobBoardMapping
+        from App.job_board_models import JobBoardMapping
         
         logger.info(f"Getting board mappings for job {job_id}")
         

@@ -1,10 +1,12 @@
 from django.contrib import admin
 from .models import (
-# Import job board admin
-from App.admin.job_board_admin import JobBoardMappingAdmin, ExternalApplicationAdmin, BoardSyncLogAdmin    Blog, Candidate, Employer, Job, Profile, DropdownGroup, DropdownMaster,
+    Blog, Candidate, Employer, Job, Profile, DropdownGroup, DropdownMaster,
     CandidateSkill, CandidateEducation, CandidateExperience, CandidateCertification,
     ResumeProcessing, ErrorLog, ResumeJobMatch
 )
+
+# Import job board admin classes
+from App.job_board_admin import JobBoardMappingAdmin, ExternalApplicationAdmin, BoardSyncLogAdmin
 
 admin.site.register(Blog)
 admin.site.register(Candidate)

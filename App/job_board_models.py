@@ -4,7 +4,6 @@ Tracks external job board postings and applications
 """
 from django.db import models
 from django.utils import timezone
-from App.models import Job
 
 
 class JobBoardMapping(models.Model):
@@ -30,7 +29,7 @@ class JobBoardMapping(models.Model):
     
     # Relationships
     job = models.ForeignKey(
-        Job,
+        'Job',
         on_delete=models.CASCADE,
         related_name='board_mappings',
         help_text="Internal job posting"
@@ -192,7 +191,7 @@ class ExternalApplication(models.Model):
     
     # Relationships
     job = models.ForeignKey(
-        Job,
+        'Job',
         on_delete=models.CASCADE,
         related_name='external_applications',
         help_text="Job being applied to"
@@ -324,7 +323,7 @@ class BoardSyncLog(models.Model):
     
     # Relationships
     job = models.ForeignKey(
-        Job,
+        'Job',
         on_delete=models.CASCADE,
         related_name='sync_logs',
         null=True,

@@ -6,7 +6,7 @@ from django.db.models.signals import post_save, pre_delete
 from django.dispatch import receiver
 from django.conf import settings
 from App.models import Job
-from App.models.job_board_models import JobBoardMapping
+from App.job_board_models import JobBoardMapping
 from App.services.job_board_integration_service import job_board_service
 import logging
 

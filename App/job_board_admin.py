@@ -5,7 +5,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 from django.urls import reverse
 from django.utils.safestring import mark_safe
-from App.models.job_board_models import JobBoardMapping, ExternalApplication, BoardSyncLog
+from App.job_board_models import JobBoardMapping, ExternalApplication, BoardSyncLog
 
 
 @admin.register(JobBoardMapping)
