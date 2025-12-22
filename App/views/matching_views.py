@@ -279,7 +279,7 @@ def recalculate_match(request, match_id):
     if result.success:
         messages.success(
             request, 
-            f"Match recalculated: {result.data['overall_match_percentage']:.2f}%"
+            f"Match recalculated: {result.data.get('overall_match', 0):.2f}%"
         )
     else:
         messages.error(request, f"Recalculation failed: {result.message}")
