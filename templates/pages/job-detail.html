@@ -55,8 +55,16 @@
 							<p class="text-light">We are looking for a experienced Senior Front-End Developer with an advanced level of english to design UI/UX interface for web and mobile apps.</p>
 						</div>
 						<div class="jbs-roots-y6 py-3">
+						{% if user.is_authenticated and user.groups.all.0.name == 'rpo_admin' or user.is_superuser %}
+							<!-- RPO Admin: Show Find Candidate button -->
+							<a href="{% url 'App:resume_matching_dashboard' %}?job={{ job.id }}" class="btn btn-main fw-medium px-lg-5 px-4 me-3">
+								<i class="fa-solid fa-search me-2"></i>Find Candidate
+							</a>
+						{% else %}
+							<!-- Candidate/Employer: Show Apply and Save buttons -->
 							<button class="btn btn-main fw-medium px-lg-5 px-4 me-3" type="button" data-bs-toggle="modal" data-bs-target="#applyjob">Apply Job</button>
 							<button class="btn btn-whites fw-medium px-lg-5 px-4" type="button">Save job</button>
+						{% endif %}
 						</div>
 					</div>
 				</div>

@@ -272,6 +272,29 @@ class ResumeProcessingService:
             if resume_record:
                 resume_record = self.update_resume_record(resume_record, extracted_data)
             
+            # Auto-match resume to jobs after successful processing
+            if resume_record and resume_record.status == 'completed':
+                try:
+                    from App.services.resume_matching_service import ResumeJobMatchingService
+                    
+                    # Match to all active jobs
+                    match_result = ResumeJobMatchingService.match_resume_to_all_jobs(
+                        resume_id=resume_record.id,
+                        user=user
+                    )
+                    
+                    if match_result.success:
+                        extracted_data['matching_info'] = {
+                            'total_matches': match_result.data.get('total_jobs_matched', 0),
+                            'matches_created': True
+                        }
+                except Exception as match_error:
+                    # Don't fail the whole process if matching fails
+                    extracted_data['matching_info'] = {
+                        'matches_created': False,
+                        'error': str(match_error)
+                    }
+            
             return {
                 'success': True,
                 'resume_record': resume_record,

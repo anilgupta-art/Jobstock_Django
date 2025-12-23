@@ -241,8 +241,19 @@ def rpo_process_resumes(request):
             messages.error(request, 'Invalid resume IDs format')
             return redirect(request.META.get('HTTP_REFERER', 'App:rpo_dashboard'))
     
+    # Get job_id from request if provided
+    job_id_str = request.POST.get('job_id', '')
+    job_id = None
+    
+    if job_id_str:
+        try:
+            job_id = int(job_id_str.strip())
+        except ValueError:
+            messages.error(request, 'Invalid Job ID format')
+            return redirect(request.META.get('HTTP_REFERER', 'App:rpo_dashboard'))
+    
     # Use service to process resumes
-    result = ResumeUploadService.process_pending_resumes(request.user, resume_ids)
+    result = ResumeUploadService.process_pending_resumes(request.user, resume_ids, job_id)
     
     if result.success:
         messages.success(request, result.message)
