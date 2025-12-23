@@ -73,24 +73,35 @@ def resume_matching_dashboard(request):
     page_number = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_number)
     
-    # Statistics
+    # Statistics - Build base queryset for stats with same filters as main queryset
+    stats_queryset = ResumeJobMatch.objects.filter(status='completed')
+    
+    # Apply same filters to stats
+    if match_quality:
+        stats_queryset = stats_queryset.filter(match_quality=match_quality)
+    if job_id:
+        stats_queryset = stats_queryset.filter(job_id=job_id)
+    if resume_id:
+        stats_queryset = stats_queryset.filter(resume_id=resume_id)
+    if search:
+        stats_queryset = stats_queryset.filter(
+            Q(job__title__icontains=search) |
+            Q(resume__user__username__icontains=search) |
+            Q(resume__user__first_name__icontains=search) |
+            Q(resume__user__last_name__icontains=search) |
+            Q(resume__profile__full_name__icontains=search) |
+            Q(resume__original_filename__icontains=search)
+        )
+    
+    # Calculate statistics from filtered queryset
     stats = {
-        'total_matches': ResumeJobMatch.objects.filter(status='completed').count(),
-        'excellent_matches': ResumeJobMatch.objects.filter(
-            status='completed', 
-            match_quality='excellent'
-        ).count(),
-        'good_matches': ResumeJobMatch.objects.filter(
-            status='completed', 
-            match_quality='good'
-        ).count(),
-        'recommended_matches': ResumeJobMatch.objects.filter(
-            status='completed', 
-            is_recommended=True
-        ).count(),
-        'avg_match_percentage': ResumeJobMatch.objects.filter(
-            status='completed'
-        ).aggregate(Avg('overall_match_percentage'))['overall_match_percentage__avg'] or 0,
+        'total_matches': stats_queryset.count(),
+        'excellent_matches': stats_queryset.filter(match_quality='excellent').count(),
+        'good_matches': stats_queryset.filter(match_quality='good').count(),
+        'recommended_matches': stats_queryset.filter(is_recommended=True).count(),
+        'avg_match_percentage': stats_queryset.aggregate(
+            Avg('overall_match_percentage')
+        )['overall_match_percentage__avg'] or 0,
     }
     
     # Get active jobs and completed resumes for filters

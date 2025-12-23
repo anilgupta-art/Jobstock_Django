@@ -201,6 +201,12 @@ class ResumeProcessingService:
         resume_record.resume_json = results
         
         # Extract specific fields for quick access
+        # Candidate name - try contact_info first, then entities
+        resume_record.candidate_name = (
+            extracted_data['contact_info'].get('name') or
+            (extracted_data['entities']['persons'][0] if extracted_data['entities']['persons'] else None)
+        )
+        
         resume_record.extracted_skills = ', '.join(
             extracted_data['skills']['skills'][:30]  # Limit to 30 skills
         )

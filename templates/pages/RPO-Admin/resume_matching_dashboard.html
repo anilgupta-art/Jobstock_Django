@@ -224,13 +224,24 @@
                                         {% for match in page_obj %}
                                         <tr>
                                             <td>
-                                                <div class="d-flex align-items-center">
+                                                <div class="d-flex align-items-start">
                                                     <div class="avatar-sm bg-primary rounded-circle d-flex align-items-center justify-content-center text-white me-2" style="min-width: 35px; width: 35px; height: 35px;">
                                                         <i class="fa-solid fa-user"></i>
                                                     </div>
                                                     <div>
-                                                        <h6 class="mb-0 fw-semibold">{{ match.resume.user.get_full_name|default:match.resume.user.username }}</h6>
-                                                        <small class="text-muted">{{ match.resume.original_filename|truncatechars:30 }}</small>
+                                                        <h6 class="mb-1 fw-semibold">
+                                                            {{ match.resume.candidate_name|default:match.resume.original_filename|truncatechars:30 }}
+                                                        </h6>
+                                                        {% if match.resume.extracted_email %}
+                                                        <small class="text-muted d-block">
+                                                            <i class="fa-solid fa-envelope me-1"></i>{{ match.resume.extracted_email }}
+                                                        </small>
+                                                        {% endif %}
+                                                        {% if match.resume.extracted_phone %}
+                                                        <small class="text-muted d-block">
+                                                            <i class="fa-solid fa-phone me-1"></i>{{ match.resume.extracted_phone }}
+                                                        </small>
+                                                        {% endif %}
                                                     </div>
                                                 </div>
                                             </td>
@@ -273,7 +284,7 @@
                                                        title="View Match Details">
                                                         <i class="fa-solid fa-eye"></i>
                                                     </a>
-                                                    <a href="{{ match.resume.resume_path }}" 
+                                                    <a href="/media/{{ match.resume.resume_path }}" 
                                                        download="{{ match.resume.original_filename }}" 
                                                        class="btn btn-outline-success" 
                                                        title="Download Resume">

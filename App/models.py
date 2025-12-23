@@ -498,6 +498,7 @@ class ResumeProcessing(models.Model):
     resume_json = models.JSONField(blank=True, null=True, help_text="Structured JSON data extracted from resume")
     
     # Quick Access Fields (extracted from JSON for faster queries)
+    candidate_name = models.CharField(max_length=255, blank=True, null=True, help_text="Extracted candidate name from resume")
     extracted_skills = models.TextField(blank=True, null=True, help_text="Comma-separated skills")
     extracted_email = models.EmailField(blank=True, null=True)
     extracted_phone = models.CharField(max_length=50, blank=True, null=True)

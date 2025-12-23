@@ -209,15 +209,39 @@ class SimpleDocumentProcessor:
             text: Input text
             
         Returns:
-            dict: Contact information
+            dict: Contact information with emails, phones, names, linkedin, github
         """
         # Email pattern
         email_pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
         emails = re.findall(email_pattern, text)
         
-        # Phone pattern (various formats)
-        phone_pattern = r'(\+?\d{1,3}[-.\s]?)?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}'
-        phones = re.findall(phone_pattern, text)
+        # Enhanced phone patterns to catch more formats
+        phone_patterns = [
+            r'\+?\d{1,3}[-.\s]?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}',  # +1-234-567-8900, (234) 567-8900
+            r'\b\d{10}\b',  # 2345678900
+            r'\b\d{3}[-.\s]\d{3}[-.\s]\d{4}\b',  # 234-567-8900
+            r'\+\d{1,3}\s?\d{10}',  # +1 2345678900
+            r'\(\d{3}\)\s*\d{3}[-.\s]?\d{4}',  # (234) 567-8900
+        ]
+        
+        phones = []
+        for pattern in phone_patterns:
+            matches = re.findall(pattern, text)
+            phones.extend(matches)
+        
+        # Clean up phone numbers
+        cleaned_phones = []
+        for phone in phones:
+            # Remove common non-digit chars and keep as found
+            if phone.strip():
+                cleaned_phones.append(phone.strip())
+        
+        # Extract name from first few lines (usually at top of resume)
+        # Look for name pattern: Capital letters, 2-4 words
+        name_pattern = r'^([A-Z][a-z]+(?:\s+[A-Z][a-z]+){1,3})'
+        first_lines = '\n'.join(text.split('\n')[:5])
+        name_match = re.search(name_pattern, first_lines, re.MULTILINE)
+        candidate_name = name_match.group(1) if name_match else None
         
         # LinkedIn pattern
         linkedin_pattern = r'linkedin\.com/in/[\w-]+'
@@ -228,8 +252,9 @@ class SimpleDocumentProcessor:
         github = re.findall(github_pattern, text.lower())
         
         return {
+            'name': candidate_name,
             'emails': list(set(emails)),
-            'phones': list(set([''.join(p) for p in phones if p])),
+            'phones': list(set(cleaned_phones)),
             'linkedin': list(set(linkedin)),
             'github': list(set(github))
         }
