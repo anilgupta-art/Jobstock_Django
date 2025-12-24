@@ -8747,7 +8747,7 @@ span.remove-from-compare {
     min-height: calc(100vh - 75px);
     display: flex;
     flex-wrap: wrap;
-    padding-top:75px !important;
+    /* padding-top:75px !important; */
 }
 .dashboard-nav {
     position: fixed;

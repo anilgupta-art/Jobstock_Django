@@ -45,13 +45,9 @@
         <div id="main-wrapper">
 
 			<main>
-				{% if messages %}
-					<div class="container mt-3">
-						{% for message in messages %}
-							<div class="alert alert-{{ message.tags }}">{{ message }}</div>
-						{% endfor %}
-					</div>
-				{% endif %}
+				   {% if messages %}
+					   {% include 'Base/snackbar.html' %}
+				   {% endif %}
 				{% block hero_content %}
 					{{ hero_content}}
 				{% endblock %}
