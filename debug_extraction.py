@@ -57,7 +57,8 @@ def test_extraction():
             print(f"✅ Contact Info:")
             print(f"   📧 Emails: {contact_info['emails']}")
             print(f"   📱 Phones: {contact_info['phones']}")
-            print(f"   🔗 LinkedIn: {contact_info['linkedin']}")
+            print(f"✅ Contact Info:")
+            print(f"   👤 Candidate Name: {contact_info['name']}")
             print(f"   💻 GitHub: {contact_info['github']}")
             
             # Extract entities (names)

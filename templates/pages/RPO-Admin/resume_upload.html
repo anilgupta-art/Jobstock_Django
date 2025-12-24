@@ -61,7 +61,21 @@
 							
 							<!-- Upload Info -->
 							<div class="alert alert-info mb-4">
-								<h6 class="mb-2"><i class="fa-solid fa-info-circle me-2"></i>Upload Guidelines</h6>
+								<h6 class="mb-2">
+									<i class="fa-solid fa-info-circle me-2"></i>
+									<span data-bs-toggle="tooltip" data-bs-placement="right" title="Please follow these guidelines for uploading resumes. Accepted formats: {{ allowed_extensions }}. Max file size: {{ max_file_size_mb }} MB per file. You can upload multiple files at once. Files will be saved in: Data/resume/[date]/{{ request.user.username }}/">
+										Upload Guidelines
+									</span>
+								</h6>
+								<script>
+								// Enable Bootstrap tooltips
+								document.addEventListener('DOMContentLoaded', function () {
+									var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+									tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+										new bootstrap.Tooltip(tooltipTriggerEl);
+									});
+								});
+								</script>
 								<ul class="mb-0 ps-3">
 									<li>Accepted formats: {{ allowed_extensions }}</li>
 									<li>Maximum file size: {{ max_file_size_mb }} MB per file</li>

@@ -283,16 +283,37 @@
                         <i class="la la-user"></i> Candidate Information
                     </div>
                     <div class="card-body">
-                        <p><strong>Name:</strong> {{ match.resume.candidate_name }}</p>
-                        <p><strong>Email:</strong> {{ match.resume.email|default:"N/A" }}</p>
-                        <p><strong>Phone:</strong> {{ match.resume.phone|default:"N/A" }}</p>
-                        <p><strong>Location:</strong> {{ match.resume.location|default:"N/A" }}</p>
-                        <p><strong>Experience:</strong> {{ match.resume.years_of_experience|default:"N/A" }}</p>
-                        <p>
-                            <a href="{% url 'App:rpo_resume_view' match.resume.id %}" class="theme-btn btn-style-one">
-                                <i class="la la-eye"></i> View Full Resume
-                            </a>
-                        </p>
+                        <div class="row g-2 align-items-center">
+                            <div class="col-12 mb-2">
+                                <span class="fw-bold fs-5"><i class="fa-solid fa-user me-2"></i>{{ match.resume.candidate_name|default:'N/A' }}</span>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <span class="text-muted"><i class="fa-solid fa-envelope me-1"></i>Email:</span><br>
+                                <span class="fw-medium">{{ match.resume.extracted_email|default:'N/A' }}</span>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <span class="text-muted"><i class="fa-solid fa-phone me-1"></i>Phone:</span><br>
+                                <span class="fw-medium">{{ match.resume.extracted_phone|default:'N/A' }}</span>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <span class="text-muted"><i class="fa-solid fa-location-dot me-1"></i>Location:</span><br>
+                                <span class="fw-medium">{{ match.resume.resume_json.entities.locations.0|default:'N/A' }}</span>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <span class="text-muted"><i class="fa-solid fa-briefcase me-1"></i>Experience:</span><br>
+                                <span class="fw-medium">{{ match.resume.years_of_experience|default:'N/A' }}</span>
+                            </div>
+                            <div class="col-12 mt-3 d-flex gap-2">
+                                <a href="{% url 'App:rpo_resume_view' match.resume.id %}" class="btn btn-outline-primary w-100">
+                                    <i class="la la-eye"></i> View Full Resume
+                                </a>
+                                {% if match.resume.resume_path %}
+                                <a href="/media/{{ match.resume.resume_path }}" class="btn btn-success w-100" download>
+                                    <i class="fa-solid fa-download me-1"></i> Download Resume
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -303,16 +324,32 @@
                         <i class="la la-briefcase"></i> Job Information
                     </div>
                     <div class="card-body">
-                        <p><strong>Title:</strong> {{ match.job.title }}</p>
-                        <p><strong>Company:</strong> {{ match.job.company }}</p>
-                        <p><strong>Location:</strong> {{ match.job.location }}</p>
-                        <p><strong>Type:</strong> {{ match.job.get_job_type_display }}</p>
-                        <p><strong>Experience Required:</strong> {{ match.job.experience_required.text|default:"N/A" }}</p>
-                        <p>
-                            <a href="{% url 'App:job_detail' match.job.slug %}" class="theme-btn btn-style-one">
-                                <i class="la la-eye"></i> View Job Details
-                            </a>
-                        </p>
+                        <div class="row g-2 align-items-center">
+                            <div class="col-12 mb-2">
+                                <span class="fw-bold fs-5"><i class="fa-solid fa-briefcase me-2"></i>{{ match.job.title|default:'N/A' }}</span>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <span class="text-muted"><i class="fa-solid fa-building me-1"></i>Company:</span><br>
+                                <span class="fw-medium">{{ match.job.company|default:'N/A' }}</span>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <span class="text-muted"><i class="fa-solid fa-location-dot me-1"></i>Location:</span><br>
+                                <span class="fw-medium">{{ match.job.location|default:'N/A' }}</span>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <span class="text-muted"><i class="fa-solid fa-briefcase me-1"></i>Type:</span><br>
+                                <span class="fw-medium">{{ match.job.get_job_type_display|default:'N/A' }}</span>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <span class="text-muted"><i class="fa-solid fa-user-graduate me-1"></i>Experience Required:</span><br>
+                                <span class="fw-medium">{{ match.job.experience_required.text|default:'N/A' }}</span>
+                            </div>
+                            <div class="col-12 mt-3 d-flex gap-2">
+                                <a href="{% url 'App:job_detail' match.job.slug %}" class="btn btn-outline-primary w-100">
+                                    <i class="la la-eye"></i> View Job Details
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

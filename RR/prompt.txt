@@ -1,0 +1,114 @@
+I am backhand and AI developer ,And my team member fronthand developer , I want my fronthand also run this project and work on html,css,js images,static, etc but not see the backhand code, so we reqire docker that access 
+html,css,js images,static, etc i mean fronthand code outside of docker if change that show in docker hosted , put not see python code or what is perfect way to do it, we have different location , only he run the batch file application host in docker
+please see the page all jobs come from database if click on edit employer-submit-job.html function show the job details, and there is delete asking are you sure if yes then delete, please write on MVT a pattern also include the service layer
+
+
+In above html 
+1)these are group in first is Django Hiring Manager, 2 nd is Candidate, 3 is RPO Admin, so please white perfect database design 
+and use it function all value come from database and Django template use the rest api, we also require the common resuable response class so
+ other module use  call like { status code,Message,error,More error details ,data } etc please add if require more
+
+ please write all logic in services so rest API and django template easily use , please chose the perfect method 
+ 
+ please update which perfect for system
+  if user login with RPO_Admin group please provide Dashboard Navigation and create a new page for matching current dashboard  of User multiple resume upload (PDF,DOC,Docx,txt,etc ) all resume file save in Data/resume/currentdate/userName
+  please fellow djang MVT write all logic in services so rest API and django template easily use , please chose the perfect method 
+  please use same response class
+  
+  
+  
+please create the dynamic hierarchary multilevel menu bar based on user login i means autheration please deactive all execept Hire manager, RPO_Admin
+ please fellow djang MVT write all logic in services so rest API and django template easily use , please chose the perfect method 
+  please use same response class validation also require
+ templates\pages\candidate-resume.html
+ 
+ 
+ in url (http://127.0.0.1:8000/candidate-profile/candidate1/) after resume upload there many process like extract data, store in database . we require same process here url(http://127.0.0.1:8000/rpo-resume-upload/) but here is multiple resume upload so one one wise here require 
+ please`reuse the function all lo services so rest API and django template easily use , please chose the perfect method 
+ always write the generic method
+ 
+ 
+ 
+In URL "http://127.0.0.1:8000/rpo-resume-upload/" please update the navigation_item table  so we use only this "http://127.0.0.1:8000/rpo-dashboard/"
+please do the perfect which is best
+
+
+
+please add a menu navigation Posted Job   in RPO_Admin Group Analysis may be database table (app_job) the page (http://127.0.0.1:8000/job-detail/jr-php-developer/" ) here we show all posted job in table format( include the pagination,sorting searching,etc) validation also require
+like posted company posted date , expire date title etc create a hyperlink if click the redirect to associated url  like title is jr-php-developer the redirect page  details descrption ,
+please fellow djang MVT write all logic in services so rest API and django template easily use , please chose the perfect method 
+  please use same response class
+  please write the all generic and reusable method other componet so use
+  
+  
+  
+  I have posted job very details in table app_job field  and resume process data in table resume_process there are field (resume_test,resume_json,extracted_skils,years of experiences,sentimatic_score etc)
+  please find each resume is  best suitable candiate of  in percentage, plase create a table for this jobID, resume_id, percentage, sentimatic_score, why sucess, why fail, please add perfect solution please add more,
+  please use background process job generic and reusable and use djang MVT write all logic in services so rest API and django template easily use
+  
+  
+  please create the 100 files of  different resume include the (slils,city location,email phone no, Current CTC, Accepted CTC,Qualification hobbies exepericnes,education etc ) in format of pdf, txt,doc,docx and save in /data/
+  please insert the 100 Job post in table app_Job with different type requirement
+  
+  please insert a new row in navigation_item copy of ID=45 but title is Process Resume and URL_name =App:rpo_dashboard
+  
+  
+  Please correct the layout of table perfect layout , download the resume
+  
+  
+  insert the data in table Customer, with  First_name,Last_name Generate, and other field get from database table  SELECT *
+  FROM [aicrm2].[dbo].[Customer_back] 
+
+
+
+my database table name is "app_job" write the generic classes function and reusable and use djang MVT write all logic in services so rest API and django template easily .
+below web site job post and recive the resume  I want job post in below web sites and recive the resume from below web site
+JobElephant
+ZipRecruiter
+Indeed Employer
+LinkedIn Recruiter please do best for you
+
+
+
+In page http://127.0.0.1:8000/rpo-dashboard/ Process all pending button pass a parameter JobID from query string if Jobid is not None then only process JobID resume otherwise process all resume
+
+Add a button Find candidate (after Apply Job)  with same UI on ""http://127.0.0.1:8000/rpo-dashboard/""  other button(Apply Job,Save Job) hide  for Grroup (RPO_Admin) if click on it redirect to "http://127.0.0.1:8000/rpo-dashboard/" with parameter jobId from "http://127.0.0.1:8000/job-detail/product-manager-100/" i mean like output 
+"http://127.0.0.1:8000/rpo-dashboard/jobid=99" 
+
+
+please first backup then clean all database transaction entries for resume_upload, Process_resume ,resume job match also give the delete do the perfect which you want 
+
+
+
+please change on page http://127.0.0.1:8000/job-detail/product-manager-100/ whenever click on Find Candidate redirect to http://127.0.0.1:8000/resume-matching/?job=107
+http://127.0.0.1:8000/resume-matching/?job=107 associated with job ID
+
+
+please correct the count of (Total Matches,Excellent ,Good,Recommended etc) based on Job in parameter on page http://127.0.0.1:8000/resume-matching/?page=3&job=108
+
+In page (http://127.0.0.1:8000/resume-matching/?job=106) on candidate column show the candidate name,email,phone no below of each
+
+
+
+
+In this project  fellow the below file structure
+
+always use the path 
+model   \sql_app\sqlmodels\
+schema   \sql_app\sqlalchemy_schemas\
+repoistory  \sql_app\repositories\
+service \services\
+router \routers\
+
+
+please design the table as parent child  also add the base may be auditBase class so all functionality like is_deleted, is_active, etc show
+
+CREATE TABLE [dbo].[setting](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[setting_Group] [varchar](255) NOT NULL,
+	[setting_test] [varchar](255) NOT NULL,
+	[setting_value] [varchar](255) NOT NULL,
+)
+please create or update the model  , schema,repoistory service router validation of below table do the perfect which you want
+also update the main  
+Like user_push_notification_db functionality we require same functionality for database table "Customer"  so please write generic reusable code customer import create the config json etc file save , but all logic in services, and fellows or use existing code sqlmodel, schema router,services,etc  please do the best and perfect
