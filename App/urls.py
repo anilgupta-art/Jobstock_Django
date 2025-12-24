@@ -1,9 +1,15 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 
 app_name = 'App'
 
 urlpatterns = [
+    # API Routes
+    path("api/", include('App.urls_api_navigation')),
+    path("api/resumes/", include('App.urls_api_resume')),
+    path("api/menu/", include('App.urls_api_menu')),
+    
+    # Home and main pages
     path("", views.home_4, name="index"),
     #path("", views.index, name="home-10"),    
     path("home-2/", views.home_2, name="home_2"),
@@ -86,9 +92,25 @@ urlpatterns = [
     path("employer-detail-2/", views.employer_detail_2, name="employer_detail_2"),
     
     path("employer-dashboard/", views.employer_dashboard, name="employer_dashboard"),
+    
+    # RPO Admin Routes
+    path("rpo-dashboard/", views.rpo_dashboard, name="rpo_dashboard"),
+    path("rpo-resume-upload/", views.rpo_resume_upload, name="rpo_resume_upload"),
+    path("rpo-resume-list/", views.rpo_resume_list, name="rpo_resume_list"),
+    path("rpo-resume-view/<int:resume_id>/", views.rpo_resume_view, name="rpo_resume_view"),
+    path("rpo-resume-download/<int:resume_id>/", views.rpo_resume_download, name="rpo_resume_download"),
+    path("rpo-process-resumes/", views.rpo_process_resumes, name="rpo_process_resumes"),
+    path("rpo-process-resume/<int:resume_id>/", views.rpo_process_single_resume, name="rpo_process_single_resume"),
+    path("rpo-posted-jobs/", views.rpo_posted_jobs, name="rpo_posted_jobs"),
+    
+    # Menu Demo
+    path("menu-demo/", views.menu_demo, name="menu_demo"),
+    
     path("employer-profile/", views.employer_profile, name="employer_profile"),
     path("employer-jobs/", views.employer_jobs, name="employer_jobs"),
     path("employer-submit-job/", views.employer_submit_job, name="employer_submit_job"),
+    path("employer-edit-job/<int:job_id>/", views.employer_submit_job, name="employer_edit_job"),
+    path("employer-delete-job/<int:job_id>/", views.employer_delete_job, name="employer_delete_job"),
     path("employer-applicants-jobs/", views.employer_applicants_jobs, name="employer_applicants_jobs"),
     path("employer-shortlist-candidates/", views.employer_shortlist_candidates, name="employer_shortlist_candidates"),
     path("employer-package/", views.employer_package, name="employer_package"),
