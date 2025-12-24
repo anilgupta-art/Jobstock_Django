@@ -295,7 +295,11 @@ def rpo_process_single_resume(request, resume_id):
         messages.error(request, result.message)
     
     # Redirect back to referring page or resume view
-    return redirect(request.META.get('HTTP_REFERER', 'App:rpo_resume_view', kwargs={'resume_id': resume_id}))
+    referer = request.META.get('HTTP_REFERER')
+    if referer:
+        return redirect(referer)
+    from django.urls import reverse
+    return redirect(reverse('App:rpo_resume_view', kwargs={'resume_id': resume_id}))
 
 
 @login_required

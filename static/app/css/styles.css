@@ -297,9 +297,9 @@ html body .mdi:before,
 html body .mdi-set {
   line-height: initial;
 }
-section{
+/* section{
 	padding:80px 0 80px;
-}
+} */
 section.min{
 	padding:50px 0 50px;
 }
