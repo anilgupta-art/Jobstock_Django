@@ -152,9 +152,11 @@ def rpo_resume_list(request):
         messages.error(request, 'Access denied. RPO Admin role required.')
         return redirect('App:index')
     
-    # Get pagination parameters
+
+    # Pagination and sorting
     limit = int(request.GET.get('limit', 20))
     offset = int(request.GET.get('offset', 0))
+    sort = request.GET.get('sort', '-created_at')
 
     # Filtering
     job_filter = request.GET.getlist('job')
@@ -176,8 +178,11 @@ def rpo_resume_list(request):
     if status_filter:
         resumes_qs = resumes_qs.filter(status__in=status_filter)
 
+    # Sorting
+    resumes_qs = resumes_qs.order_by(sort)
+
     total = resumes_qs.count()
-    resumes = resumes_qs.order_by('-created_at')[offset:offset+limit]
+    resumes = resumes_qs[offset:offset+limit]
 
     # For filter dropdowns
     jobs = ResumeProcessing.objects.values_list('job__title', flat=True).distinct().exclude(job__title__isnull=True).exclude(job__title='')
@@ -208,7 +213,10 @@ def rpo_resume_list(request):
         'resume_sources': resume_sources,
         'status_options': status_options,
     }
-    return render(request, 'Pages/RPO-Admin/resume_list.html', context)
+    # Use AJAX partial for table if AJAX request
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        return render(request, 'Components/Resume/resume_list_table.html', context)
+    return render(request, 'Pages/Reusable/resume_list_page.html', context)
 
 
 @login_required
