@@ -1,0 +1,27 @@
+<!-- Bootstrap Snackbar/Toast for notifications -->
+<div aria-live="polite" aria-atomic="true" class="position-fixed top-0 end-0 p-3" style="z-index: 1080; min-width: 300px;">
+  <div id="snackbar-toast" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3500">
+    <div class="d-flex">
+      <div class="toast-body" id="snackbar-toast-body">
+        <!-- Notification message will appear here -->
+      </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
+<script>
+  // Show Django messages as Bootstrap Toast/Snackbar
+  document.addEventListener('DOMContentLoaded', function() {
+    var djangoMessages = document.querySelectorAll('.alert');
+    if (djangoMessages.length > 0) {
+      djangoMessages.forEach(function(msg) {
+        var toastBody = document.getElementById('snackbar-toast-body');
+        toastBody.innerHTML = msg.innerHTML;
+        var toast = new bootstrap.Toast(document.getElementById('snackbar-toast'));
+        toast.show();
+        setTimeout(function() { toast.hide(); }, 3500);
+        msg.remove();
+      });
+    }
+  });
+</script>

@@ -24,7 +24,28 @@
                 
                    <li class="parent-parent-menu-item"><a href="/" class="home-link" style="color: blue;">Home<span class="submenu-indicator"></span></a>
                          <ul class="nav-dropdown nav-submenu">
-                            <li><a href="{% url 'App:index' %}" class="sub-menu-item">Home Layout 1</a></li>
+                            {% if request.user.is_authenticated %}
+                                <li>
+                                    {% if request.user.is_superuser or request.user.profile.role == 'hiring_manager' %}
+                                        <a href="{% url 'App:employer_dashboard' %}" class="sub-menu-item">
+                                            <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                                        </a>
+                                    {% elif request.user.profile.role == 'rpo_admin' %}
+                                        <a href="{% url 'App:rpo_dashboard' %}" class="sub-menu-item">
+                                            <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                                        </a>
+                                    {% elif request.user.profile.role == 'candidate' %}
+                                        <a href="{% url 'App:candidate_dashboard' %}" class="sub-menu-item">
+                                            <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                                        </a>
+                                    {% else %}
+                                        <a href="{% url 'App:candidate_dashboard' %}" class="sub-menu-item">
+                                            <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                                        </a>
+                                    {% endif %}
+                                </li>
+                            {% endif %}
+                            <!-- <li><a href="{% url 'App:index' %}" class="sub-menu-item">Home Layout 1</a></li>
                             <li><a href="{% url 'App:home_2' %}" class="sub-menu-item">Home Layout 2</a></li>
                             <li><a href="{% url 'App:home_3' %}" class="sub-menu-item">Home Layout 3</a></li>
                             <li><a href="{% url 'App:home_4' %}" class="sub-menu-item">Home Layout 4</a></li>
@@ -35,11 +56,11 @@
                             <li><a href="{% url 'App:home_9' %}" class="sub-menu-item">Home Layout 9</a></li>                                    
                             <li><a href="{% url 'App:home_10' %}" class="sub-menu-item">Home Layout 10</a></li>
                             <li><a href="{% url 'App:home_11' %}" class="sub-menu-item">Home Layout 11</a></li>
-                            <li><a href="{% url 'App:home_12' %}" class="sub-menu-item">Home Layout 12</a></li>																								
+                            <li><a href="{% url 'App:home_12' %}" class="sub-menu-item">Home Layout 12</a></li>																								 -->
                         </ul> 
                     </li> 
                     
-                     <li class="parent-parent-menu-item"><a href="JavaScript:Void(0);" class="home-link">For Candidate<span class="submenu-indicator"></span></a>
+                     <!-- <li class="parent-parent-menu-item"><a href="JavaScript:Void(0);" class="home-link">For Candidate<span class="submenu-indicator"></span></a>
                         <ul class="nav-dropdown nav-submenu">
                             <li class="parent-menu-item"><a href="JavaScript:Void(0);">Browse Jobs<span class="submenu-indicator"></span></a>
                                 <ul class="nav-dropdown nav-submenu">
@@ -140,7 +161,7 @@
                     </li>
                     
                     <li><a href="{% url 'App:help' %}" class="sub-menu-item">Help</a></li>
-                    
+                     -->
                 </ul> 
                 
                 <ul class="nav-menu nav-menu-social align-to-right">

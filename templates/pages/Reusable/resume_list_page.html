@@ -1,0 +1,98 @@
+{% extends "Base/base.html" %}
+{% load static %}
+
+{% block extra_head %}
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<style>
+    .select2-container .select2-selection--multiple { min-height: 38px; }
+    .resume-table th, .resume-table td { vertical-align: middle; }
+    .badge { font-size: 0.9em; }
+    .filter-bar { background: #f8f9fa; border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="filter-bar mb-3">
+        <form id="resume-filter-form" class="row g-3 align-items-end">
+            <div class="col-md-3">
+                <label for="filter-source" class="form-label mb-1">Resume Source</label>
+                <select id="filter-source" name="resumesource" class="form-select select2" multiple>
+                    {% for source in resume_sources %}
+                        <option value="{{ source.id }}">{{ source.text }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="filter-status" class="form-label mb-1">Status</label>
+                <select id="filter-status" name="status" class="form-select select2" multiple>
+                    {% for status in status_options %}
+                        <option value="{{ status.value }}">{{ status.text }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="filter-sort" class="form-label mb-1">Sort By</label>
+                <select id="filter-sort" name="sort" class="form-select">
+                    <option value="-created_at">Newest First</option>
+                    <option value="created_at">Oldest First</option>
+                    <option value="filename">Filename (A-Z)</option>
+                    <option value="-filename">Filename (Z-A)</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-main w-100"><i class="fa fa-filter me-1"></i>Filter</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="resume-list-container">
+        {% include 'Components/Resume/resume_list_table.html' %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('.select2').select2({ width: '100%' });
+
+    function loadResumeList(params) {
+        $.ajax({
+            url: window.location.pathname,
+            data: params,
+            type: 'GET',
+            success: function(response) {
+                let html = $(response);
+                let newTable = html.find('#resume-list-container').html();
+                $('#resume-list-container').html(newTable);
+            },
+            error: function() {
+                alert('Error loading resumes.');
+            }
+        });
+    }
+
+    $('#resume-filter-form').on('submit', function(e) {
+        e.preventDefault();
+        let params = $(this).serialize();
+        loadResumeList(params);
+    });
+
+    // Pagination click
+    $(document).on('click', '.pagination a', function(e) {
+        e.preventDefault();
+        let pageUrl = $(this).attr('href');
+        let params = $('#resume-filter-form').serialize();
+        loadResumeList(params + '&' + pageUrl.split('?')[1]);
+    });
+
+    // Sorting change
+    $('#filter-sort').on('change', function() {
+        $('#resume-filter-form').submit();
+    });
+});
+</script>
+{% endblock %}

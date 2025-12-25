@@ -11,5 +11,6 @@ from .page_views import *
 from .auth_views import *
 from .admin_views import *
 from .rpo_admin_views import *
+from .matching_views import *
 from . import api_menu_views
 from .menu_demo_view import menu_demo
