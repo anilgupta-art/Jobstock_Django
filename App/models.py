@@ -4,6 +4,9 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 import os
 
+# Import job board models
+from App.job_board_models import JobBoardMapping, ExternalApplication, BoardSyncLog
+
 # Create your models here.
 
 def validate_resume_file(file):
@@ -476,6 +479,8 @@ class ResumeProcessing(models.Model):
     # Core Fields
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='resume_processing')
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='resume_processing', null=True, blank=True)
+    job = models.ForeignKey('Job', on_delete=models.SET_NULL, null=True, blank=True, related_name='resume_processings', help_text='Job associated with this resume upload')
+    resumesource = models.ForeignKey('DropdownMaster', on_delete=models.SET_NULL, null=True, blank=True, related_name='resume_processings', help_text='Resume source company')
     
     # File Information
     resume_path = models.CharField(max_length=500, help_text="Path to the uploaded resume file")
@@ -495,6 +500,7 @@ class ResumeProcessing(models.Model):
     resume_json = models.JSONField(blank=True, null=True, help_text="Structured JSON data extracted from resume")
     
     # Quick Access Fields (extracted from JSON for faster queries)
+    candidate_name = models.CharField(max_length=255, blank=True, null=True, help_text="Extracted candidate name from resume")
     extracted_skills = models.TextField(blank=True, null=True, help_text="Comma-separated skills")
     extracted_email = models.EmailField(blank=True, null=True)
     extracted_phone = models.CharField(max_length=50, blank=True, null=True)
@@ -1012,3 +1018,238 @@ class GroupProfile(models.Model):
         db_table = 'auth_group_profiles'
         verbose_name = 'Group Profile'
         verbose_name_plural = 'Group Profiles'
+
+
+class ResumeJobMatch(models.Model):
+    """
+    Stores AI-powered matching results between resumes and job postings
+    Calculates compatibility percentage and provides detailed analysis
+    """
+    
+    STATUS_CHOICES = (
+        ('pending', 'Pending'),
+        ('processing', 'Processing'),
+        ('completed', 'Completed'),
+        ('failed', 'Failed'),
+    )
+    
+    MATCH_QUALITY_CHOICES = (
+        ('excellent', 'Excellent Match (80-100%)'),
+        ('good', 'Good Match (60-79%)'),
+        ('fair', 'Fair Match (40-59%)'),
+        ('poor', 'Poor Match (0-39%)'),
+    )
+    
+    # Relationships
+    job = models.ForeignKey(
+        Job, 
+        on_delete=models.CASCADE, 
+        related_name='resume_matches',
+        help_text="Job posting being matched"
+    )
+    resume = models.ForeignKey(
+        ResumeProcessing, 
+        on_delete=models.CASCADE, 
+        related_name='job_matches',
+        help_text="Processed resume being evaluated"
+    )
+    
+    # Matching Scores
+    overall_match_percentage = models.DecimalField(
+        max_digits=5, 
+        decimal_places=2, 
+        default=0.00,
+        help_text="Overall compatibility percentage (0-100)"
+    )
+    skills_match_percentage = models.DecimalField(
+        max_digits=5, 
+        decimal_places=2, 
+        default=0.00,
+        help_text="Skills compatibility percentage"
+    )
+    experience_match_percentage = models.DecimalField(
+        max_digits=5, 
+        decimal_places=2, 
+        default=0.00,
+        help_text="Experience level compatibility"
+    )
+    qualification_match_percentage = models.DecimalField(
+        max_digits=5, 
+        decimal_places=2, 
+        default=0.00,
+        help_text="Educational qualification match"
+    )
+    location_match_percentage = models.DecimalField(
+        max_digits=5, 
+        decimal_places=2, 
+        default=0.00,
+        help_text="Location compatibility"
+    )
+    
+    # Sentiment Analysis
+    sentiment_score = models.FloatField(
+        null=True, 
+        blank=True,
+        help_text="Resume sentiment polarity score (-1 to 1)"
+    )
+    sentiment_impact = models.CharField(
+        max_length=50,
+        blank=True,
+        help_text="Positive/Negative/Neutral impact on match"
+    )
+    
+    # Match Analysis
+    matching_skills = models.JSONField(
+        blank=True, 
+        null=True,
+        help_text="List of skills that match job requirements"
+    )
+    missing_skills = models.JSONField(
+        blank=True, 
+        null=True,
+        help_text="List of required skills not found in resume"
+    )
+    additional_skills = models.JSONField(
+        blank=True, 
+        null=True,
+        help_text="Extra skills in resume not required by job"
+    )
+    
+    # Success/Failure Reasons
+    success_reasons = models.JSONField(
+        blank=True, 
+        null=True,
+        help_text="List of reasons why candidate is a good match"
+    )
+    failure_reasons = models.JSONField(
+        blank=True, 
+        null=True,
+        help_text="List of reasons why candidate doesn't match"
+    )
+    improvement_suggestions = models.JSONField(
+        blank=True, 
+        null=True,
+        help_text="Suggestions for improving match score"
+    )
+    
+    # Match Quality
+    match_quality = models.CharField(
+        max_length=20,
+        choices=MATCH_QUALITY_CHOICES,
+        blank=True,
+        help_text="Categorized match quality"
+    )
+    is_recommended = models.BooleanField(
+        default=False,
+        help_text="Whether candidate is recommended for this job"
+    )
+    
+    # Processing Status
+    status = models.CharField(
+        max_length=20, 
+        choices=STATUS_CHOICES, 
+        default='pending'
+    )
+    processing_started_at = models.DateTimeField(null=True, blank=True)
+    processing_completed_at = models.DateTimeField(null=True, blank=True)
+    error_message = models.TextField(blank=True, null=True)
+    
+    # Detailed Analysis (JSON)
+    detailed_analysis = models.JSONField(
+        blank=True, 
+        null=True,
+        help_text="Complete analysis breakdown including all factors"
+    )
+    
+    # Metadata
+    matched_by = models.ForeignKey(
+        User, 
+        on_delete=models.SET_NULL, 
+        null=True, 
+        blank=True,
+        related_name='initiated_matches',
+        help_text="User who initiated the matching process"
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return f"{self.resume.user.username} -> {self.job.title} ({self.overall_match_percentage}%)"
+    
+    def get_match_quality_badge_class(self):
+        """Return Bootstrap badge class based on match quality"""
+        quality_classes = {
+            'excellent': 'bg-success',
+            'good': 'bg-info',
+            'fair': 'bg-warning',
+            'poor': 'bg-danger',
+        }
+        return quality_classes.get(self.match_quality, 'bg-secondary')
+    
+    def get_status_badge_class(self):
+        """Return Bootstrap badge class based on status"""
+        status_classes = {
+            'pending': 'bg-warning text-dark',
+            'processing': 'bg-info',
+            'completed': 'bg-success',
+            'failed': 'bg-danger',
+        }
+        return status_classes.get(self.status, 'bg-secondary')
+    
+    def calculate_match_quality(self):
+        """Determine match quality category based on overall percentage"""
+        percentage = float(self.overall_match_percentage)
+        if percentage >= 80:
+            return 'excellent'
+        elif percentage >= 60:
+            return 'good'
+        elif percentage >= 40:
+            return 'fair'
+        else:
+            return 'poor'
+    
+    def get_processing_duration(self):
+        """Calculate processing duration in seconds"""
+        if self.processing_started_at and self.processing_completed_at:
+            delta = self.processing_completed_at - self.processing_started_at
+            return delta.total_seconds()
+        return None
+    
+    class Meta:
+        db_table = 'resume_job_match'
+        verbose_name = 'Resume Job Match'
+        verbose_name_plural = 'Resume Job Matches'
+        ordering = ['-overall_match_percentage', '-created_at']
+        unique_together = [['job', 'resume']]
+        indexes = [
+            models.Index(fields=['job', 'overall_match_percentage']),
+            models.Index(fields=['resume', 'overall_match_percentage']),
+            models.Index(fields=['match_quality', 'is_recommended']),
+            models.Index(fields=['status', 'created_at']),
+        ]
+
+from App.models import DropdownGroup, DropdownMaster
+
+def insert_resume_source_companies():
+    # Create or get the ResumeSource group
+    group, _ = DropdownGroup.objects.get_or_create(
+        text='ResumeSource', defaults={'value': 'ResumeSource', 'is_active': True}
+    )
+    # List of company names
+    companies = [
+        'LinkedIn', 'Zoho', 'Indeed', 'Glassdoor', 'Monster',
+        'Google', 'Microsoft', 'Amazon', 'IBM', 'Salesforce'
+    ]
+    # Insert each company as a DropdownMaster item
+    for idx, name in enumerate(companies):
+        DropdownMaster.objects.get_or_create(
+            group=group,
+            text=name,
+            defaults={
+                'value': name.lower(),
+                'is_active': True,
+                'sort_order': idx
+            }
+        )
+
+# Usage: Call insert_resume_source_companies() from Django shell or migration

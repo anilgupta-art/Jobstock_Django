@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple WebRTC Video Call Test</title>
+  <style>
+    video { width: 45%; margin: 10px; border: 1px solid #ccc; }
+    #status { margin: 10px 0; }
+  </style>
+</head>
+<body>
+  <h2>WebRTC Video Call Test</h2>
+  <div id="status">Not connected</div>
+  <input id="room" placeholder="Room name (auto)" value="" readonly />
+  <button onclick="createCallSession()">New Call Session</button>
+  <button onclick="joinRoom()" id="joinBtn" disabled>Join Room</button>
+  <br>
+  <video id="localVideo" autoplay muted playsinline></video>
+  <video id="remoteVideo" autoplay playsinline></video>
+  <br>
+  <button id="startRec" onclick="startRecording()">Start Recording</button>
+  <button id="pauseRec" onclick="pauseRecording()" disabled>Pause</button>
+  <button id="saveRec" onclick="saveRecording()" disabled>Save</button>
+  <script>
+    let localStream, peer, ws;
+    let mediaRecorder, recordedChunks = [], isPaused = false;
+    let callSessionId = null;
+    const roomInput = document.getElementById('room');
+    const statusDiv = document.getElementById('status');
+    const localVideo = document.getElementById('localVideo');
+    const remoteVideo = document.getElementById('remoteVideo');
+    function createCallSession() {
+      fetch('/api/calls/create/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ call_type: 'human_human' })
+      })
+      .then(response => response.json())
+      .then(data => {
+        callSessionId = data.call_session_id;
+        roomInput.value = callSessionId;
+        document.getElementById('joinBtn').disabled = false;
+        statusDiv.textContent = 'Call session created: ' + callSessionId;
+      })
+      .catch(err => {
+        statusDiv.textContent = 'Failed to create call session: ' + err;
+      });
+    }
+
+    function joinRoom() {
+      if (!callSessionId) return alert('No call session!');
+      const room = callSessionId;
+      ws = new WebSocket(`ws://${location.hostname}:8000/ws/video/${room}/`);
+      ws.onopen = () => statusDiv.textContent = 'WebSocket connected';
+      ws.onmessage = async (event) => {
+        const data = JSON.parse(event.data);
+        if (data.type === 'offer') {
+          await createPeer(false);
+          await peer.setRemoteDescription(new RTCSessionDescription(data.sdp));
+          const answer = await peer.createAnswer();
+          await peer.setLocalDescription(answer);
+          ws.send(JSON.stringify({type: 'answer', sdp: answer}));
+        } else if (data.type === 'answer') {
+          await peer.setRemoteDescription(new RTCSessionDescription(data.sdp));
+        } else if (data.type === 'candidate') {
+          if (peer) {
+            await peer.addIceCandidate(new RTCIceCandidate(data.candidate));
+          }
+        }
+      };
+      ws.onclose = () => statusDiv.textContent = 'WebSocket closed';
+      startLocal();
+    }
+
+    async function startLocal() {
+      localStream = await navigator.mediaDevices.getUserMedia({video: true, audio: true});
+      localVideo.srcObject = localStream;
+      if (!peer) await createPeer(true);
+    }
+
+    function startRecording() {
+      if (!localStream) return alert('No local stream!');
+      recordedChunks = [];
+      mediaRecorder = new MediaRecorder(localStream, { mimeType: 'video/webm; codecs=vp9' });
+      mediaRecorder.ondataavailable = e => { if (e.data.size > 0) recordedChunks.push(e.data); };
+      mediaRecorder.onstop = () => {
+        document.getElementById('saveRec').disabled = false;
+        document.getElementById('startRec').disabled = false;
+        document.getElementById('pauseRec').disabled = true;
+        // After stopping, automatically call doSaveRecording to handle download/upload
+        doSaveRecording();
+      };
+      mediaRecorder.start();
+      document.getElementById('pauseRec').disabled = false;
+      document.getElementById('startRec').disabled = true;
+      document.getElementById('saveRec').disabled = false; // Enable Save while recording
+      isPaused = false;
+    }
+
+    function pauseRecording() {
+      if (!mediaRecorder) return;
+      if (!isPaused) {
+        mediaRecorder.pause();
+        document.getElementById('pauseRec').textContent = 'Resume';
+      } else {
+        mediaRecorder.resume();
+        document.getElementById('pauseRec').textContent = 'Pause';
+      }
+      isPaused = !isPaused;
+    }
+
+    function saveRecording() {
+      // If recording is still active, stop it and wait for onstop to trigger download/upload
+      if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+        mediaRecorder.stop();
+        // onstop handler will call doSaveRecording
+        return;
+      }
+      doSaveRecording();
+    }
+
+    function doSaveRecording() {
+      if (!recordedChunks.length) {
+        alert('No recording to save!');
+        return;
+      }
+      const blob = new Blob(recordedChunks, { type: 'video/webm' });
+      // Download locally (show download link)
+      const url = URL.createObjectURL(blob);
+      let downloadLink = document.getElementById('downloadLink');
+      if (!downloadLink) {
+        downloadLink = document.createElement('a');
+        downloadLink.id = 'downloadLink';
+        downloadLink.textContent = 'Download Recording';
+        downloadLink.style.display = 'inline-block';
+        downloadLink.style.margin = '10px';
+        document.body.appendChild(downloadLink);
+      }
+      downloadLink.href = url;
+      downloadLink.download = 'recording.webm';
+      // Upload to Django backend
+      const formData = new FormData();
+      formData.append('file', blob, 'recording.webm');
+      // Use callSessionId for upload
+      fetch(`/api/video/upload/${callSessionId}/`, {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        alert('Recording uploaded! ' + (data.file_url || JSON.stringify(data)));
+      })
+      .catch(err => alert('Upload failed: ' + err));
+      // Reset buttons for next recording
+      document.getElementById('startRec').disabled = false;
+      document.getElementById('pauseRec').disabled = true;
+      document.getElementById('saveRec').disabled = true;
+    }
+
+    async function createPeer(isCaller) {
+      peer = new RTCPeerConnection({iceServers: [{urls: 'stun:stun.l.google.com:19302'}]});
+      localStream.getTracks().forEach(track => peer.addTrack(track, localStream));
+      peer.onicecandidate = (e) => {
+        if (e.candidate) ws.send(JSON.stringify({type: 'candidate', candidate: e.candidate}));
+      };
+      peer.ontrack = (e) => {
+        remoteVideo.srcObject = e.streams[0];
+      };
+      if (isCaller) {
+        const offer = await peer.createOffer();
+        await peer.setLocalDescription(offer);
+        ws.send(JSON.stringify({type: 'offer', sdp: offer}));
+      }
+    }
+  </script>
+</body>
+</html>

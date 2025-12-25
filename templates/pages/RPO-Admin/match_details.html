@@ -1,0 +1,468 @@
+{% extends "Base/base.html" %}
+{% load static %}
+
+{% block title %}Match Details - RPO Admin{% endblock %}
+
+{% block hero_content %}
+
+{% include 'Base/navbar.html' %}
+
+<!-- Dashboard -->
+<div class="dashboard-wrap bg-light">
+	<a class="mobNavigation" data-bs-toggle="collapse" href="#MobNav" role="button" aria-expanded="false" aria-controls="MobNav">
+		<i class="fas fa-bars mr-2"></i>Dashboard Navigation
+	</a>
+	<div class="collapse" id="MobNav">
+		<div class="dashboard-nav">
+			<div class="dash-user-blocks pt-5">
+				<div class="jbs-grid-usrs-thumb">
+					<div class="jbs-grid-yuo">
+						<figure><img src="{% static 'app/img/l-12.png' %}" class="img-fluid circle" alt=""></figure>
+					</div>
+				</div>
+				<div class="jbs-grid-usrs-caption mb-3">
+					<div class="jbs-kioyer">
+						<span class="label text-light bg-main">RPO Admin</span>
+					</div>
+					<div class="jbs-tiosk">
+						<h4 class="jbs-tiosk-title">{{ request.user.get_full_name|default:request.user.username }}</h4>
+						<div class="jbs-tiosk-subtitle"><span><i class="fa-solid fa-user-tie me-2"></i>RPO Administrator</span></div>
+					</div>
+				</div>
+			</div>
+			{% include 'Components/For-Employer/dashboard_nav.html' with dashboard_active='resume_matching' %}
+		</div>
+	</div>
+	
+	<div class="dashboard-content">
+		<!-- Page Title -->
+		<div class="dashboard-tlbar d-block mb-4">
+			<div class="row">
+				<div class="col-xl-12 col-lg-12 col-md-12">
+					<h1 class="mb-1 fs-3 fw-medium">Match Details</h1>
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item text-muted"><a href="{% url 'App:rpo_dashboard' %}">Dashboard</a></li>
+							<li class="breadcrumb-item text-muted"><a href="{% url 'App:resume_matching_dashboard' %}">Resume Matching</a></li>
+							<li class="breadcrumb-item active" aria-current="page">Match Details</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+		
+		
+<!-- End Page Title -->
+
+<!-- Match Details -->
+<section class="user-dashboard">
+    <div class="dashboard-outer">
+        <div class="upper-title-box">
+            <h3>Match Analysis</h3>
+            <div class="text">{{ match.resume.candidate_name }} vs {{ match.job.title }}</div>
+        </div>
+
+        <!-- Overall Score -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card mb-4">
+                    <div class="card-body text-center" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 8px;">
+                        <h2 style="color: white; margin: 0;">{{ match.overall_match_percentage|floatformat:2 }}%</h2>
+                        <p style="color: white; margin: 5px 0;">Overall Match Quality</p>
+                        <span class="badge badge-light" style="font-size: 14px;">{{ match.get_match_quality_display|upper }}</span>
+                        {% if match.is_recommended %}
+                        <span class="badge badge-success ml-2" style="font-size: 14px;"><i class="la la-check"></i> RECOMMENDED</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Component Scores -->
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="score-card">
+                    <div class="score-icon" style="background: #1967d2;">
+                        <i class="la la-code"></i>
+                    </div>
+                    <h4>{{ match.skills_match_percentage|floatformat:1 }}%</h4>
+                    <p>Skills Match</p>
+                    <div class="progress">
+                        <div class="progress-bar" style="width: {{ match.skills_match_percentage }}%; background: #1967d2;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="score-card">
+                    <div class="score-icon" style="background: #28a745;">
+                        <i class="la la-briefcase"></i>
+                    </div>
+                    <h4>{{ match.experience_match_percentage|floatformat:1 }}%</h4>
+                    <p>Experience Match</p>
+                    <div class="progress">
+                        <div class="progress-bar" style="width: {{ match.experience_match_percentage }}%; background: #28a745;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="score-card">
+                    <div class="score-icon" style="background: #ffc107;">
+                        <i class="la la-map-marker"></i>
+                    </div>
+                    <h4>{{ match.location_match_percentage|floatformat:1 }}%</h4>
+                    <p>Location Match</p>
+                    <div class="progress">
+                        <div class="progress-bar" style="width: {{ match.location_match_percentage }}%; background: #ffc107;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="score-card">
+                    <div class="score-icon" style="background: #dc3545;">
+                        <i class="la la-graduation-cap"></i>
+                    </div>
+                    <h4>{{ match.qualification_match_percentage|floatformat:1 }}%</h4>
+                    <p>Qualification Match</p>
+                    <div class="progress">
+                        <div class="progress-bar" style="width: {{ match.qualification_match_percentage }}%; background: #dc3545;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skills Analysis -->
+        <div class="row mt-4">
+            <div class="col-lg-4">
+                <div class="card h-100">
+                    <div class="card-header bg-success text-white">
+                        <i class="la la-check-circle"></i> Matching Skills
+                    </div>
+                    <div class="card-body">
+                        {% if match.matching_skills %}
+                        <div class="skills-list">
+                            {% for skill in match.matching_skills %}
+                            <span class="skill-badge badge-success">{{ skill }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <p class="text-muted">No matching skills found</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card h-100">
+                    <div class="card-header bg-warning text-dark">
+                        <i class="la la-exclamation-circle"></i> Missing Skills
+                    </div>
+                    <div class="card-body">
+                        {% if match.missing_skills %}
+                        <div class="skills-list">
+                            {% for skill in match.missing_skills %}
+                            <span class="skill-badge badge-warning">{{ skill }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <p class="text-muted">No missing skills</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card h-100">
+                    <div class="card-header bg-info text-white">
+                        <i class="la la-plus-circle"></i> Additional Skills
+                    </div>
+                    <div class="card-body">
+                        {% if match.additional_skills %}
+                        <div class="skills-list">
+                            {% for skill in match.additional_skills %}
+                            <span class="skill-badge badge-info">{{ skill }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <p class="text-muted">No additional skills</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success & Failure Reasons -->
+        <div class="row mt-4">
+            <div class="col-lg-6">
+                <div class="card h-100">
+                    <div class="card-header bg-success text-white">
+                        <i class="la la-thumbs-up"></i> Success Factors
+                    </div>
+                    <div class="card-body">
+                        {% if match.success_reasons %}
+                        <ul class="reasons-list">
+                            {% for reason in match.success_reasons %}
+                            <li><i class="la la-check text-success"></i> {{ reason }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <p class="text-muted">No success factors identified</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card h-100">
+                    <div class="card-header bg-danger text-white">
+                        <i class="la la-thumbs-down"></i> Concerns
+                    </div>
+                    <div class="card-body">
+                        {% if match.failure_reasons %}
+                        <ul class="reasons-list">
+                            {% for reason in match.failure_reasons %}
+                            <li><i class="la la-times text-danger"></i> {{ reason }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <p class="text-muted">No concerns identified</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Improvement Suggestions -->
+        {% if match.improvement_suggestions %}
+        <div class="row mt-4">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <i class="la la-lightbulb"></i> Improvement Suggestions
+                    </div>
+                    <div class="card-body">
+                        <ul class="suggestions-list">
+                            {% for suggestion in match.improvement_suggestions %}
+                            <li><i class="la la-arrow-right text-primary"></i> {{ suggestion }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Sentiment Analysis -->
+        {% if match.sentiment_score %}
+        <div class="row mt-4">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="la la-smile"></i> Sentiment Analysis
+                    </div>
+                    <div class="card-body">
+                        <p>
+                            <strong>Sentiment Score:</strong> {{ match.sentiment_score|floatformat:3 }}
+                            <span class="badge {% if match.sentiment_score > 0 %}badge-success{% elif match.sentiment_score < 0 %}badge-danger{% else %}badge-secondary{% endif %} ml-2">
+                                {{ match.sentiment_impact|upper }}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Candidate & Job Info -->
+        <div class="row mt-4">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="la la-user"></i> Candidate Information
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-2 align-items-center">
+                            <div class="col-12 mb-2">
+                                <span class="fw-bold fs-5"><i class="fa-solid fa-user me-2"></i>{{ match.resume.candidate_name|default:'N/A' }}</span>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <span class="text-muted"><i class="fa-solid fa-envelope me-1"></i>Email:</span><br>
+                                <span class="fw-medium">{{ match.resume.extracted_email|default:'N/A' }}</span>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <span class="text-muted"><i class="fa-solid fa-phone me-1"></i>Phone:</span><br>
+                                <span class="fw-medium">{{ match.resume.extracted_phone|default:'N/A' }}</span>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <span class="text-muted"><i class="fa-solid fa-location-dot me-1"></i>Location:</span><br>
+                                <span class="fw-medium">{{ match.resume.resume_json.entities.locations.0|default:'N/A' }}</span>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <span class="text-muted"><i class="fa-solid fa-briefcase me-1"></i>Experience:</span><br>
+                                <span class="fw-medium">{{ match.resume.years_of_experience|default:'N/A' }}</span>
+                            </div>
+                            <div class="col-12 mt-3 d-flex gap-2">
+                                <a href="{% url 'App:rpo_resume_view' match.resume.id %}" class="btn btn-outline-primary w-100">
+                                    <i class="la la-eye"></i> View Full Resume
+                                </a>
+                                {% if match.resume.resume_path %}
+                                <a href="/media/{{ match.resume.resume_path }}" class="btn btn-success w-100" download>
+                                    <i class="fa-solid fa-download me-1"></i> Download Resume
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="la la-briefcase"></i> Job Information
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-2 align-items-center">
+                            <div class="col-12 mb-2">
+                                <span class="fw-bold fs-5"><i class="fa-solid fa-briefcase me-2"></i>{{ match.job.title|default:'N/A' }}</span>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <span class="text-muted"><i class="fa-solid fa-building me-1"></i>Company:</span><br>
+                                <span class="fw-medium">{{ match.job.company|default:'N/A' }}</span>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <span class="text-muted"><i class="fa-solid fa-location-dot me-1"></i>Location:</span><br>
+                                <span class="fw-medium">{{ match.job.location|default:'N/A' }}</span>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <span class="text-muted"><i class="fa-solid fa-briefcase me-1"></i>Type:</span><br>
+                                <span class="fw-medium">{{ match.job.get_job_type_display|default:'N/A' }}</span>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <span class="text-muted"><i class="fa-solid fa-user-graduate me-1"></i>Experience Required:</span><br>
+                                <span class="fw-medium">{{ match.job.experience_required.text|default:'N/A' }}</span>
+                            </div>
+                            <div class="col-12 mt-3 d-flex gap-2">
+                                <a href="{% url 'App:job_detail' match.job.slug %}" class="btn btn-outline-primary w-100">
+                                    <i class="la la-eye"></i> View Job Details
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="row mt-4">
+            <div class="col-lg-12 text-center">
+                <form method="post" action="{% url 'App:recalculate_match' match.id %}" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="theme-btn btn-style-three">
+                        <i class="la la-sync"></i> Recalculate Match
+                    </button>
+                </form>
+                <a href="{% url 'App:resume_matching_dashboard' %}" class="theme-btn btn-style-one">
+                    <i class="la la-arrow-left"></i> Back to Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Match Details -->
+
+<style>
+.card {
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+.card-header {
+    font-weight: 600;
+    border-radius: 8px 8px 0 0 !important;
+}
+.score-card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    text-align: center;
+    margin-bottom: 20px;
+}
+.score-card .score-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+.score-card .score-icon i {
+    font-size: 30px;
+    color: white;
+}
+.score-card h4 {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 10px 0 5px 0;
+}
+.score-card p {
+    color: #696969;
+    margin: 0 0 10px 0;
+}
+.progress {
+    height: 8px;
+    border-radius: 4px;
+    background: #f0f0f0;
+}
+.progress-bar {
+    height: 100%;
+    border-radius: 4px;
+}
+.skill-badge {
+    display: inline-block;
+    padding: 5px 12px;
+    margin: 4px;
+    border-radius: 15px;
+    font-size: 13px;
+    font-weight: 500;
+}
+.badge-success {
+    background: #28a745;
+    color: white;
+}
+.badge-warning {
+    background: #ffc107;
+    color: #212529;
+}
+.badge-info {
+    background: #17a2b8;
+    color: white;
+}
+.reasons-list,
+.suggestions-list {
+    list-style: none;
+    padding: 0;
+}
+.reasons-list li,
+.suggestions-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+.reasons-list li:last-child,
+.suggestions-list li:last-child {
+    border-bottom: none;
+}
+.reasons-list i,
+.suggestions-list i {
+    margin-right: 10px;
+}
+.skills-list {
+    max-height: 250px;
+    overflow-y: auto;
+}
+</style>
+{% endblock %}

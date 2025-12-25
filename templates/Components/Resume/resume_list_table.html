@@ -1,0 +1,119 @@
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h4 class="mb-0">Resumes ({{ total }})</h4>
+    </div>
+    <div class="card-body">
+        {% if resumes %}
+        <div class="table-responsive">
+            <table class="table table-hover resume-table">
+                <thead>
+                    <tr>
+                        
+                        <th>#</th>
+                        <th>Filename</th>
+                        <th>Status</th>
+                        <th>Created At</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for resume in resumes %}
+                    <tr>
+                        <td>{{ forloop.counter0|add:offset|add:1 }}</td>
+                        <td>{{ resume.original_filename }}</td>
+                        <td>
+                            <span class="badge {{ resume.get_status_badge_class }}">
+                                {{ resume.status|title }}
+                            </span>
+                        </td>
+                        <td>{{ resume.created_at|date:"M d, Y H:i" }}</td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <a href="{% url 'App:rpo_resume_view' resume.id %}" class="btn btn-light" title="View">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+                                <a href="{% url 'App:rpo_resume_download' resume.id %}" class="btn btn-light" title="Download">
+                                    <i class="fa-solid fa-download"></i>
+                                </a>
+                                <button class="btn btn-light text-danger" onclick="deleteResume({{ resume.id }}, '{{ resume.original_filename|escapejs }}')" title="Delete">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="d-flex justify-content-between align-items-center mt-4">
+            <div class="text-muted">
+                Showing {{ offset|add:1 }} to {{ offset|add:resumes|length }} of {{ total }} resumes
+            </div>
+            <nav>
+                <ul class="pagination mb-0">
+                    {% if has_prev %}
+                    <li class="page-item">
+                        <a class="page-link" href="?offset={{ prev_offset }}&limit={{ limit }}">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link"><i class="fa-solid fa-chevron-left"></i></span>
+                    </li>
+                    {% endif %}
+                    <li class="page-item active">
+                        <span class="page-link">{{ offset|add:limit|divisibleby:limit|add:1 }}</span>
+                    </li>
+                    {% if has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?offset={{ next_offset }}&limit={{ limit }}">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link"><i class="fa-solid fa-chevron-right"></i></span>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+        {% else %}
+        <div class="text-center py-5">
+            <i class="fa-solid fa-file-pdf fa-4x text-muted mb-3"></i>
+            <h5 class="text-muted">No resumes uploaded yet</h5>
+            <p class="text-muted">Upload your first resume to get started</p>
+            <a href="{% url 'App:rpo_resume_upload' %}" class="btn btn-main mt-2">
+                <i class="fa-solid fa-upload me-2"></i>Upload Resumes
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+<script>
+function deleteResume(resumeId, filename) {
+    if (!confirm(`Are you sure you want to delete "${filename}"?`)) {
+        return;
+    }
+    fetch(`/api/resumes/${resumeId}/delete/`, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': '{{ csrf_token }}',
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert(data.message);
+            window.location.reload();
+        } else {
+            alert('Error: ' + data.message);
+        }
+    })
+    .catch(error => {
+        alert('Error deleting resume: ' + error);
+    });
+}
+</script>

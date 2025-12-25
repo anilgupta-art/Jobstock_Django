@@ -201,6 +201,12 @@ class ResumeProcessingService:
         resume_record.resume_json = results
         
         # Extract specific fields for quick access
+        # Candidate name - try contact_info first, then entities
+        resume_record.candidate_name = (
+            extracted_data['contact_info'].get('name') or
+            (extracted_data['entities']['persons'][0] if extracted_data['entities']['persons'] else None)
+        )
+        
         resume_record.extracted_skills = ', '.join(
             extracted_data['skills']['skills'][:30]  # Limit to 30 skills
         )
@@ -271,6 +277,29 @@ class ResumeProcessingService:
             # Update database record
             if resume_record:
                 resume_record = self.update_resume_record(resume_record, extracted_data)
+            
+            # Auto-match resume to jobs after successful processing
+            if resume_record and resume_record.status == 'completed':
+                try:
+                    from App.services.resume_matching_service import ResumeJobMatchingService
+                    
+                    # Match to all active jobs
+                    match_result = ResumeJobMatchingService.match_resume_to_all_jobs(
+                        resume_id=resume_record.id,
+                        user=user
+                    )
+                    
+                    if match_result.success:
+                        extracted_data['matching_info'] = {
+                            'total_matches': match_result.data.get('total_jobs_matched', 0),
+                            'matches_created': True
+                        }
+                except Exception as match_error:
+                    # Don't fail the whole process if matching fails
+                    extracted_data['matching_info'] = {
+                        'matches_created': False,
+                        'error': str(match_error)
+                    }
             
             return {
                 'success': True,

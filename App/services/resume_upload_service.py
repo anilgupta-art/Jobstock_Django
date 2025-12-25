@@ -139,7 +139,7 @@ class ResumeUploadService:
             }
     
     @classmethod
-    def upload_resumes(cls, files: List[UploadedFile], user: User) -> ApiResponse:
+    def upload_resumes(cls, files: List[UploadedFile], user: User, job=None, resumesource=None) -> ApiResponse:
         """
         Upload multiple resume files
         
@@ -167,7 +167,6 @@ class ResumeUploadService:
         for file in files:
             # Validate file
             validation = cls.validate_file(file)
-            
             if not validation['valid']:
                 results['failed'].append({
                     'filename': file.name,
@@ -175,10 +174,8 @@ class ResumeUploadService:
                 })
                 results['failed_count'] += 1
                 continue
-            
             # Save file to disk
             save_result = cls.save_resume_file(file, user)
-            
             if not save_result['success']:
                 results['failed'].append({
                     'filename': file.name,
@@ -186,7 +183,6 @@ class ResumeUploadService:
                 })
                 results['failed_count'] += 1
                 continue
-            
             # Create database record
             try:
                 file_ext = os.path.splitext(file.name)[1].lower()
@@ -197,9 +193,10 @@ class ResumeUploadService:
                     original_filename=save_result['filename'],
                     file_size=file.size,
                     file_extension=file_ext,
-                    status='pending'
+                    status='pending',
+                    job=job,
+                    resumesource=resumesource
                 )
-                
                 results['successful'].append({
                     'id': resume_record.id,
                     'filename': save_result['filename'],
@@ -208,7 +205,6 @@ class ResumeUploadService:
                     'status': 'pending'
                 })
                 results['success_count'] += 1
-                
             except Exception as e:
                 # File saved but database record failed
                 results['failed'].append({
@@ -364,13 +360,14 @@ class ResumeUploadService:
             )
     
     @classmethod
-    def process_pending_resumes(cls, user: User, resume_ids: List[int] = None) -> ApiResponse:
+    def process_pending_resumes(cls, user: User, resume_ids: List[int] = None, job_id: int = None) -> ApiResponse:
         """
         Process pending resumes for a user using ResumeProcessingService
         
         Args:
             user: User whose resumes to process
             resume_ids: Optional list of specific resume IDs to process
+            job_id: Optional job ID to filter resumes for a specific job
             
         Returns:
             ApiResponse with processing results
@@ -382,13 +379,17 @@ class ResumeUploadService:
             if resume_ids:
                 query['id__in'] = resume_ids
             
+            if job_id:
+                query['job_id'] = job_id
+            
             # Get resumes to process
             resumes = ResumeProcessing.objects.filter(**query)
             
             if not resumes.exists():
+                job_msg = f" for Job ID {job_id}" if job_id else ""
                 return ApiResponse.success(
                     data={'total': 0, 'successful': 0, 'failed': 0},
-                    message="No pending resumes to process"
+                    message=f"No pending resumes to process{job_msg}"
                 )
             
             # Use generic processing service
@@ -398,9 +399,10 @@ class ResumeUploadService:
                 verbose=False
             )
             
+            job_msg = f" for Job ID {job_id}" if job_id else ""
             return ApiResponse.success(
                 data=results,
-                message=f"Processed {results['successful']} of {results['total']} resumes successfully"
+                message=f"Processed {results['successful']} of {results['total']} resumes successfully{job_msg}"
             )
             
         except Exception as e:

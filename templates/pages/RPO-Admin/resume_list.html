@@ -1,64 +1,45 @@
 {% extends "Base/base.html" %}
 {% load static %}
 
-{% block hero_content %}
 
-{% include 'Base/navbar.html' %}
-	
-<!-- Resume List Page -->
-<div class="dashboard-wrap bg-light">
-	<a class="mobNavigation" data-bs-toggle="collapse" href="#MobNav" role="button" aria-expanded="false" aria-controls="MobNav">
-		<i class="fas fa-bars mr-2"></i>Dashboard Navigation
-	</a>
-	<div class="collapse" id="MobNav">
-		<div class="dashboard-nav">
-			<div class="dash-user-blocks pt-5">
-				<div class="jbs-grid-usrs-thumb">
-					<div class="jbs-grid-yuo">
-						<figure><img src="{% static 'app/img/l-12.png' %}" class="img-fluid circle" alt=""></figure>
-					</div>
-				</div>
-				<div class="jbs-grid-usrs-caption mb-3">
-					<div class="jbs-kioyer">
-						<span class="label text-light bg-main">RPO Admin</span>
-					</div>
-					<div class="jbs-tiosk">
-						<h4 class="jbs-tiosk-title">{{ request.user.get_full_name|default:request.user.username }}</h4>
-						<div class="jbs-tiosk-subtitle"><span><i class="fa-solid fa-user-tie me-2"></i>RPO Administrator</span></div>
-					</div>
+{% block extra_head %}
+	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+	<style>
+		.select2-container .select2-selection--multiple { min-height: 38px; }
+	</style>
+{% endblock %}
+
+<thead>
+	<tr>
+		<th>#</th>
+		<th>Filename</th>
+		<th>Status</th>
+		<th>Created At</th>
+		<th>Actions</th>
+	</tr>
+</thead>
+							<label for="filter-source" class="form-label mb-1">Resume Source</label>
+							<select id="filter-source" name="resumesource" class="form-select select2" multiple>
+								{% for source in resume_sources %}
+								<option value="{{ source.id }}">{{ source.text }}</option>
+								{% endfor %}
+							</select>
+						</div>
+						<div class="col-md-2">
+							<label for="filter-status" class="form-label mb-1">Status</label>
+							<select id="filter-status" name="status" class="form-select select2" multiple>
+								<option value="pending">Pending</option>
+								<option value="processing">Processing</option>
+								<option value="completed">Completed</option>
+								<option value="failed">Failed</option>
+							</select>
+						</div>
+						<div class="col-md-2">
+							<button type="submit" class="btn btn-main w-100"><i class="fa fa-filter me-1"></i>Filter</button>
+						</div>
+					</form>
 				</div>
 			</div>
-			{% include 'Components/For-Employer/dashboard_nav.html' with dashboard_active='resume_list' %}
-		</div>					
-	</div>
-	
-	<div class="dashboard-content">
-		<div class="dashboard-tlbar d-block mb-4">
-			<div class="row">
-				<div class="col-xl-12 col-lg-12 col-md-12">
-					<div class="d-flex justify-content-between align-items-center">
-						<div>
-							<h1 class="mb-1 fs-3 fw-medium">Uploaded Resumes</h1>
-							<nav aria-label="breadcrumb">
-								<ol class="breadcrumb">
-									<li class="breadcrumb-item text-muted"><a href="{% url 'App:index' %}">Home</a></li>
-									<li class="breadcrumb-item text-muted"><a href="{% url 'App:rpo_dashboard' %}">RPO Dashboard</a></li>
-									<li class="breadcrumb-item"><a href="#" class="text-main">Resume List</a></li>
-								</ol>
-							</nav>
-						</div>
-						<div>
-							<a href="{% url 'App:rpo_resume_upload' %}" class="btn btn-main">
-								<i class="fa-solid fa-upload me-2"></i>Upload New
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<div class="dashboard-widg-bar d-block">
-			
 			<!-- Resume List -->
 			<div class="row gx-4 gy-4 mb-4">
 				<div class="col-xl-12 col-lg-12 col-md-12">
@@ -66,15 +47,6 @@
 						<div class="card-header">
 							<div class="d-flex justify-content-between align-items-center">
 								<h4 class="mb-0">All Resumes ({{ total }})</h4>
-								<div class="d-flex gap-2">
-									<select class="form-select form-select-sm" style="width: auto;">
-										<option>All Status</option>
-										<option>Pending</option>
-										<option>Processing</option>
-										<option>Completed</option>
-										<option>Failed</option>
-									</select>
-								</div>
 							</div>
 						</div>
 						<div class="card-body">
@@ -85,51 +57,86 @@
 										<tr>
 											<th>#</th>
 											<th>Filename</th>
-											<th>Size</th>
-											<th>Type</th>
-											<th>Status</th>
-											<th>Uploaded</th>
-											<th>Actions</th>
-										</tr>
-									</thead>
-									<tbody>
-										{% for resume in resumes %}
-										<tr>
-											<td>{{ forloop.counter|add:offset }}</td>
-											<td>
-												<div class="d-flex align-items-center">
-													{% if resume.file_extension == '.pdf' %}
-													<i class="fa-solid fa-file-pdf fa-lg text-danger me-2"></i>
-													{% elif resume.file_extension == '.doc' or resume.file_extension == '.docx' %}
-													<i class="fa-solid fa-file-word fa-lg text-primary me-2"></i>
-													{% elif resume.file_extension == '.txt' %}
-													<i class="fa-solid fa-file-alt fa-lg text-secondary me-2"></i>
-													{% else %}
-													<i class="fa-solid fa-file fa-lg text-muted me-2"></i>
-													{% endif %}
-													<span>{{ resume.filename }}</span>
-												</div>
-											</td>
-											<td>{{ resume.file_size|filesizeformat }}</td>
-											<td><span class="badge bg-light text-dark">{{ resume.file_extension|upper }}</span></td>
+											<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+											<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+											<script>
+											$(document).ready(function() {
+												$('.select2').select2({ width: '100%' });
+
+												$('#resume-filter-form').on('submit', function(e) {
+													e.preventDefault();
+													let data = $(this).serialize();
+													$.ajax({
+														url: window.location.pathname,
+														data: data,
+														type: 'GET',
+														success: function(response) {
+															// Replace the resume list table and pagination only
+															let html = $(response);
+															let newTable = html.find('.table-responsive').parent().html();
+															let newPagination = html.find('.pagination').parent().parent().html();
+															$('.table-responsive').parent().html(newTable);
+															$('.pagination').parent().parent().html(newPagination);
+														},
+														error: function() {
+															alert('Error applying filters.');
+														}
+													});
+												});
+											});
+
+											function deleteResume(resumeId, filename) {
+												if (!confirm(`Are you sure you want to delete "${filename}"?`)) {
+													return;
+												}
+												fetch(`/api/resumes/${resumeId}/delete/`, {
+													method: 'POST',
+													headers: {
+														'X-CSRFToken': '{{ csrf_token }}',
+														'Content-Type': 'application/json'
+													}
+												})
+												.then(response => response.json())
+												.then(data => {
+													if (data.success) {
+														alert(data.message);
+														window.location.reload();
+													} else {
+														alert('Error: ' + data.message);
+													}
+												})
+												.catch(error => {
+													alert('Error deleting resume: ' + error);
+												});
+											}
+											</script>
 											<td>
 												{% if resume.status == 'pending' %}
 												<span class="badge bg-warning text-dark">
 													<i class="fa-solid fa-clock me-1"></i>Pending
 												</span>
 												{% elif resume.status == 'processing' %}
-												<span class="badge bg-info">
-													<i class="fa-solid fa-spinner fa-spin me-1"></i>Processing
-												</span>
-												{% elif resume.status == 'completed' %}
-												<span class="badge bg-success">
-													<i class="fa-solid fa-check me-1"></i>Completed
-												</span>
-												{% elif resume.status == 'failed' %}
-												<span class="badge bg-danger">
-													<i class="fa-solid fa-times me-1"></i>Failed
-												</span>
-												{% endif %}
+					<!-- Removed duplicate status badge block after </tbody> -->
+											</td>
+											<td>{{ resume.created_at|date:"M d, Y H:i" }}</td>
+											<td>
+												<div class="btn-group btn-group-sm">
+													<button class="btn btn-light" title="View">
+														<i class="fa-solid fa-eye"></i>
+													</button>
+													<button class="btn btn-light" title="Download">
+														<i class="fa-solid fa-download"></i>
+													</button>
+													<button class="btn btn-light text-danger" 
+															onclick="deleteResume({{ resume.id }}, '{{ resume.filename }}')"
+															title="Delete">
+														<i class="fa-solid fa-trash"></i>
+													</button>
+												</div>
+											</td>
+				</tr>
+			{% endfor %}
+			</tbody>
 											</td>
 											<td>{{ resume.created_at|date:"M d, Y H:i" }}</td>
 											<td>
@@ -148,10 +155,8 @@
 												</div>
 											</td>
 										</tr>
-										{% endfor %}
-									</tbody>
-								</table>
-							</div>
+									{% endfor %}
+								</tbody>
 							
 							<!-- Pagination -->
 							<div class="d-flex justify-content-between align-items-center mt-4">
