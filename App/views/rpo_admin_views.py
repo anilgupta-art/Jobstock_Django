@@ -166,9 +166,12 @@ def rpo_resume_list(request):
     from App.models import ResumeProcessing, DropdownGroup, DropdownMaster
     resumes_qs = ResumeProcessing.objects.all()
 
-    # Only show resumes for this user (or all if superuser)
+    # Show all resumes uploaded by any user in rpo_admin group if current user is rpo_admin
     if not request.user.is_superuser:
-        resumes_qs = resumes_qs.filter(user=request.user)
+        if is_rpo_admin:
+            resumes_qs = resumes_qs.filter(user__groups__name='rpo_admin')
+        else:
+            resumes_qs = resumes_qs.filter(user=request.user)
 
     # Apply filters
     if job_filter:
