@@ -251,3 +251,4 @@ data/**/*.docx
 # Local development files
 local/
 local_*
+db.sqlite3
