@@ -1045,6 +1045,7 @@ class ResumeJobMatch(models.Model):
         related_name='resume_matches',
         help_text="Job posting being matched"
     )
+    
     resume = models.ForeignKey(
         ResumeProcessing, 
         on_delete=models.CASCADE, 
