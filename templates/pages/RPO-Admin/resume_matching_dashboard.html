@@ -126,6 +126,17 @@
                             <form method="get" class="row">
                                 <div class="col-lg-3 col-md-6 col-sm-12">
                                     <div class="form-group">
+                                        <label>Company</label>
+                                        <select name="company" class="form-control select2" multiple="multiple" style="width: 100%;">
+                                            <option value="__all__" class="select2-all">Select All</option>
+                                            {% for company in resume_sources %}
+                                            <option value="{{ company.value }}">{{ company.text }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6 col-sm-12">
+                                    <div class="form-group">
                                         <label>Match Quality</label>
                                         <select name="quality" class="form-control select2" multiple="multiple" style="width: 100%;">
                                             <option value="__all__" class="select2-all">Select All</option>

@@ -10,7 +10,7 @@ from django.db.models import Q, Count, Avg
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 
-from App.models import ResumeJobMatch, ResumeProcessing, Job
+from App.models import ResumeJobMatch, ResumeProcessing, Job, DropdownGroup, DropdownMaster
 from App.services.resume_matching_service import ResumeJobMatchingService
 from App.tasks_matching import (
     match_resume_to_job_task,
@@ -110,17 +110,26 @@ def resume_matching_dashboard(request):
         status='completed'
     ).order_by('-created_at')[:50]
     
+    # Get ResumeSource companies for dropdown
+    try:
+        resume_source_group = DropdownGroup.objects.get(text='ResumeSource', is_active=True)
+        resume_sources = DropdownMaster.objects.filter(group=resume_source_group, is_active=True).order_by('sort_order', 'text')
+    except DropdownGroup.DoesNotExist:
+        resume_sources = []
+    
     context = {
         'page_obj': page_obj,
         'stats': stats,
         'active_jobs': active_jobs,
         'completed_resumes': completed_resumes,
+        'resume_sources': resume_sources,
         'current_filters': {
             'quality': match_quality,
             'job': job_id,
             'resume': resume_id,
-            'search': search
-        }
+            'search': search,
+        },
+        'search': search,
     }
     
     return render(request, 'Pages/RPO-Admin/resume_matching_dashboard.html', context)

@@ -1225,3 +1225,29 @@ class ResumeJobMatch(models.Model):
             models.Index(fields=['match_quality', 'is_recommended']),
             models.Index(fields=['status', 'created_at']),
         ]
+
+from App.models import DropdownGroup, DropdownMaster
+
+def insert_resume_source_companies():
+    # Create or get the ResumeSource group
+    group, _ = DropdownGroup.objects.get_or_create(
+        text='ResumeSource', defaults={'value': 'ResumeSource', 'is_active': True}
+    )
+    # List of company names
+    companies = [
+        'LinkedIn', 'Zoho', 'Indeed', 'Glassdoor', 'Monster',
+        'Google', 'Microsoft', 'Amazon', 'IBM', 'Salesforce'
+    ]
+    # Insert each company as a DropdownMaster item
+    for idx, name in enumerate(companies):
+        DropdownMaster.objects.get_or_create(
+            group=group,
+            text=name,
+            defaults={
+                'value': name.lower(),
+                'is_active': True,
+                'sort_order': idx
+            }
+        )
+
+# Usage: Call insert_resume_source_companies() from Django shell or migration
