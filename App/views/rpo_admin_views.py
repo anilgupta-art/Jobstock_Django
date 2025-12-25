@@ -155,31 +155,51 @@ def rpo_resume_list(request):
     # Get pagination parameters
     limit = int(request.GET.get('limit', 20))
     offset = int(request.GET.get('offset', 0))
-    
-    # Get resumes from service
-    resumes_response = ResumeUploadService.get_user_resumes(request.user, limit=limit, offset=offset)
-    
-    if resumes_response.success:
-        resumes_data = resumes_response.data
-        context = {
-            'page_title': 'My Uploaded Resumes',
-            'resumes': resumes_data.get('resumes', []),
-            'total': resumes_data.get('total', 0),
-            'limit': limit,
-            'offset': offset,
-            'has_next': (offset + limit) < resumes_data.get('total', 0),
-            'has_prev': offset > 0,
-            'next_offset': offset + limit,
-            'prev_offset': max(0, offset - limit)
-        }
-    else:
-        messages.error(request, resumes_response.message)
-        context = {
-            'page_title': 'My Uploaded Resumes',
-            'resumes': [],
-            'total': 0
-        }
-    
+
+    # Filtering
+    job_filter = request.GET.getlist('job')
+    resumesource_filter = request.GET.getlist('resumesource')
+    status_filter = request.GET.getlist('status')
+
+    from App.models import ResumeProcessing, DropdownGroup, DropdownMaster
+    resumes_qs = ResumeProcessing.objects.all()
+
+    # Only show resumes for this user (or all if superuser)
+    if not request.user.is_superuser:
+        resumes_qs = resumes_qs.filter(user=request.user)
+
+    # Apply filters
+    if job_filter:
+        resumes_qs = resumes_qs.filter(job__title__in=job_filter)
+    if resumesource_filter:
+        resumes_qs = resumes_qs.filter(resumesource__id__in=resumesource_filter)
+    if status_filter:
+        resumes_qs = resumes_qs.filter(status__in=status_filter)
+
+    total = resumes_qs.count()
+    resumes = resumes_qs.order_by('-created_at')[offset:offset+limit]
+
+    # For filter dropdowns
+    jobs = ResumeProcessing.objects.values_list('job__title', flat=True).distinct().exclude(job__title__isnull=True).exclude(job__title='')
+    try:
+        resume_source_group = DropdownGroup.objects.get(text='ResumeSource', is_active=True)
+        resume_sources = DropdownMaster.objects.filter(group=resume_source_group, is_active=True).order_by('sort_order', 'text')
+    except DropdownGroup.DoesNotExist:
+        resume_sources = []
+
+    context = {
+        'page_title': 'My Uploaded Resumes',
+        'resumes': resumes,
+        'total': total,
+        'limit': limit,
+        'offset': offset,
+        'has_next': (offset + limit) < total,
+        'has_prev': offset > 0,
+        'next_offset': offset + limit,
+        'prev_offset': max(0, offset - limit),
+        'jobs': jobs,
+        'resume_sources': resume_sources,
+    }
     return render(request, 'Pages/RPO-Admin/resume_list.html', context)
 
 
