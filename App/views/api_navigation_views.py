@@ -40,7 +40,7 @@ def get_user_navigation(request):
         }
     """
     result = NavigationService.get_navigation_for_user(request.user)
-    return JsonResponse(result, status=result['status_code'])
+    return JsonResponse(result.to_dict(), status=result.status_code)
 
 
 @api_view(['GET'])
@@ -53,7 +53,7 @@ def get_dashboard_widgets(request):
         JSON response with widget configuration
     """
     result = NavigationService.get_dashboard_widgets(request.user)
-    return JsonResponse(result, status=result['status_code'])
+    return JsonResponse(result.to_dict(), status=result.status_code)
 
 
 @api_view(['GET'])
@@ -66,7 +66,7 @@ def get_quick_actions(request):
         JSON response with quick actions
     """
     result = NavigationService.get_quick_actions(request.user)
-    return JsonResponse(result, status=result['status_code'])
+    return JsonResponse(result.to_dict(), status=result.status_code)
 
 
 @api_view(['POST'])
@@ -88,7 +88,7 @@ def update_dashboard_preferences(request):
         request.user,
         request.data
     )
-    return JsonResponse(result, status=result['status_code'])
+    return JsonResponse(result.to_dict(), status=result.status_code)
 
 
 @login_required
@@ -98,7 +98,7 @@ def get_navigation_json(request):
     Non-DRF endpoint for navigation (for templates without DRF setup)
     """
     result = NavigationService.get_navigation_for_user(request.user)
-    return JsonResponse(result, status=result.get('status_code', 200))
+    return JsonResponse(result.to_dict(), status=getattr(result, 'status_code', 200))
 
 
 @api_view(['GET'])
@@ -111,4 +111,4 @@ def get_navigation_stats(request):
         JSON with badge counts, notifications, etc.
     """
     result = NavigationService.get_navigation_stats(request.user)
-    return JsonResponse(result, status=result['status_code'])
+    return JsonResponse(result.to_dict(), status=result.status_code)

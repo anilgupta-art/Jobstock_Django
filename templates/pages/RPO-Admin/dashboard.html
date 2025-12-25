@@ -147,7 +147,10 @@
 							{% if stats.pending > 0 %}
 							<form method="POST" action="{% url 'App:rpo_process_resumes' %}" class="d-inline w-100">
 								{% csrf_token %}
-								<button type="submit" class="btn btn-success btn-block w-100" onclick="return confirm('Process {{ stats.pending }} pending resume(s)?')">
+								{% if request.GET.job_id %}
+								<input type="hidden" name="job_id" value="{{ request.GET.job_id }}">
+								{% endif %}
+								<button type="submit" class="btn btn-success btn-block w-100" onclick="return confirm('Process {{ stats.pending }} pending resume(s){% if request.GET.job_id %} for Job ID {{ request.GET.job_id }}{% endif %}?')">
 									<i class="fa-solid fa-cog me-2"></i>Process All Pending ({{ stats.pending }})
 								</button>
 							</form>

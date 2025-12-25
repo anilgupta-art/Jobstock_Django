@@ -1,0 +1,11 @@
+# requirements.txt - PERFECT BALANCE
+transformers==4.40.0        # Apache 2.0 - NLP/Audio
+torch==2.3.0                # BSD 3-Clause (like MIT)
+torchaudio==2.3.0           # BSD 3-Clause
+torchvision==0.18.0         # BSD 3-Clause
+whisper-openai==1.1.10      # MIT - Best speech-to-text
+deepface==0.0.89           # MIT - Face emotions
+opencv-python==4.9.0       # Apache 2.0 - Video processing
+librosa==0.10.2            # ISC (permissive) - Audio features
+pydub==0.25.1              # MIT - Audio processing
+numpy==1.26.0              # BSD 3-Clause

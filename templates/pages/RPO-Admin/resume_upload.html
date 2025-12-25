@@ -14,9 +14,9 @@
 		<div class="dashboard-nav">
 			<div class="dash-user-blocks pt-5">
 				<div class="jbs-grid-usrs-thumb">
-					<div class="jbs-grid-yuo">
+					<!-- <div class="jbs-grid-yuo">
 						<figure><img src="{% static 'app/img/l-12.png' %}" class="img-fluid circle" alt=""></figure>
-					</div>
+					</div> -->
 				</div>
 				<div class="jbs-grid-usrs-caption mb-3">
 					<div class="jbs-kioyer">
@@ -37,6 +37,15 @@
 			<div class="row">
 				<div class="col-xl-12 col-lg-12 col-md-12">
 					<h1 class="mb-1 fs-3 fw-medium">Upload Resumes</h1>
+					{% if job_title and job_company %}
+						<div class="alert alert-info mb-2">
+							<strong>Job:</strong> {{ job_title }} ({{ job_company }})
+						</div>
+					{% elif job_title %}
+						<div class="alert alert-info mb-2">
+							<strong>Job:</strong> {{ job_title }}
+						</div>
+					{% endif %}
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item text-muted"><a href="{% url 'App:index' %}">Home</a></li>
@@ -54,14 +63,26 @@
 			<div class="row gx-4 gy-4 mb-4">
 				<div class="col-xl-8 col-lg-8 col-md-12">
 					<div class="card">
-						<div class="card-header">
-							<h4 class="mb-0">Upload Multiple Resumes</h4>
-						</div>
+						
 						<div class="card-body">
 							
 							<!-- Upload Info -->
-							<div class="alert alert-info mb-4">
-								<h6 class="mb-2"><i class="fa-solid fa-info-circle me-2"></i>Upload Guidelines</h6>
+							<!-- <div class="alert alert-info mb-4">
+								<h6 class="mb-2">
+									<i class="fa-solid fa-info-circle me-2"></i>
+									<span data-bs-toggle="tooltip" data-bs-placement="right" title="Please follow these guidelines for uploading resumes. Accepted formats: {{ allowed_extensions }}. Max file size: {{ max_file_size_mb }} MB per file. You can upload multiple files at once. Files will be saved in: Data/resume/[date]/{{ request.user.username }}/">
+										UI format
+									</span>
+								</h6>
+								<script>
+								// Enable Bootstrap tooltips
+								document.addEventListener('DOMContentLoaded', function () {
+									var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+									tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+										new bootstrap.Tooltip(tooltipTriggerEl);
+									});
+								});
+								</script>
 								<ul class="mb-0 ps-3">
 									<li>Accepted formats: {{ allowed_extensions }}</li>
 									<li>Maximum file size: {{ max_file_size_mb }} MB per file</li>
@@ -69,13 +90,18 @@
 									<li>Files will be saved in: Data/resume/[date]/{{ request.user.username }}/</li>
 								</ul>
 							</div>
-							
+							 -->
 							<!-- Upload Form -->
 							<form method="post" enctype="multipart/form-data" id="resumeUploadForm">
 								{% csrf_token %}
-								
+								{% if job_id %}
+									<input type="hidden" name="jobid" value="{{ job_id }}">
+								{% endif %}
 								<div class="mb-4">
-									<label class="form-label fw-medium">Select Resume Files</label>
+									<span>
+										Select Resume Files
+										<i class="fa-solid fa-info-circle me-2" data-bs-toggle="tooltip" data-bs-placement="right" title="Accepted formats: {{ allowed_extensions }}. Max file size: {{ max_file_size_mb }} MB per file. You can upload multiple files at once."></i>
+									</span>
 									<div class="upload-drop-zone" id="dropZone">
 										<div class="upload-drop-zone-content">
 											<i class="fa-solid fa-cloud-upload fa-3x text-primary mb-3"></i>
@@ -95,12 +121,29 @@
 										</div>
 									</div>
 								</div>
-								
-								<!-- Selected Files List -->
-								<div id="selectedFilesList" class="mb-4" style="display: none;">
-									<h6 class="fw-medium mb-3">Selected Files:</h6>
-									<div id="filesContainer"></div>
+								<!-- ResumeSource Multi-Select Dropdown -->
+								<div class="mb-4">
+									<label for="resumeSources" class="form-label">Resume Source (Company)</label>
+									<select id="resumeSources" name="resume_sources" class="form-control select2" multiple="multiple" style="width:100%">
+										<script>
+											document.addEventListener('DOMContentLoaded', function() {
+												if (window.jQuery && $('#resumeSources').length) {
+													$('#resumeSources').select2({
+														placeholder: 'Select company sources',
+														allowClear: true,
+														width: 'resolve',
+														dropdownAutoWidth: true
+													});
+												}
+											});
+										</script>
+										{% for source in resume_sources %}
+											<option value="{{ source.id }}">{{ source.text }}</option>
+										{% endfor %}
+									</select>
 								</div>
+								
+								
 								
 								<!-- Upload Button -->
 								<div class="d-flex gap-2">
@@ -110,6 +153,11 @@
 									<button type="button" class="btn btn-light" id="clearBtn" onclick="clearFiles()">
 										<i class="fa-solid fa-times me-2"></i>Clear All
 									</button>
+								</div>
+								<!-- Selected Files List -->
+								<div id="selectedFilesList" class="mb-4" style="display: none;">
+									<h6 class="fw-medium mb-3">Selected Files:</h6>
+									<div id="filesContainer"></div>
 								</div>
 							</form>
 							
