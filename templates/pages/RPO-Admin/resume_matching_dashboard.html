@@ -127,12 +127,12 @@
                                 <div class="col-lg-3 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label>Match Quality</label>
-                                        <select name="quality" class="chosen-select">
-                                            <option value="">All Qualities</option>
-                                            <option value="excellent" {% if current_filters.quality == 'excellent' %}selected{% endif %}>Excellent (80%+)</option>
-                                            <option value="good" {% if current_filters.quality == 'good' %}selected{% endif %}>Good (60-79%)</option>
-                                            <option value="fair" {% if current_filters.quality == 'fair' %}selected{% endif %}>Fair (40-59%)</option>
-                                            <option value="poor" {% if current_filters.quality == 'poor' %}selected{% endif %}>Poor (<40%)</option>
+                                        <select name="quality" class="form-control select2" multiple="multiple" style="width: 100%;">
+                                            <option value="__all__" class="select2-all">Select All</option>
+                                            <option value="excellent" {% if 'excellent' in current_filters.quality %}selected{% endif %}>Excellent (80%+)</option>
+                                            <option value="good" {% if 'good' in current_filters.quality %}selected{% endif %}>Good (60-79%)</option>
+                                            <option value="fair" {% if 'fair' in current_filters.quality %}selected{% endif %}>Fair (40-59%)</option>
+                                            <option value="poor" {% if 'poor' in current_filters.quality %}selected{% endif %}>Poor (<40%)</option>
                                         </select>
                                     </div>
                                 </div>
@@ -140,10 +140,10 @@
                                 <div class="col-lg-3 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label>Job</label>
-                                        <select name="job" class="chosen-select">
-                                            <option value="">All Jobs</option>
+                                        <select name="job" class="form-control select2" multiple="multiple" style="width: 100%;">
+                                            <option value="__all__" class="select2-all">Select All</option>
                                             {% for job in active_jobs %}
-                                            <option value="{{ job.id }}" {% if current_filters.job == job.id|stringformat:"s" %}selected{% endif %}>
+                                            <option value="{{ job.id }}" {% if job.id|stringformat:'s' in current_filters.job %}selected{% endif %}>
                                                 {{ job.title }} - {{ job.company }}
                                             </option>
                                             {% endfor %}
@@ -154,14 +154,15 @@
                                 <div class="col-lg-3 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label>Resume</label>
-                                        <select name="resume" class="chosen-select">
-                                            <option value="">All Resumes</option>
+                                        <select name="resume" class="form-control select2" multiple="multiple" style="width: 100%;">
+                                            <option value="__all__" class="select2-all">Select All</option>
                                             {% for resume in completed_resumes %}
-                                            <option value="{{ resume.id }}" {% if current_filters.resume == resume.id|stringformat:"s" %}selected{% endif %}>
+                                            <option value="{{ resume.id }}" {% if resume.id|stringformat:'s' in current_filters.resume %}selected{% endif %}>
                                                 {{ resume.candidate_name }}
                                             </option>
                                             {% endfor %}
                                         </select>
+
                                     </div>
                                 </div>
 

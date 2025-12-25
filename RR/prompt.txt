@@ -112,3 +112,28 @@ CREATE TABLE [dbo].[setting](
 please create or update the model  , schema,repoistory service router validation of below table do the perfect which you want
 also update the main  
 Like user_push_notification_db functionality we require same functionality for database table "Customer"  so please write generic reusable code customer import create the config json etc file save , but all logic in services, and fellows or use existing code sqlmodel, schema router,services,etc  please do the best and perfect
+
+
+In this page "http://127.0.0.1:8000/resume-matching/match-details/9426/"  Candidate Information like(Phone,Email,location etc not show ) also add resume download button
+plese do the best UI and backhand
+
+I am working in cpu so what is requirement (hardware + sofware (apache,or MIT licences)
+you can do Wrute  Django multiple module (for small task then communicate of each other) for onlinyou calle video calling human and  system  or  (human to human )AI and ML ask some listed or auto generate question ask to human after calling finish. video recording file save in system
+please add for perfect for our system
+
+
+
+In this api @router.put("/{user_id}")
+async def update_user( user upload a image that is save with (userId.png) on /data/user/image also add a column in database image that store the path of image 
+
+
+
+In url http://127.0.0.1:8000/rpo-resume-list/ in any navigation menu item like (All Resumes,Process Resume,etc) it must be selected and highlight and not hide it would be show
+
+In this page "http://127.0.0.1:8000/resume-matching/" I want all dropdown multiselect and also filter capable please chane code for multi select in py please must be look and feel perfect add which system require
+I think provided dropdown is getting more space i want less space so ui interaction is not correct please do it for better ui
+
+it showing good but when we select more then one it height is increase we we require more UI perfect
+also add a dropdown icon when we click also dropdown option , you can also add a checkbox of dropdown iems
+                                    
+                                

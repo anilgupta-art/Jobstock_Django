@@ -201,15 +201,11 @@ def view_match_details(request, match_id):
         ResumeJobMatch.objects.select_related('job', 'resume', 'matched_by'),
         id=match_id
     )
-    
     context = {
         'match': match,
         'detailed_analysis': match.detailed_analysis or {}
     }
-    
     return render(request, 'Pages/RPO-Admin/match_details.html', context)
-
-
 @login_required
 def top_candidates_for_job(request, job_id):
     """
@@ -219,25 +215,19 @@ def top_candidates_for_job(request, job_id):
     if not check_rpo_admin_access(request):
         messages.error(request, 'Access denied. RPO Admin role required.')
         return redirect('App:index')
-    job = get_object_or_404(Job, id=job_id)
-    
+    job = get_object_or_404(Job, id=job_id, is_active=True)
     # Get top matches
-    result = ResumeJobMatchingService.get_top_matches_for_job(job_id, limit=20)
-    
+    result = ResumeJobMatchingService.get_top_candidates_for_job(job_id, limit=20)
     if not result.success:
         messages.error(request, result.message)
         return redirect('App:resume_matching_dashboard')
-    
     matches = result.data.get('matches', [])
-    
     context = {
         'job': job,
         'matches': matches,
         'total_matches': result.data.get('total_matches', 0)
     }
-    
     return render(request, 'Pages/RPO-Admin/top_candidates.html', context)
-
 
 @login_required
 def top_jobs_for_resume(request, resume_id):
@@ -249,22 +239,17 @@ def top_jobs_for_resume(request, resume_id):
         messages.error(request, 'Access denied. RPO Admin role required.')
         return redirect('App:index')
     resume = get_object_or_404(ResumeProcessing, id=resume_id)
-    
     # Get top matches
     result = ResumeJobMatchingService.get_top_jobs_for_resume(resume_id, limit=20)
-    
     if not result.success:
         messages.error(request, result.message)
         return redirect('App:resume_matching_dashboard')
-    
     matches = result.data.get('matches', [])
-    
     context = {
         'resume': resume,
         'matches': matches,
         'total_matches': result.data.get('total_matches', 0)
     }
-    
     return render(request, 'Pages/RPO-Admin/top_jobs.html', context)
 
 

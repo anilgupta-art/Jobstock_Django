@@ -34,6 +34,9 @@
 		</style>
 		
 		{% block css %}{% endblock %}
+		<!-- Select2 CSS for all pages -->
+		<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+		<link href="{% static 'app/css/select2-dashboard.css' %}" rel="stylesheet" />
 		
     </head>
 	
@@ -91,6 +94,27 @@
 		<script src="{% static 'app/js/htmleditor.js' %}"></script>
 		<!-- plugins -->
 		{% block js %}{% endblock %}
+		<!-- Select2 JS for all pages -->
+		<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+		<script>
+		$(document).ready(function() {
+			$('.select2').select2({
+				placeholder: 'Select options',
+				allowClear: true,
+				width: 'resolve',
+				dropdownAutoWidth: true
+			});
+			// Select All logic for Select2
+			$('.select2').on('select2:select', function(e) {
+				var data = e.params.data;
+				if (data.id === '__all__') {
+					var $select = $(this);
+					var allValues = $select.find('option:not([value="__all__"])').map(function() { return $(this).val(); }).get();
+					$select.val(allValues).trigger('change');
+				}
+			});
+		});
+		</script>
 		<script>
 			(function(){
 				try{
