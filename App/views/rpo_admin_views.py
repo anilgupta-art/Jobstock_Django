@@ -187,6 +187,13 @@ def rpo_resume_list(request):
     except DropdownGroup.DoesNotExist:
         resume_sources = []
 
+    # Get status options from DropdownMaster (group='Status')
+    try:
+        status_group = DropdownGroup.objects.get(text='Status', is_active=True)
+        status_options = DropdownMaster.objects.filter(group=status_group, is_active=True).order_by('sort_order', 'text')
+    except DropdownGroup.DoesNotExist:
+        status_options = []
+
     context = {
         'page_title': 'My Uploaded Resumes',
         'resumes': resumes,
@@ -199,6 +206,7 @@ def rpo_resume_list(request):
         'prev_offset': max(0, offset - limit),
         'jobs': jobs,
         'resume_sources': resume_sources,
+        'status_options': status_options,
     }
     return render(request, 'Pages/RPO-Admin/resume_list.html', context)
 
