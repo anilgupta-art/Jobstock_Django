@@ -37,6 +37,15 @@
 			<div class="row">
 				<div class="col-xl-12 col-lg-12 col-md-12">
 					<h1 class="mb-1 fs-3 fw-medium">Upload Resumes</h1>
+					{% if job_title and job_company %}
+						<div class="alert alert-info mb-2">
+							<strong>Job:</strong> {{ job_title }} ({{ job_company }})
+						</div>
+					{% elif job_title %}
+						<div class="alert alert-info mb-2">
+							<strong>Job:</strong> {{ job_title }}
+						</div>
+					{% endif %}
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item text-muted"><a href="{% url 'App:index' %}">Home</a></li>
@@ -85,12 +94,14 @@
 							<!-- Upload Form -->
 							<form method="post" enctype="multipart/form-data" id="resumeUploadForm">
 								{% csrf_token %}
-								
+								{% if job_id %}
+									<input type="hidden" name="jobid" value="{{ job_id }}">
+								{% endif %}
 								<div class="mb-4">
-									<span >
+									<span>
 										Select Resume Files
-									
-								<i class="fa-solid fa-info-circle me-2" data-bs-toggle="tooltip" data-bs-placement="right" title="Accepted formats: {{ allowed_extensions }}. Max file size: {{ max_file_size_mb }} MB per file. You can upload multiple files at once."></i></span>
+										<i class="fa-solid fa-info-circle me-2" data-bs-toggle="tooltip" data-bs-placement="right" title="Accepted formats: {{ allowed_extensions }}. Max file size: {{ max_file_size_mb }} MB per file. You can upload multiple files at once."></i>
+									</span>
 									<div class="upload-drop-zone" id="dropZone">
 										<div class="upload-drop-zone-content">
 											<i class="fa-solid fa-cloud-upload fa-3x text-primary mb-3"></i>
@@ -109,6 +120,27 @@
 											</button>
 										</div>
 									</div>
+								</div>
+								<!-- ResumeSource Multi-Select Dropdown -->
+								<div class="mb-4">
+									<label for="resumeSources" class="form-label">Resume Source (Company)</label>
+									<select id="resumeSources" name="resume_sources" class="form-control select2" multiple="multiple" style="width:100%">
+										<script>
+											document.addEventListener('DOMContentLoaded', function() {
+												if (window.jQuery && $('#resumeSources').length) {
+													$('#resumeSources').select2({
+														placeholder: 'Select company sources',
+														allowClear: true,
+														width: 'resolve',
+														dropdownAutoWidth: true
+													});
+												}
+											});
+										</script>
+										{% for source in resume_sources %}
+											<option value="{{ source.id }}">{{ source.text }}</option>
+										{% endfor %}
+									</select>
 								</div>
 								
 								

@@ -135,5 +135,16 @@ I think provided dropdown is getting more space i want less space so ui interact
 
 it showing good but when we select more then one it height is increase we we require more UI perfect
 also add a dropdown icon when we click also dropdown option , you can also add a checkbox of dropdown iems
+
+currently remove item not remove when we also want search option inside the dropdown please add user interfacr best
+
+we want fixed width of each dropdown and remove icon and dropdown icon ui perfect when we dropdown   
+
+any thing reqire please add more but perfect
+please create a button Resume Upload on page (http://127.0.0.1:8000/job-detail/product-manager-100/?jobid=9) when click on button redirect to http://127.0.0.1:8000/rpo-resume-upload/jobID=9  Show the Job title based on jobid also create a multi select dropdown of resource source please fell and look very good 
+
+based on jobid company name must be show like jobtitle(companyName) and also create field in table resume_process (jobid,resumesource) whenever we upload the resume this field must be save in resume_process table
+
+I upload a resume but not show filed in datbase (jobid,resumesource) please correct the code
                                     
                                 

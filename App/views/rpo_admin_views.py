@@ -7,9 +7,11 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods
 from django.contrib import messages
 from django.core.paginator import Paginator
+
 from App.services.resume_upload_service import ResumeUploadService
 from App.services.job_service import JobService
 from App.utils.response import ApiResponse
+from App.models import Job
 
 
 @login_required
@@ -17,28 +19,60 @@ from App.utils.response import ApiResponse
 def rpo_resume_upload(request):
     """
     RPO Admin Resume Upload Page
-    GET: Display upload form with statistics
+    GET: Display upload form with statistics, job title, and ResumeSource dropdown
     POST: Handle multiple resume uploads
     """
     # Check if user is RPO Admin
     user_role = request.user.profile.role if hasattr(request.user, 'profile') else 'unknown'
     is_rpo_admin = user_role == 'rpo_admin' or request.user.groups.filter(name='rpo_admin').exists()
-    
+
     if not is_rpo_admin and not request.user.is_superuser:
         messages.error(request, 'Access denied. RPO Admin role required.')
         return redirect('App:index')
-    
+
+    # Get jobid from query params (for GET and POST)
+    job_id = request.GET.get('jobid') or request.POST.get('jobid')
+    job_title = None
+    job_company = None
+    if job_id:
+        try:
+            job_obj = Job.objects.get(pk=job_id)
+            job_title = job_obj.title
+            job_company = getattr(job_obj, 'company_name', None)
+        except Job.DoesNotExist:
+            job_title = None
+            job_company = None
+
+    # Get ResumeSource companies for dropdown
+    from App.models import DropdownGroup, DropdownMaster
+    try:
+        resume_source_group = DropdownGroup.objects.get(text='ResumeSource', is_active=True)
+        resume_sources = DropdownMaster.objects.filter(group=resume_source_group, is_active=True).order_by('sort_order', 'text')
+    except DropdownGroup.DoesNotExist:
+        resume_sources = []
+
     if request.method == 'POST':
         # Handle file upload
         files = request.FILES.getlist('resumes')
-        
+        resumesource_id = request.POST.get('resume_sources')
+        job_obj = None
+        resumesource_obj = None
+        if job_id:
+            try:
+                job_obj = Job.objects.get(pk=job_id)
+            except Job.DoesNotExist:
+                job_obj = None
+        if resumesource_id:
+            from App.models import DropdownMaster
+            try:
+                resumesource_obj = DropdownMaster.objects.get(pk=resumesource_id)
+            except DropdownMaster.DoesNotExist:
+                resumesource_obj = None
         if not files:
             messages.error(request, 'Please select at least one resume file to upload')
             return redirect('App:rpo_resume_upload')
-        
         # Use service to upload resumes
-        result = ResumeUploadService.upload_resumes(files, request.user)
-        
+        result = ResumeUploadService.upload_resumes(files, request.user, job=job_obj, resumesource=resumesource_obj)
         if result.success:
             messages.success(request, result.message)
             if result.data['failed_count'] > 0:
@@ -49,26 +83,27 @@ def rpo_resume_upload(request):
             if hasattr(result, 'error_details') and result.error_details:
                 for failed in result.error_details.get('failed', []):
                     messages.error(request, f"{failed['filename']}: {failed['error']}")
-        
         return redirect('App:rpo_resume_upload')
-    
+
     # GET request - show upload form
-    # Get user's resume statistics
     stats_response = ResumeUploadService.get_upload_statistics(request.user)
     stats = stats_response.data if stats_response.success else {}
-    
-    # Get recent uploads
     resumes_response = ResumeUploadService.get_user_resumes(request.user, limit=10)
     resumes = resumes_response.data.get('resumes', []) if resumes_response.success else []
-    
+
+    job_display = job_title if job_title else ''
+    if job_title and job_company:
+        job_display = f"{job_title} ({job_company})"
     context = {
         'page_title': 'Resume Upload',
         'stats': stats,
         'recent_uploads': resumes,
         'allowed_extensions': ', '.join(ResumeUploadService.ALLOWED_EXTENSIONS),
-        'max_file_size_mb': ResumeUploadService.MAX_FILE_SIZE / (1024 * 1024)
+        'max_file_size_mb': ResumeUploadService.MAX_FILE_SIZE / (1024 * 1024),
+        'job_id': job_id,
+        'job_title': job_display,
+        'resume_sources': resume_sources,
     }
-    
     return render(request, 'Pages/RPO-Admin/resume_upload.html', context)
 
 

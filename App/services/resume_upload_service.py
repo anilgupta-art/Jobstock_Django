@@ -139,7 +139,7 @@ class ResumeUploadService:
             }
     
     @classmethod
-    def upload_resumes(cls, files: List[UploadedFile], user: User) -> ApiResponse:
+    def upload_resumes(cls, files: List[UploadedFile], user: User, job=None, resumesource=None) -> ApiResponse:
         """
         Upload multiple resume files
         
@@ -167,7 +167,6 @@ class ResumeUploadService:
         for file in files:
             # Validate file
             validation = cls.validate_file(file)
-            
             if not validation['valid']:
                 results['failed'].append({
                     'filename': file.name,
@@ -175,10 +174,8 @@ class ResumeUploadService:
                 })
                 results['failed_count'] += 1
                 continue
-            
             # Save file to disk
             save_result = cls.save_resume_file(file, user)
-            
             if not save_result['success']:
                 results['failed'].append({
                     'filename': file.name,
@@ -186,7 +183,6 @@ class ResumeUploadService:
                 })
                 results['failed_count'] += 1
                 continue
-            
             # Create database record
             try:
                 file_ext = os.path.splitext(file.name)[1].lower()
@@ -197,9 +193,10 @@ class ResumeUploadService:
                     original_filename=save_result['filename'],
                     file_size=file.size,
                     file_extension=file_ext,
-                    status='pending'
+                    status='pending',
+                    job=job,
+                    resumesource=resumesource
                 )
-                
                 results['successful'].append({
                     'id': resume_record.id,
                     'filename': save_result['filename'],
@@ -208,7 +205,6 @@ class ResumeUploadService:
                     'status': 'pending'
                 })
                 results['success_count'] += 1
-                
             except Exception as e:
                 # File saved but database record failed
                 results['failed'].append({
