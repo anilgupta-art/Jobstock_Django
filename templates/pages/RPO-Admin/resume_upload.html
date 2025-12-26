@@ -6,243 +6,252 @@
 {% include 'Base/navbar.html' %}
 	
 <!-- Resume Upload Page -->
-<div class="dashboard-wrap bg-light">
-	<a class="mobNavigation" data-bs-toggle="collapse" href="#MobNav" role="button" aria-expanded="false" aria-controls="MobNav">
-		<i class="fas fa-bars mr-2"></i>Dashboard Navigation
-	</a>
-	<div class="collapse" id="MobNav">
-		<div class="dashboard-nav">
-			<div class="dash-user-blocks pt-5">
-				<div class="jbs-grid-usrs-thumb">
-					<!-- <div class="jbs-grid-yuo">
-						<figure><img src="{% static 'app/img/l-12.png' %}" class="img-fluid circle" alt=""></figure>
-					</div> -->
-				</div>
-				<div class="jbs-grid-usrs-caption mb-3">
-					<div class="jbs-kioyer">
-						<span class="label text-light bg-main">RPO Admin</span>
-					</div>
-					<div class="jbs-tiosk">
-						<h4 class="jbs-tiosk-title">{{ request.user.get_full_name|default:request.user.username }}</h4>
-						<div class="jbs-tiosk-subtitle"><span><i class="fa-solid fa-user-tie me-2"></i>RPO Administrator</span></div>
-					</div>
-				</div>
-			</div>
-			{% include 'Components/For-Employer/dashboard_nav.html' with dashboard_active='resume_upload' %}
-		</div>					
-	</div>
+ <div class="dlayout bg-light">
 	
-	<div class="dashboard-content">
-		<div class="dashboard-tlbar d-block mb-4">
-			<div class="row">
-				<div class="col-xl-12 col-lg-12 col-md-12">
-					<h1 class="mb-1 fs-3 fw-medium">Upload Resumes</h1>
-					{% if job_title and job_company %}
-						<div class="alert alert-info mb-2">
-							<strong>Job:</strong> {{ job_title }} ({{ job_company }})
+		<div class="dsidebar" id="dsidebar">
+		<div class="dashboard-wrap ">
+			<a class="mobNavigation" data-bs-toggle="collapse" href="#MobNav" role="button" aria-expanded="false" aria-controls="MobNav">
+				<i class="fas fa-bars mr-2"></i>Dashboard Navigation
+			</a>
+			<div class="collapse" id="MobNav">
+				<div class="dashboard-nav">
+					<div class="dash-user-blocks pt-5">
+						<div class="jbs-grid-usrs-thumb">
+							<!-- <div class="jbs-grid-yuo">
+								<figure><img src="{% static 'app/img/l-12.png' %}" class="img-fluid circle" alt=""></figure>
+							</div> -->
 						</div>
-					{% elif job_title %}
-						<div class="alert alert-info mb-2">
-							<strong>Job:</strong> {{ job_title }}
+						<div class="jbs-grid-usrs-caption mb-3">
+							<div class="jbs-kioyer">
+								<span class="label text-light bg-main">RPO Admin</span>
+							</div>
+							<div class="jbs-tiosk">
+								<h4 class="jbs-tiosk-title">{{ request.user.get_full_name|default:request.user.username }}</h4>
+								<div class="jbs-tiosk-subtitle"><span><i class="fa-solid fa-user-tie me-2"></i>RPO Administrator</span></div>
+							</div>
 						</div>
-					{% endif %}
-					<nav aria-label="breadcrumb">
-						<ol class="breadcrumb">
-							<li class="breadcrumb-item text-muted"><a href="{% url 'App:index' %}">Home</a></li>
-							<li class="breadcrumb-item text-muted"><a href="{% url 'App:rpo_dashboard' %}">RPO Dashboard</a></li>
-							<li class="breadcrumb-item"><a href="#" class="text-main">Upload Resumes</a></li>
-						</ol>
-					</nav>
-				</div>
+					</div>
+					{% include 'Components/For-Employer/dashboard_nav.html' with dashboard_active='resume_upload' %}
+				</div>					
 			</div>
 		</div>
-		
-		<div class="dashboard-widg-bar d-block">
-			
-			<!-- Upload Form -->
-			<div class="row gx-4 gy-4 mb-4">
-				<div class="col-xl-8 col-lg-8 col-md-12">
-					<div class="card">
-						
-						<div class="card-body">
-							
-							<!-- Upload Info -->
-							<!-- <div class="alert alert-info mb-4">
-								<h6 class="mb-2">
-									<i class="fa-solid fa-info-circle me-2"></i>
-									<span data-bs-toggle="tooltip" data-bs-placement="right" title="Please follow these guidelines for uploading resumes. Accepted formats: {{ allowed_extensions }}. Max file size: {{ max_file_size_mb }} MB per file. You can upload multiple files at once. Files will be saved in: Data/resume/[date]/{{ request.user.username }}/">
-										UI format
-									</span>
-								</h6>
-								<script>
-								// Enable Bootstrap tooltips
-								document.addEventListener('DOMContentLoaded', function () {
-									var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-									tooltipTriggerList.forEach(function (tooltipTriggerEl) {
-										new bootstrap.Tooltip(tooltipTriggerEl);
-									});
-								});
-								</script>
-								<ul class="mb-0 ps-3">
-									<li>Accepted formats: {{ allowed_extensions }}</li>
-									<li>Maximum file size: {{ max_file_size_mb }} MB per file</li>
-									<li>You can upload multiple files at once</li>
-									<li>Files will be saved in: Data/resume/[date]/{{ request.user.username }}/</li>
-								</ul>
+	</div>
+	<!-- RIGHT CONTENT -->
+  	<div class="dmain-Content" id="dmainContent">
+		<button id="dtoggleBtn" class="dtoggle-btn">☰</button>	
+		<div class="dashboard-content">
+			<div class="dashboard-tlbar d-block mb-4">
+				<div class="row">
+					<div class="col-xl-12 col-lg-12 col-md-12">
+						<h1 class="mb-1 fs-3 fw-medium">Upload Resumes</h1>
+						{% if job_title and job_company %}
+							<div class="alert alert-info mb-2">
+								<strong>Job:</strong> {{ job_title }} ({{ job_company }})
 							</div>
-							 -->
-							<!-- Upload Form -->
-							<form method="post" enctype="multipart/form-data" id="resumeUploadForm">
-								{% csrf_token %}
-								{% if job_id %}
-									<input type="hidden" name="jobid" value="{{ job_id }}">
-								{% endif %}
-								<div class="mb-4">
-									<span>
-										Select Resume Files
-										<i class="fa-solid fa-info-circle me-2" data-bs-toggle="tooltip" data-bs-placement="right" title="Accepted formats: {{ allowed_extensions }}. Max file size: {{ max_file_size_mb }} MB per file. You can upload multiple files at once."></i>
-									</span>
-									<div class="upload-drop-zone" id="dropZone">
-										<div class="upload-drop-zone-content">
-											<i class="fa-solid fa-cloud-upload fa-3x text-primary mb-3"></i>
-											<h5>Drag & Drop Files Here</h5>
-											<p class="text-muted">or click to browse</p>
-											<input 
-												type="file" 
-												name="resumes" 
-												id="resumeInput" 
-												multiple 
-												accept=".pdf,.doc,.docx,.txt"
-												class="d-none"
-											>
-											<button type="button" class="btn btn-primary mt-2" onclick="document.getElementById('resumeInput').click()">
-												<i class="fa-solid fa-folder-open me-2"></i>Browse Files
-											</button>
-										</div>
-									</div>
-								</div>
-								<!-- ResumeSource Multi-Select Dropdown -->
-								<div class="mb-4">
-									<label for="resumeSources" class="form-label">Resume Source (Company)</label>
-									<select id="resumeSources" name="resume_sources" class="form-control select2" multiple="multiple" style="width:100%">
-										<script>
-											document.addEventListener('DOMContentLoaded', function() {
-												if (window.jQuery && $('#resumeSources').length) {
-													$('#resumeSources').select2({
-														placeholder: 'Select company sources',
-														allowClear: true,
-														width: 'resolve',
-														dropdownAutoWidth: true
-													});
-												}
-											});
-										</script>
-										{% for source in resume_sources %}
-											<option value="{{ source.id }}">{{ source.text }}</option>
-										{% endfor %}
-									</select>
-								</div>
-								
-								
-								
-								<!-- Upload Button -->
-								<div class="d-flex gap-2">
-									<button type="submit" class="btn btn-main" id="uploadBtn" disabled>
-										<i class="fa-solid fa-upload me-2"></i>Upload Resumes
-									</button>
-									<button type="button" class="btn btn-light" id="clearBtn" onclick="clearFiles()">
-										<i class="fa-solid fa-times me-2"></i>Clear All
-									</button>
-								</div>
-								<!-- Selected Files List -->
-								<div id="selectedFilesList" class="mb-4" style="display: none;">
-									<h6 class="fw-medium mb-3">Selected Files:</h6>
-									<div id="filesContainer"></div>
-								</div>
-							</form>
-							
-						</div>
+						{% elif job_title %}
+							<div class="alert alert-info mb-2">
+								<strong>Job:</strong> {{ job_title }}
+							</div>
+						{% endif %}
+						<nav aria-label="breadcrumb">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item text-muted"><a href="{% url 'App:index' %}">Home</a></li>
+								<li class="breadcrumb-item text-muted"><a href="{% url 'App:rpo_dashboard' %}">RPO Dashboard</a></li>
+								<li class="breadcrumb-item"><a href="#" class="text-main">Upload Resumes</a></li>
+							</ol>
+						</nav>
 					</div>
 				</div>
+			</div>
+			
+			<div class="dashboard-widg-bar d-block">
 				
-				<!-- Statistics Sidebar -->
-				<div class="col-xl-4 col-lg-4 col-md-12">
-					<div class="card mb-4">
-						<div class="card-header">
-							<h4 class="mb-0">Upload Statistics</h4>
-						</div>
-						<div class="card-body">
-							<div class="mb-3">
-								<div class="d-flex justify-content-between mb-1">
-									<span class="text-muted">Total Uploads</span>
-									<span class="fw-bold">{{ stats.total_uploads|default:0 }}</span>
+				<!-- Upload Form -->
+				<div class="row gx-4 gy-4 mb-4">
+					<div class="col-xl-8 col-lg-8 col-md-12">
+						<div class="card">
+							
+							<div class="card-body">
+								
+								<!-- Upload Info -->
+								<!-- <div class="alert alert-info mb-4">
+									<h6 class="mb-2">
+										<i class="fa-solid fa-info-circle me-2"></i>
+										<span data-bs-toggle="tooltip" data-bs-placement="right" title="Please follow these guidelines for uploading resumes. Accepted formats: {{ allowed_extensions }}. Max file size: {{ max_file_size_mb }} MB per file. You can upload multiple files at once. Files will be saved in: Data/resume/[date]/{{ request.user.username }}/">
+											UI format
+										</span>
+									</h6>
+									<script>
+									// Enable Bootstrap tooltips
+									document.addEventListener('DOMContentLoaded', function () {
+										var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+										tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+											new bootstrap.Tooltip(tooltipTriggerEl);
+										});
+									});
+									</script>
+									<ul class="mb-0 ps-3">
+										<li>Accepted formats: {{ allowed_extensions }}</li>
+										<li>Maximum file size: {{ max_file_size_mb }} MB per file</li>
+										<li>You can upload multiple files at once</li>
+										<li>Files will be saved in: Data/resume/[date]/{{ request.user.username }}/</li>
+									</ul>
 								</div>
-								<div class="d-flex justify-content-between mb-1">
-									<span class="text-muted">Pending</span>
-									<span class="text-warning fw-bold">{{ stats.pending|default:0 }}</span>
-								</div>
-								<div class="d-flex justify-content-between mb-1">
-									<span class="text-muted">Processing</span>
-									<span class="text-info fw-bold">{{ stats.processing|default:0 }}</span>
-								</div>
-								<div class="d-flex justify-content-between mb-1">
-									<span class="text-muted">Completed</span>
-									<span class="text-success fw-bold">{{ stats.completed|default:0 }}</span>
-								</div>
-								<div class="d-flex justify-content-between">
-									<span class="text-muted">Failed</span>
-									<span class="text-danger fw-bold">{{ stats.failed|default:0 }}</span>
-								</div>
-							</div>
-							<hr>
-							<div>
-								<div class="d-flex justify-content-between">
-									<span class="text-muted">Total Size</span>
-									<span class="fw-bold">{{ stats.total_size_mb|floatformat:2|default:"0.00" }} MB</span>
-								</div>
+								-->
+								<!-- Upload Form -->
+								<form method="post" enctype="multipart/form-data" id="resumeUploadForm">
+									{% csrf_token %}
+									{% if job_id %}
+										<input type="hidden" name="jobid" value="{{ job_id }}">
+									{% endif %}
+									<div class="mb-4">
+										<span>
+											Select Resume Files
+											<i class="fa-solid fa-info-circle me-2" data-bs-toggle="tooltip" data-bs-placement="right" title="Accepted formats: {{ allowed_extensions }}. Max file size: {{ max_file_size_mb }} MB per file. You can upload multiple files at once."></i>
+										</span>
+										<div class="upload-drop-zone" id="dropZone">
+											<div class="upload-drop-zone-content">
+												<i class="fa-solid fa-cloud-upload fa-3x text-primary mb-3"></i>
+												<h5>Drag & Drop Files Here</h5>
+												<p class="text-muted">or click to browse</p>
+												<input 
+													type="file" 
+													name="resumes" 
+													id="resumeInput" 
+													multiple 
+													accept=".pdf,.doc,.docx,.txt"
+													class="d-none"
+												>
+												<button type="button" class="btn btn-primary mt-2" onclick="document.getElementById('resumeInput').click()">
+													<i class="fa-solid fa-folder-open me-2"></i>Browse Files
+												</button>
+											</div>
+										</div>
+									</div>
+									<!-- ResumeSource Multi-Select Dropdown -->
+									<div class="mb-4">
+										<label for="resumeSources" class="form-label">Resume Source (Company)</label>
+										<select id="resumeSources" name="resume_sources" class="form-control select2" multiple="multiple" style="width:100%">
+											<script>
+												document.addEventListener('DOMContentLoaded', function() {
+													if (window.jQuery && $('#resumeSources').length) {
+														$('#resumeSources').select2({
+															placeholder: 'Select company sources',
+															allowClear: true,
+															width: 'resolve',
+															dropdownAutoWidth: true
+														});
+													}
+												});
+											</script>
+											{% for source in resume_sources %}
+												<option value="{{ source.id }}">{{ source.text }}</option>
+											{% endfor %}
+										</select>
+									</div>
+									
+									
+									
+									<!-- Upload Button -->
+									<div class="d-flex gap-2">
+										<button type="submit" class="btn btn-main" id="uploadBtn" disabled>
+											<i class="fa-solid fa-upload me-2"></i>Upload Resumes
+										</button>
+										<button type="button" class="btn btn-light" id="clearBtn" onclick="clearFiles()">
+											<i class="fa-solid fa-times me-2"></i>Clear All
+										</button>
+									</div>
+									<!-- Selected Files List -->
+									<div id="selectedFilesList" class="mb-4" style="display: none;">
+										<h6 class="fw-medium mb-3">Selected Files:</h6>
+										<div id="filesContainer"></div>
+									</div>
+								</form>
+								
 							</div>
 						</div>
 					</div>
 					
-					<!-- Recent Uploads -->
-					<div class="card">
-						<div class="card-header">
-							<h4 class="mb-0">Recent Uploads</h4>
-						</div>
-						<div class="card-body">
-							{% if recent_uploads %}
-								{% for resume in recent_uploads %}
-								<div class="d-flex align-items-center mb-3 pb-3 border-bottom">
-									<div class="flex-shrink-0">
-										<i class="fa-solid fa-file-pdf fa-2x text-danger"></i>
+					<!-- Statistics Sidebar -->
+					<div class="col-xl-4 col-lg-4 col-md-12">
+						<div class="card mb-4">
+							<div class="card-header">
+								<h4 class="mb-0">Upload Statistics</h4>
+							</div>
+							<div class="card-body">
+								<div class="mb-3">
+									<div class="d-flex justify-content-between mb-1">
+										<span class="text-muted">Total Uploads</span>
+										<span class="fw-bold">{{ stats.total_uploads|default:0 }}</span>
 									</div>
-									<div class="flex-grow-1 ms-3">
-										<h6 class="mb-1 text-truncate" style="max-width: 150px;" title="{{ resume.filename }}">{{ resume.filename }}</h6>
-										<small class="text-muted">{{ resume.created_at|date:"M d, H:i" }}</small>
+									<div class="d-flex justify-content-between mb-1">
+										<span class="text-muted">Pending</span>
+										<span class="text-warning fw-bold">{{ stats.pending|default:0 }}</span>
 									</div>
-									<div class="flex-shrink-0">
-										{% if resume.status == 'pending' %}
-										<span class="badge bg-warning">Pending</span>
-										{% elif resume.status == 'completed' %}
-										<span class="badge bg-success">Done</span>
-										{% elif resume.status == 'failed' %}
-										<span class="badge bg-danger">Failed</span>
-										{% endif %}
+									<div class="d-flex justify-content-between mb-1">
+										<span class="text-muted">Processing</span>
+										<span class="text-info fw-bold">{{ stats.processing|default:0 }}</span>
+									</div>
+									<div class="d-flex justify-content-between mb-1">
+										<span class="text-muted">Completed</span>
+										<span class="text-success fw-bold">{{ stats.completed|default:0 }}</span>
+									</div>
+									<div class="d-flex justify-content-between">
+										<span class="text-muted">Failed</span>
+										<span class="text-danger fw-bold">{{ stats.failed|default:0 }}</span>
 									</div>
 								</div>
-								{% endfor %}
-							{% else %}
-							<p class="text-muted text-center mb-0">No recent uploads</p>
-							{% endif %}
+								<hr>
+								<div>
+									<div class="d-flex justify-content-between">
+										<span class="text-muted">Total Size</span>
+										<span class="fw-bold">{{ stats.total_size_mb|floatformat:2|default:"0.00" }} MB</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<!-- Recent Uploads -->
+						<div class="card">
+							<div class="card-header">
+								<h4 class="mb-0">Recent Uploads</h4>
+							</div>
+							<div class="card-body">
+								{% if recent_uploads %}
+									{% for resume in recent_uploads %}
+									<div class="d-flex align-items-center mb-3 pb-3 border-bottom">
+										<div class="flex-shrink-0">
+											<i class="fa-solid fa-file-pdf fa-2x text-danger"></i>
+										</div>
+										<div class="flex-grow-1 ms-3">
+											<h6 class="mb-1 text-truncate" style="max-width: 150px;" title="{{ resume.filename }}">{{ resume.filename }}</h6>
+											<small class="text-muted">{{ resume.created_at|date:"M d, H:i" }}</small>
+										</div>
+										<div class="flex-shrink-0">
+											{% if resume.status == 'pending' %}
+											<span class="badge bg-warning">Pending</span>
+											{% elif resume.status == 'completed' %}
+											<span class="badge bg-success">Done</span>
+											{% elif resume.status == 'failed' %}
+											<span class="badge bg-danger">Failed</span>
+											{% endif %}
+										</div>
+									</div>
+									{% endfor %}
+								{% else %}
+								<p class="text-muted text-center mb-0">No recent uploads</p>
+								{% endif %}
+							</div>
 						</div>
 					</div>
 				</div>
+				
 			</div>
-			
 		</div>
-	</div>
-</div>
 
+	</div>
+
+</div>
 <style>
 .upload-drop-zone {
 	border: 2px dashed #ccc;
@@ -300,6 +309,17 @@
 }
 </style>
 
+
+<script>
+  const dtoggleBtn = document.getElementById('dtoggleBtn');
+  const dsidebar = document.getElementById('dsidebar');
+  const dmainContent = document.getElementById('dmainContent');
+
+  dtoggleBtn.addEventListener('click', () => {
+    dsidebar.classList.toggle('hide');
+    dmainContent.classList.toggle('full');
+  });
+</script>
 <script>
 let selectedFiles = [];
 
