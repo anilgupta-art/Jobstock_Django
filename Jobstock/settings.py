@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "django_filters",
     "drf_yasg",
     "App",
+    "zoho_integration",
     "django_celery_results",
     "django_celery_beat",
 ]
