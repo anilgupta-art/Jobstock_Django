@@ -140,7 +140,9 @@ class ZohoResumeDownloadAPIView(APIView):
     @swagger_auto_schema(
         operation_description="Download resume for a specific candidate",
         manual_parameters=[
-            openapi.Parameter('candidate_id', openapi.IN_QUERY, description="Zoho candidate ID", type=openapi.TYPE_STRING, required=True)
+            openapi.Parameter('candidate_id', openapi.IN_QUERY, description="Zoho candidate ID", type=openapi.TYPE_STRING, required=True),
+            openapi.Parameter('access_token', openapi.IN_QUERY, description="Zoho access_token", type=openapi.TYPE_STRING, required=True),
+            openapi.Parameter('refresh_token', openapi.IN_QUERY, description="Zoho candidate ID", type=openapi.TYPE_STRING, required=True)
         ],
         responses={
             200: openapi.Response('Resume file'),
@@ -152,6 +154,8 @@ class ZohoResumeDownloadAPIView(APIView):
     )
     def get(self, request):
         candidate_id = request.GET.get('candidate_id')
+        access_token = request.GET.get('access_token')
+        refresh_token = request.GET.get('refresh_token')
         if not candidate_id:
             return Response({'error': 'candidate_id query parameter is required.'}, status=status.HTTP_400_BAD_REQUEST)
         try:
@@ -159,8 +163,8 @@ class ZohoResumeDownloadAPIView(APIView):
                 creds = json.load(f)
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        access_token = creds.get('access_token')
-        if not access_token and creds.get('refresh_token'):
+        #access_token = creds.get('access_token')
+        if not access_token and refresh_token:
             token_url = 'https://accounts.zoho.com/oauth/v2/token'
             payload = {
                 'refresh_token': creds['refresh_token'],
@@ -192,3 +196,75 @@ class ZohoResumeDownloadAPIView(APIView):
         except Exception:
             data = {'error': 'Invalid response from Zoho.'}
         return Response(data, status=response.status_code)
+    
+
+class ZohoCandidateAttachmentListAPIView(APIView):
+    @swagger_auto_schema(
+        operation_description="Get a list of attachments for a candidate from Zoho using access token and candidate_id.",
+        manual_parameters=[
+            openapi.Parameter('access_token', openapi.IN_QUERY, description="Zoho access token", type=openapi.TYPE_STRING, required=True),
+            openapi.Parameter('candidate_id', openapi.IN_QUERY, description="Zoho candidate ID", type=openapi.TYPE_STRING, required=True),
+        ],
+        responses={
+            200: openapi.Response('Attachment list', openapi.Schema(type=openapi.TYPE_OBJECT)),
+            400: openapi.Response('Error response', openapi.Schema(
+                type=openapi.TYPE_OBJECT,
+                properties={'error': openapi.Schema(type=openapi.TYPE_STRING)}
+            ))
+        }
+    )
+    def get(self, request):
+        access_token = request.GET.get('access_token')
+        candidate_id = request.GET.get('candidate_id')
+        if not all([access_token, candidate_id]):
+            return Response({'error': 'access_token and candidate_id are required.'}, status=status.HTTP_400_BAD_REQUEST)
+        url = f'https://recruit.zoho.com/recruit/v2/Candidates/{candidate_id}/Attachments'
+        headers = {'Authorization': f'Zoho-oauthtoken {access_token}'}
+        response = requests.get(url, headers=headers)
+        try:
+            data = response.json()
+        except Exception:
+            data = {'error': 'Invalid response from Zoho.'}
+        if response.status_code == 200:
+            return Response(data)
+        return Response(data, status=response.status_code)
+
+class ZohoCandidateAttachmentAPIView(APIView):
+    @swagger_auto_schema(
+        operation_description="Get a candidate's attachment from Zoho using access token and candidate_id.",
+        manual_parameters=[
+            openapi.Parameter('access_token', openapi.IN_QUERY, description="Zoho access token", type=openapi.TYPE_STRING, required=True),
+            openapi.Parameter('candidate_id', openapi.IN_QUERY, description="Zoho candidate ID", type=openapi.TYPE_STRING, required=True),
+            openapi.Parameter('attachment_id', openapi.IN_QUERY, description="Zoho attachment ID", type=openapi.TYPE_STRING, required=True),
+        ],
+        responses={
+            200: openapi.Response('Attachment file'),
+            400: openapi.Response('Error response', openapi.Schema(
+                type=openapi.TYPE_OBJECT,
+                properties={'error': openapi.Schema(type=openapi.TYPE_STRING)}
+            ))
+        }
+    )
+    def get(self, request):
+        access_token = request.GET.get('access_token')
+        candidate_id = request.GET.get('candidate_id')
+        attachment_id = request.GET.get('attachment_id')
+        if not all([access_token, candidate_id, attachment_id]):
+            return Response({'error': 'access_token, candidate_id, and attachment_id are required.'}, status=status.HTTP_400_BAD_REQUEST)
+        url = f'https://recruit.zoho.com/recruit/v2/Candidates/{candidate_id}/Attachments/{attachment_id}'
+        headers = {'Authorization': f'Zoho-oauthtoken {access_token}'}
+        response = requests.get(url, headers=headers)
+        if response.status_code == 200:
+            content_type = response.headers.get('Content-Type', 'application/octet-stream')
+            content_disp = response.headers.get('Content-Disposition', f'attachment; filename="attachment_{attachment_id}"')
+            resp = Response(response.content, content_type=content_type)
+            resp['Content-Disposition'] = content_disp
+            return resp
+        try:
+            data = response.json()
+        except Exception:
+            data = {'error': 'Invalid response from Zoho.'}
+        return Response(data, status=response.status_code)
+
+
+
