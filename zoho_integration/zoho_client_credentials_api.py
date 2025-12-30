@@ -1,3 +1,4 @@
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -7,6 +8,7 @@ import os
 import json
 import requests
 from .models import ZohoTokenLog
+from django.http import FileResponse
 
 API_CONFIG_PATH = os.path.join(os.path.dirname(__file__), 'zoho_api_config.json')
 
@@ -253,13 +255,15 @@ class ZohoCandidateAttachmentAPIView(APIView):
             return Response({'error': 'access_token, candidate_id, and attachment_id are required.'}, status=status.HTTP_400_BAD_REQUEST)
         url = f'https://recruit.zoho.com/recruit/v2/Candidates/{candidate_id}/Attachments/{attachment_id}'
         headers = {'Authorization': f'Zoho-oauthtoken {access_token}'}
-        response = requests.get(url, headers=headers)
-        if response.status_code == 200:
-            content_type = response.headers.get('Content-Type', 'application/octet-stream')
+        response = requests.get(url, headers=headers, stream=True)
+        content_type = response.headers.get('Content-Type', '')
+        # If the response is a file (not JSON), return as file using FileResponse
+        if response.status_code == 200 and not content_type.startswith('application/json'):
             content_disp = response.headers.get('Content-Disposition', f'attachment; filename="attachment_{attachment_id}"')
-            resp = Response(response.content, content_type=content_type)
-            resp['Content-Disposition'] = content_disp
-            return resp
+            file_response = FileResponse(response.raw, content_type=content_type or 'application/octet-stream')
+            file_response['Content-Disposition'] = content_disp
+            return file_response
+        # Otherwise, try to parse as JSON (error case)
         try:
             data = response.json()
         except Exception:
