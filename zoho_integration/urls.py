@@ -6,7 +6,8 @@ from .zoho_client_credentials_api import (
     ZohoRefreshTokenAPIView,
     ZohoCandidatesAPIView,
     ZohoResumeDownloadAPIView,
-    ZohoCandidateAttachmentAPIView
+    ZohoCandidateAttachmentAPIView,
+    ZohoBulkResumeDownloadAPIView
 )
 
 urlpatterns = [
@@ -17,4 +18,5 @@ urlpatterns = [
     path('api/zoho/candidate-resume/', ZohoResumeDownloadAPIView.as_view(), name='zoho_candidate_resume'),
     path('api/zoho/candidate-attachment/', ZohoCandidateAttachmentAPIView.as_view(), name='zoho_candidate_attachment'),
      path('api/zoho/candidate-attachment-list/', ZohoCandidateAttachmentListAPIView.as_view(), name='zoho_candidate_attachment_list'),
+    path('api/zoho/bulk-resume-download/', ZohoBulkResumeDownloadAPIView.as_view(), name='zoho_bulk_resume_download'),
 ]

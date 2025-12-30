@@ -1,3 +1,10 @@
+from django.conf import settings
+import os
+# ...existing code...
+
+from rest_framework import permissions
+from django.core.files.base import ContentFile
+
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -269,6 +276,117 @@ class ZohoCandidateAttachmentAPIView(APIView):
         except Exception:
             data = {'error': 'Invalid response from Zoho.'}
         return Response(data, status=response.status_code)
+
+class ZohoBulkResumeDownloadAPIView(APIView):
+    permission_classes = [permissions.AllowAny]
+    @swagger_auto_schema(
+        operation_description="Get Zoho access token, candidate list, attachments, and download resumes to /data/resume/.",
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'grant_token': openapi.Schema(type=openapi.TYPE_STRING, description='Zoho grant token (authorization code)'),
+                'client_id': openapi.Schema(type=openapi.TYPE_STRING,value="1000.KPFB56O12AVTZGSWB0WBMS5X2XI0LC", description='Zoho client ID'),
+                'client_secret': openapi.Schema(type=openapi.TYPE_STRING,value="9c39beb5ee700593f3a445505e235989c05720152a", description='Zoho client secret'),
+                'redirect_uri': openapi.Schema(type=openapi.TYPE_STRING,value="http://localhost:8000", description='Redirect URI'),
+                'Scope': openapi.Schema(type=openapi.TYPE_STRING,value="ZohoRecruit.modules.ALL", description='ZohoRecruit.modules.ALL'),
+            },
+        #     manual_parameters=[
+        #     openapi.Parameter('grant_token', openapi.IN_QUERY, description="Zoho grant token (authorization code)", type=openapi.TYPE_STRING, required=True),
+        #     openapi.Parameter('client_id', openapi.IN_QUERY, description="Zoho client ID",value="1000.KPFB56O12AVTZGSWB0WBMS5X2XI0LC",  type=openapi.TYPE_STRING, required=True),
+        #     openapi.Parameter('client_secret', openapi.IN_QUERY, description="Zoho client secret",value="9c39beb5ee700593f3a445505e235989c05720152a", type=openapi.TYPE_STRING, required=True),
+        #     openapi.Parameter('redirect_uri', openapi.IN_QUERY, description="Redirect URI",value="http://localhost:8000", type=openapi.TYPE_STRING, required=True),
+        #      openapi.Parameter('Scope', openapi.IN_QUERY, description="Scope",value="ZohoRecruit.modules.ALL", type=openapi.TYPE_STRING, required=True),
+        # ],
+            required=['grant_token', 'client_id', 'client_secret', 'redirect_uri']
+        ),
+        responses={200: openapi.Response('Bulk download result', openapi.Schema(type=openapi.TYPE_OBJECT))}
+    )
+    def post(self, request):
+        grant_token = request.data.get('grant_token')
+        client_id = request.data.get('client_id')
+        client_secret = request.data.get('client_secret')
+        redirect_uri = request.data.get('redirect_uri')
+        # Step 1: Get access token
+        token_url = 'https://accounts.zoho.com/oauth/v2/token'
+        token_data = {
+            'grant_type': 'authorization_code',
+            'client_id': client_id,
+            'client_secret': client_secret,
+            'redirect_uri': redirect_uri,
+            'code': grant_token,
+        }
+        token_resp = requests.post(token_url, data=token_data)
+        try:
+            tokens = token_resp.json()
+        except Exception:
+            return Response({'error': 'Invalid response from Zoho token endpoint.'}, status=status.HTTP_502_BAD_GATEWAY)
+        access_token = tokens.get('access_token')
+        if not access_token:
+            return Response({'error': 'Failed to obtain access token', 'zoho_response': tokens}, status=status.HTTP_400_BAD_REQUEST)
+        # Step 2: Get candidate list
+        candidates_url = 'https://recruit.zoho.com/recruit/v2/Candidates'
+        headers = {'Authorization': f'Zoho-oauthtoken {access_token}'}
+        candidates_resp = requests.get(candidates_url, headers=headers)
+        try:
+            candidates_data = candidates_resp.json()
+        except Exception:
+            return Response({'error': 'Invalid response from Zoho candidates endpoint.'}, status=status.HTTP_502_BAD_GATEWAY)
+        candidates = candidates_data.get('data', [])
+        if not candidates:
+            return Response({'error': 'No candidates found', 'zoho_response': candidates_data}, status=status.HTTP_404_NOT_FOUND)
+        # Prepare resume folder
+        resume_folder = os.path.join(settings.BASE_DIR, 'data', 'resume')
+        os.makedirs(resume_folder, exist_ok=True)
+        results = []
+        # Step 3: For each candidate, get attachments and download resume using first attachment
+        for candidate in candidates:
+            candidate_id = candidate.get('id')
+            candidate_result = {'candidate_id': candidate_id, 'attachments': [], 'resume_saved': False}
+            # Get attachments
+            attach_url = f'https://recruit.zoho.com/recruit/v2/Candidates/{candidate_id}/Attachments'
+            attach_resp = requests.get(attach_url, headers=headers)
+            try:
+                attach_data = attach_resp.json()
+            except Exception:
+                attach_data = {'error': 'Invalid response from Zoho attachments.'}
+            attachments = attach_data.get('data', [])
+            File_Name=attachments[0].get('File_Name')
+            candidate_result['attachments'] = attachments
+            # Download resume using first attachment if available
+            if attachments:
+                attachment_id = attachments[0].get('id')
+                if attachment_id:
+                    file_url = f'https://recruit.zoho.com/recruit/v2/Candidates/{candidate_id}/Attachments/{attachment_id}'
+                    file_resp = requests.get(file_url, headers=headers, stream=True)
+                    content_type = file_resp.headers.get('Content-Type', '')
+                    if file_resp.status_code == 200 and not content_type.startswith('application/json'):
+                        # Get filename from Content-Disposition header, fallback to attachment id
+                        content_disp = file_resp.headers.get('Content-Disposition')
+                        filename = f'attachment_{File_Name}'
+                        if content_disp and 'filename=' in content_disp:
+                            import re
+                            match = re.search(r'filename="?([^";]+)"?', content_disp)
+                            if match:
+                                filename = match.group(1)
+                        filepath = os.path.join(resume_folder, filename)
+                        # Save file as received, in binary chunks, no type/extension change
+                        with open(filepath, 'wb') as f:
+                            for chunk in file_resp.iter_content(chunk_size=8192):
+                                if chunk:
+                                    f.write(chunk)
+                        candidate_result['resume_saved'] = True
+                        candidate_result['resume_path'] = filepath
+                    else:
+                        candidate_result['resume_saved'] = False
+                        candidate_result['resume_error'] = file_resp.text
+                else:
+                    candidate_result['resume_saved'] = False
+                    candidate_result['resume_error'] = 'No attachment_id found.'
+            else:
+                candidate_result['resume_saved'] = False
+                candidate_result['resume_error'] = 'No attachments found.'
+            results.append(candidate_result)
+        return Response({'results': results, 'resume_folder': resume_folder})
 
 
 
