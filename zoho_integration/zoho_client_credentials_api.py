@@ -1,3 +1,16 @@
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
+
+import os
+import json
+import requests
+from .models import ZohoTokenLog
+
+API_CONFIG_PATH = os.path.join(os.path.dirname(__file__), 'zoho_api_config.json')
+
 class ZohoResumeDownloadAPI(APIView):
     """
     API endpoint to download a candidate's resume from Zoho Recruit.
@@ -108,6 +121,7 @@ from .models import ZohoTokenLog
 API_CONFIG_PATH = os.path.join(os.path.dirname(__file__), 'zoho_api_config.json')
 
 class ZohoClientCredentialsTokenAPI(APIView):
+
     @swagger_auto_schema(
         operation_description="Get Zoho OAuth token using client_credentials grant (reads from zoho_api_config.json)",
         responses={200: openapi.Response('Token response', openapi.Schema(
@@ -151,41 +165,62 @@ class ZohoClientCredentialsTokenAPI(APIView):
         if response.status_code == 200 and 'access_token' in data:
             return Response(data)
         return Response(data, status=status.HTTP_400_BAD_REQUEST)
-    
 
-    import requests
+    @swagger_auto_schema(
+        # method='post',
+        operation_description="Generate Zoho access token from refresh token",
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'refresh_token': openapi.Schema(type=openapi.TYPE_STRING, description='Zoho OAuth2 refresh token'),
+                'client_id': openapi.Schema(type=openapi.TYPE_STRING, description='Zoho client ID'),
+                'client_secret': openapi.Schema(type=openapi.TYPE_STRING, description='Zoho client secret'),
+            },
+            required=['refresh_token', 'client_id', 'client_secret']
+        ),
+        responses={200: openapi.Response('Token response', openapi.Schema(type=openapi.TYPE_OBJECT))}
+    )
+    def post(self, request):
+        """
+        REST API endpoint to generate access token from refresh token.
+        """
+        refresh_token = request.data.get('refresh_token')
+        client_id = request.data.get('client_id')
+        client_secret = request.data.get('client_secret')
+        if not all([refresh_token, client_id, client_secret]):
+            return Response({'error': 'refresh_token, client_id, and client_secret are required.'}, status=status.HTTP_400_BAD_REQUEST)
+        token_resp = self.generate_access_token_from_refresh_token(refresh_token, client_id, client_secret)
+        if 'access_token' in token_resp:
+            return Response(token_resp, status=status.HTTP_200_OK)
+        return Response(token_resp, status=status.HTTP_400_BAD_REQUEST)
 
-    def get(self, request):
-
-        # Fill these with your Zoho Self Client credentials and grant token
-        grant_token = '1000.c253905f720dde7d21ba0dadf1b3c75b.bbd14c69e0575c813966eb9caaefc33e'
-        client_id = '1000.KPFB56O12AVTZGSWB0WBMS5X2XI0LC'
-        client_secret = '9c39beb5ee700593f3a445505e235989c05720152a'
-        redirect_uri = 'http://localhost:8000'  # Must match the one in Zoho Self Client
-
-        token_url = 'https://accounts.zoho.com/oauth/v2/token'
-        data = {
-            'grant_type': 'authorization_code',
-            'client_id': client_id,
-            'client_secret': client_secret,
-            'redirect_uri': redirect_uri,
-            'code': grant_token,
+    @swagger_auto_schema(
+        # method='get',
+        operation_description="Get Zoho candidates using access token",
+        manual_parameters=[
+            openapi.Parameter('access_token', openapi.IN_QUERY, description="Zoho access token", type=openapi.TYPE_STRING, required=True)
+        ],
+        responses={200: openapi.Response('Candidate List', openapi.Schema(type=openapi.TYPE_OBJECT))}
+    )
+    def get_candidates(self, request):
+        """
+        REST API endpoint to fetch candidates from Zoho using access token.
+        """
+        access_token = request.GET.get('access_token')
+        if not access_token:
+            return Response({'error': 'access_token query parameter is required.'}, status=status.HTTP_400_BAD_REQUEST)
+        candidates_url = 'https://recruit.zoho.com/recruit/v2/Candidates'
+        headers = {
+            'Authorization': f'Zoho-oauthtoken {access_token}'
         }
-        #1000.25b43f90ceb609bebd092777b018ed29.ce5e2e07a9a4a04ba160adfc06fb4832
-        #ZohoRecruit.modules.ALL
-        #ZohoRecruit.users.ALL
-        response = requests.post(token_url, data=data)
-        if response.ok:
-            tokens = response.json()
-            tokens= self.generate_access_token_from_refresh_token(tokens.get('refresh_token'), client_id, client_secret)
-            # Return as Django REST Response
-            self.getCandidates= self.getCandidates(request,tokens)
-            return Response(tokens, status=status.HTTP_200_OK)
-            # print('Access Token:', tokens.get('access_token'))
-            # print('Refresh Token:', tokens.get('refresh_token'))
-        else:
-            return Response({'error': response.text}, status=response.status_code)
-            # print('Error:', response.status_code, response.text)
+        response = requests.get(candidates_url, headers=headers)
+        try:
+            data = response.json()
+        except Exception:
+            return Response({'error': 'Invalid response from Zoho.'}, status=status.HTTP_502_BAD_GATEWAY)
+        if response.status_code == 200:
+            return Response(data)
+        return Response(data, status=response.status_code)
     
 
     def generate_access_token_from_refresh_token(self,refresh_token, client_id, client_secret):
