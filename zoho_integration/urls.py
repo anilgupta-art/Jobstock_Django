@@ -1,12 +1,17 @@
 from django.urls import path
 from .views import CandidateDetailAPI, CandidateResumeDownloadAPI, CandidateListAPI
-from .zoho_oauth_api import ZohoOAuthTokenAPI
-from .zoho_client_credentials_api import ZohoClientCredentialsTokenAPI
+from .zoho_client_credentials_api import (
+    
+    ZohoAuthCodeTokenAPIView,
+    ZohoRefreshTokenAPIView,
+    ZohoCandidatesAPIView,
+    ZohoResumeDownloadAPIView
+)
 
 urlpatterns = [
-    path('api/candidates/', CandidateListAPI.as_view(), name='zoho_candidate_list'),
-    path('api/candidate/<str:candidate_id>/', CandidateDetailAPI.as_view(), name='zoho_candidate_detail'),
-    path('api/candidate/<str:candidate_id>/resume/', CandidateResumeDownloadAPI.as_view(), name='zoho_candidate_resume_download'),
-    path('api/zoho/oauth-token/', ZohoOAuthTokenAPI.as_view(), name='zoho_oauth_token'),
-    path('api/zoho/client-credentials-token/', ZohoClientCredentialsTokenAPI.as_view(), name='zoho_client_credentials_token'),
+   # path('api/zoho/client-credentials-token/', ZohoClientCredentialsTokenAPIView.as_view(), name='zoho_client_credentials_token'),
+    path('api/zoho/get-access-token/', ZohoAuthCodeTokenAPIView.as_view(), name='zoho_get_access_token'),
+    path('api/zoho/get-access-token-param/', ZohoAuthCodeTokenAPIView.as_view(), name='zoho_get_access_token_param'),
+    path('api/zoho/candidates/', ZohoCandidatesAPIView.as_view(), name='zoho_candidates'),
+    path('api/zoho/candidate-resume/', ZohoResumeDownloadAPIView.as_view(), name='zoho_candidate_resume'),
 ]
