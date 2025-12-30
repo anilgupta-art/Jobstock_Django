@@ -290,13 +290,13 @@ class ZohoBulkResumeDownloadAPIView(APIView):
                 'redirect_uri': openapi.Schema(type=openapi.TYPE_STRING,value="http://localhost:8000", description='Redirect URI'),
                 'Scope': openapi.Schema(type=openapi.TYPE_STRING,value="ZohoRecruit.modules.ALL", description='ZohoRecruit.modules.ALL'),
             },
-        #     manual_parameters=[
-        #     openapi.Parameter('grant_token', openapi.IN_QUERY, description="Zoho grant token (authorization code)", type=openapi.TYPE_STRING, required=True),
-        #     openapi.Parameter('client_id', openapi.IN_QUERY, description="Zoho client ID",value="1000.KPFB56O12AVTZGSWB0WBMS5X2XI0LC",  type=openapi.TYPE_STRING, required=True),
-        #     openapi.Parameter('client_secret', openapi.IN_QUERY, description="Zoho client secret",value="9c39beb5ee700593f3a445505e235989c05720152a", type=openapi.TYPE_STRING, required=True),
-        #     openapi.Parameter('redirect_uri', openapi.IN_QUERY, description="Redirect URI",value="http://localhost:8000", type=openapi.TYPE_STRING, required=True),
-        #      openapi.Parameter('Scope', openapi.IN_QUERY, description="Scope",value="ZohoRecruit.modules.ALL", type=openapi.TYPE_STRING, required=True),
-        # ],
+#        {
+#   "grant_token": "1000.92b4b3020ffe34ac6c644ce3343db7fc.ca46a8d15c3b522428338d0126a92c0c",
+#   "client_id": "1000.KPFB56O12AVTZGSWB0WBMS5X2XI0LC",
+#   "client_secret": "9c39beb5ee700593f3a445505e235989c05720152a",
+#   "redirect_uri": "http://localhost:8000",
+#   "Scope": "ZohoRecruit.modules.ALL"
+# }
             required=['grant_token', 'client_id', 'client_secret', 'redirect_uri']
         ),
         responses={200: openapi.Response('Bulk download result', openapi.Schema(type=openapi.TYPE_OBJECT))}
