@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "zoho_integration",
     "django_celery_results",
     "django_celery_beat",
+    "App.settings",
 ]
 
 MIDDLEWARE = [
