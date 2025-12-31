@@ -1,3 +1,4 @@
+from App.api.rpo_resume_upload_api import RPOResumeUploadAPI
 from django.urls import path
 from .views import CandidateDetailAPI, CandidateResumeDownloadAPI, CandidateListAPI
 from .zoho_client_credentials_api import (
@@ -19,4 +20,5 @@ urlpatterns = [
     path('api/zoho/candidate-attachment/', ZohoCandidateAttachmentAPIView.as_view(), name='zoho_candidate_attachment'),
      path('api/zoho/candidate-attachment-list/', ZohoCandidateAttachmentListAPIView.as_view(), name='zoho_candidate_attachment_list'),
     path('api/zoho/bulk-resume-download/', ZohoBulkResumeDownloadAPIView.as_view(), name='zoho_bulk_resume_download'),
+    path('api/rpo/resume-upload/', RPOResumeUploadAPI.as_view(), name='rpo_resume_upload_api'),
 ]
