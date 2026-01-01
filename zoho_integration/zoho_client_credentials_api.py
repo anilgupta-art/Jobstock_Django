@@ -14,6 +14,7 @@ from drf_yasg import openapi
 import os
 import json
 import requests
+import base64
 
 from App.settings.services import SettingService
 
@@ -361,7 +362,7 @@ class ZohoBulkResumeDownloadAPIView(APIView):
             
         access_token = tokens.get('access_token')
         if not access_token:
-            from drf_view_utils import call_drf_post_view
+            from drf_view_utils import call_drf_post_view,rest_api_call,get_django_auth_token
             from zoho_integration.zoho_client_credentials_api import ZohoRefreshTokenAPIView
             refresh_token = ResponseBody.refresh_token#if setting else None)#request.data.get('refresh_token')
 
@@ -373,8 +374,35 @@ class ZohoBulkResumeDownloadAPIView(APIView):
                 'grant_type': 'refresh_token'
             }
             
-            response = call_drf_post_view(ZohoRefreshTokenAPIView, 'http://127.0.0.1:8000/zoho/api/zoho/refresh-token/', data)
-            print(response.data)
+            # Load .env if present (for API_AUTH_TOKEN)
+            try:
+                from dotenv import load_dotenv
+                load_dotenv()
+            except ImportError:
+                pass  # dotenv is optional, but recommended
+
+            # Get API_AUTH_TOKEN from environment
+            auth_token =get_django_auth_token("rpo_admin")# os.environ.get("API_AUTH_TOKEN")
+            if not auth_token:
+                raise Exception("API_AUTH_TOKEN not set in environment. Please set it in your .env file or environment.")
+            # Use Bearer for JWT/OAuth2, Token for DRF token auth. Try Bearer first (most common for OAuth2/JWT)
+            headers = {"Authorization": f"Token {auth_token}"}
+            # Client code
+            username = "rpo_admin"
+            password = "H@ppy123"
+            userpass = f"{username}:{password}"
+            basic_auth = base64.b64encode(userpass.encode()).decode()
+            headers = {
+                "Authorization": f"Basic {basic_auth}",
+                "Content-Type": "application/json"
+            }
+            response = rest_api_call('POST', 'http://127.0.0.1:8000/zoho/api/zoho/refresh-token/', data, headers=headers)
+            try:
+                tokens=response.json()
+                SettingService.update_setting(setting_key='ZohoCreditional', data=tokens)
+               # print(response.json())
+            except Exception:
+                print(response.text)
             access_token = tokens.get('access_token')             
             if access_token:
                 SettingService.update_setting(setting_key='ZohoCreditional', data=tokens)
