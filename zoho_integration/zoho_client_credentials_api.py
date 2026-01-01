@@ -14,6 +14,10 @@ from drf_yasg import openapi
 import os
 import json
 import requests
+
+from App.settings.services import SettingService
+
+
 from .models import ZohoTokenLog
 from django.http import FileResponse
 
@@ -44,10 +48,16 @@ class ZohoAuthCodeTokenAPIView(APIView):
         ))}
     )
     def get(self, request):
+        from global_settings_utils import get_setting_value
+        from App.utils.json_read import dict_to_namespace
+        # Example usage: replace 'your_client' and 'your_key' with actual values or variables
+        setting = get_setting_value('ReetchUSA', 'ZohoCreditional')
+        # setting will be a dict like {'key': ..., 'value': ...} or None
+        data=dict_to_namespace(setting.get('value') if setting else None)
         grant_token = request.GET.get('grant_token')
-        client_id = request.GET.get('client_id')
-        client_secret = request.GET.get('client_secret')
-        redirect_uri = request.GET.get('redirect_uri')
+        client_id =data.client_id # request.GET.get('client_id')
+        client_secret = data.client_secret # request.GET.get('client_secret')
+        redirect_uri = data.redirect_uri # request.GET.get('redirect_uri')
         if not all([grant_token, client_id, client_secret, redirect_uri]):
             return Response({'error': 'grant_token, client_id, client_secret, and redirect_uri are required.'}, status=status.HTTP_400_BAD_REQUEST)
         token_url = 'https://accounts.zoho.com/oauth/v2/token'
@@ -64,27 +74,28 @@ class ZohoAuthCodeTokenAPIView(APIView):
             return Response({'error': f'Failed to connect to Zoho: {str(e)}'}, status=status.HTTP_502_BAD_GATEWAY)
         try:
             tokens = response.json()
+            SettingService.update_setting(setting_key='ZohoCreditional', data=tokens)
         except Exception:
             return Response({'error': 'Invalid response from Zoho.'}, status=status.HTTP_502_BAD_GATEWAY)
         if not response.ok or 'error' in tokens:
             return Response({'error': tokens.get('error', 'Failed to obtain token'), 'details': tokens}, status=response.status_code)
         # If refresh_token is present, exchange for access token
-        if tokens.get('refresh_token'):
-            payload = {
-                'refresh_token': tokens.get('refresh_token'),
-                'client_id': client_id,
-                'client_secret': client_secret,
-                'grant_type': 'refresh_token'
-            }
-            try:
-                resp2 = requests.post(token_url, data=payload)
-                tokens2 = resp2.json()
-            except Exception:
-                return Response({'error': 'Invalid response from Zoho (refresh token).'}, status=status.HTTP_502_BAD_GATEWAY)
-            if not resp2.ok or 'error' in tokens2:
-                return Response({'error': tokens2.get('error', 'Failed to obtain access token from refresh token'), 'details': tokens2}, status=resp2.status_code)
-            return Response(tokens2, status=status.HTTP_200_OK)
-        return Response(tokens, status=status.HTTP_200_OK)
+        # if tokens.get('refresh_token'):
+        #     payload = {
+        #         'refresh_token': tokens.get('refresh_token'),
+        #         'client_id': client_id,
+        #         'client_secret': client_secret,
+        #         'grant_type': 'refresh_token'
+        #     }
+        #     try:
+        #         resp2 = requests.post(token_url, data=payload)
+        #         tokens2 = resp2.json()
+        #     except Exception:
+        #         return Response({'error': 'Invalid response from Zoho (refresh token).'}, status=status.HTTP_502_BAD_GATEWAY)
+        #     if not resp2.ok or 'error' in tokens2:
+        #         return Response({'error': tokens2.get('error', 'Failed to obtain access token from refresh token'), 'details': tokens2}, status=resp2.status_code)
+        #     return Response(tokens2, status=status.HTTP_200_OK)
+        # return Response(tokens, status=status.HTTP_200_OK)
 
 class ZohoRefreshTokenAPIView(APIView):
     @swagger_auto_schema(
@@ -101,9 +112,15 @@ class ZohoRefreshTokenAPIView(APIView):
         responses={200: openapi.Response('Token response', openapi.Schema(type=openapi.TYPE_OBJECT))}
     )
     def post(self, request):
-        refresh_token = request.data.get('refresh_token')
-        client_id = request.data.get('client_id')
-        client_secret = request.data.get('client_secret')
+        from global_settings_utils import get_setting_value
+        from App.utils.json_read import dict_to_namespace   
+        setting = get_setting_value('ReetchUSA', 'ZohoCreditional')
+        data=dict_to_namespace(setting.get('value') if setting else None)
+        ResponseBody=dict_to_namespace(setting.get('ResponseBody') )#if setting else None)
+        refresh_token = ResponseBody.refresh_token        
+        #refresh_token = request.data.get('refresh_token')
+        client_id =data.client_id # request.GET.get('client_id')
+        client_secret = data.client_secret # request.GET.get('client_secret')
         if not all([refresh_token, client_id, client_secret]):
             return Response({'error': 'refresh_token, client_id, and client_secret are required.'}, status=status.HTTP_400_BAD_REQUEST)
         token_url = 'https://accounts.zoho.com/oauth/v2/token'
@@ -118,7 +135,8 @@ class ZohoRefreshTokenAPIView(APIView):
             token_resp = response.json()
         except Exception:
             return Response({'error': 'Invalid response from Zoho.'}, status=status.HTTP_502_BAD_GATEWAY)
-        if 'access_token' in token_resp:
+        if 'access_token' in token_resp:           
+            SettingService.update_setting(setting_key='ZohoCreditional', data=token_resp)
             return Response(token_resp, status=status.HTTP_200_OK)
         return Response(token_resp, status=status.HTTP_400_BAD_REQUEST)
 
@@ -302,10 +320,21 @@ class ZohoBulkResumeDownloadAPIView(APIView):
         responses={200: openapi.Response('Bulk download result', openapi.Schema(type=openapi.TYPE_OBJECT))}
     )
     def post(self, request):
+        # SettingService.list_settings_global()
         grant_token = request.data.get('grant_token')
-        client_id = request.data.get('client_id')
-        client_secret = request.data.get('client_secret')
-        redirect_uri = request.data.get('redirect_uri')
+        # client_id = request.data.get('client_id')
+        # client_secret = request.data.get('client_secret')
+        # redirect_uri = request.data.get('redirect_uri')
+        from global_settings_utils import get_setting_value
+        from App.utils.json_read import dict_to_namespace   
+        setting = get_setting_value('ReetchUSA', 'ZohoCreditional')
+        data=dict_to_namespace(setting.get('value') if setting else None)
+        ResponseBody=dict_to_namespace(setting.get('ResponseBody') )#if setting else None)
+        #refresh_token = ResponseBody.refresh_token
+        
+        client_id =data.client_id # request.GET.get('client_id')
+        client_secret = data.client_secret # request.GET.get('client_secret')
+        redirect_uri= data.redirect_uri # request.GET.get('redirect_uri')
         # Step 1: Get access token
         token_url = 'https://accounts.zoho.com/oauth/v2/token'
         token_data = {
@@ -319,10 +348,39 @@ class ZohoBulkResumeDownloadAPIView(APIView):
         try:
             tokens = token_resp.json()
         except Exception:
-            return Response({'error': 'Invalid response from Zoho token endpoint.'}, status=status.HTTP_502_BAD_GATEWAY)
+            from drf_view_utils import call_drf_post_view
+            from zoho_integration.zoho_client_credentials_api import ZohoRefreshTokenAPIView
+            refresh_token = ResponseBody.refresh_token#if setting else None)#request.data.get('refresh_token')
+
+            data = {
+                'refresh_token': refresh_token,
+                'client_id': client_id,
+                'client_secret': client_secret,
+                'grant_type': 'refresh_token'
+            }
+            
         access_token = tokens.get('access_token')
         if not access_token:
-            return Response({'error': 'Failed to obtain access token', 'zoho_response': tokens}, status=status.HTTP_400_BAD_REQUEST)
+            from drf_view_utils import call_drf_post_view
+            from zoho_integration.zoho_client_credentials_api import ZohoRefreshTokenAPIView
+            refresh_token = ResponseBody.refresh_token#if setting else None)#request.data.get('refresh_token')
+
+
+            data = {
+                'refresh_token': refresh_token,
+                'client_id': client_id,
+                'client_secret': client_secret,
+                'grant_type': 'refresh_token'
+            }
+            
+            response = call_drf_post_view(ZohoRefreshTokenAPIView, 'http://127.0.0.1:8000/zoho/api/zoho/refresh-token/', data)
+            print(response.data)
+            access_token = tokens.get('access_token')             
+            if access_token:
+                SettingService.update_setting(setting_key='ZohoCreditional', data=tokens)
+            #return Response({'error': 'Invalid response from Zoho token endpoint.'}, status=status.HTTP_502_BAD_GATEWAY)
+        else:
+             SettingService.update_setting(setting_key='ZohoCreditional', data=tokens)
         # Step 2: Get candidate list
         candidates_url = 'https://recruit.zoho.com/recruit/v2/Candidates'
         headers = {'Authorization': f'Zoho-oauthtoken {access_token}'}
