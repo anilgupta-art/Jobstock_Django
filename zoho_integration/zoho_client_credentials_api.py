@@ -321,159 +321,49 @@ class ZohoBulkResumeDownloadAPIView(APIView):
         responses={200: openapi.Response('Bulk download result', openapi.Schema(type=openapi.TYPE_OBJECT))}
     )
     def post(self, request):
-        # SettingService.list_settings_global()
-        grant_token = request.data.get('grant_token')
-        # client_id = request.data.get('client_id')
-        # client_secret = request.data.get('client_secret')
-        # redirect_uri = request.data.get('redirect_uri')
         from global_settings_utils import get_setting_value
-        from App.utils.json_read import dict_to_namespace   
-        setting = get_setting_value('ReetchUSA', 'ZohoCreditional')
-        data=dict_to_namespace(setting.get('value') if setting else None)
-        ResponseBody=dict_to_namespace(setting.get('ResponseBody') )#if setting else None)
-        #refresh_token = ResponseBody.refresh_token
-        
-        client_id =data.client_id # request.GET.get('client_id')
-        client_secret = data.client_secret # request.GET.get('client_secret')
-        redirect_uri= data.redirect_uri # request.GET.get('redirect_uri')
+        from App.utils.json_read import dict_to_namespace
+        from .zoho_api_utils import (
+            get_zoho_access_token, get_zoho_candidates,
+            prepare_resume_folder, process_candidates_and_download_resumes
+        )
+        from .zoho_api_utils import get_zoho_credentials_and_params
+        params = get_zoho_credentials_and_params(request)
+        setting = params['setting']
+        data = params['data']
+        ResponseBody = params['ResponseBody']
+        grant_token = params['grant_token']
+        client_id = params['client_id']
+        client_secret = params['client_secret']
+        redirect_uri = params['redirect_uri']
+
         # Step 1: Get access token
-        token_url = 'https://accounts.zoho.com/oauth/v2/token'
-        token_data = {
-            'grant_type': 'authorization_code',
-            'client_id': client_id,
-            'client_secret': client_secret,
-            'redirect_uri': redirect_uri,
-            'code': grant_token,
-        }
-        token_resp = requests.post(token_url, data=token_data)
-        try:
-            tokens = token_resp.json()
-        except Exception:
-            from drf_view_utils import call_drf_post_view
-            from zoho_integration.zoho_client_credentials_api import ZohoRefreshTokenAPIView
-            refresh_token = ResponseBody.refresh_token#if setting else None)#request.data.get('refresh_token')
-
-            data = {
-                'refresh_token': refresh_token,
-                'client_id': client_id,
-                'client_secret': client_secret,
-                'grant_type': 'refresh_token'
-            }
-            
+        tokens = get_zoho_access_token(grant_token, client_id, client_secret, redirect_uri)
         access_token = tokens.get('access_token')
+        # If no access_token, try refresh_token logic
         if not access_token:
-            from drf_view_utils import call_drf_post_view,rest_api_call,get_django_auth_token
-            from zoho_integration.zoho_client_credentials_api import ZohoRefreshTokenAPIView
-            refresh_token = ResponseBody.refresh_token#if setting else None)#request.data.get('refresh_token')
-
-
-            data = {
-                'refresh_token': refresh_token,
-                'client_id': client_id,
-                'client_secret': client_secret,
-                'grant_type': 'refresh_token'
-            }
-            
-            # Load .env if present (for API_AUTH_TOKEN)
-            try:
-                from dotenv import load_dotenv
-                load_dotenv()
-            except ImportError:
-                pass  # dotenv is optional, but recommended
-
-            # Get API_AUTH_TOKEN from environment
-            auth_token =get_django_auth_token("rpo_admin")# os.environ.get("API_AUTH_TOKEN")
-            if not auth_token:
-                raise Exception("API_AUTH_TOKEN not set in environment. Please set it in your .env file or environment.")
-            # Use Bearer for JWT/OAuth2, Token for DRF token auth. Try Bearer first (most common for OAuth2/JWT)
-            headers = {"Authorization": f"Token {auth_token}"}
-            # Client code
-            username = "rpo_admin"
-            password = "H@ppy123"
-            userpass = f"{username}:{password}"
-            basic_auth = base64.b64encode(userpass.encode()).decode()
-            headers = {
-                "Authorization": f"Basic {basic_auth}",
-                "Content-Type": "application/json"
-            }
-            response = rest_api_call('POST', 'http://127.0.0.1:8000/zoho/api/zoho/refresh-token/', data, headers=headers)
-            try:
-                #tokens=response.json()
-                tokens = json.loads(response.content.decode())
-
-                SettingService.update_setting(setting_key='ZohoCreditional', data=tokens,ResponseBody=ResponseBody)
-               # print(response.json())
-            except Exception:
-                print(response.text)
-            access_token = tokens.get('access_token')             
-            if access_token:
-                SettingService.update_setting(setting_key='ZohoCreditional', data=tokens,ResponseBody=ResponseBody)
-            #return Response({'error': 'Invalid response from Zoho token endpoint.'}, status=status.HTTP_502_BAD_GATEWAY)
-        else:
-             SettingService.update_setting(setting_key='ZohoCreditional', data=tokens,ResponseBody=ResponseBody)
-        # Step 2: Get candidate list
-        candidates_url = 'https://recruit.zoho.com/recruit/v2/Candidates'
-        headers = {'Authorization': f'Zoho-oauthtoken {access_token}'}
-        candidates_resp = requests.get(candidates_url, headers=headers)
-        try:
-            candidates_data = candidates_resp.json()
-        except Exception:
-            return Response({'error': 'Invalid response from Zoho candidates endpoint.'}, status=status.HTTP_502_BAD_GATEWAY)
-        candidates = candidates_data.get('data', [])
-        if not candidates:
-            return Response({'error': 'No candidates found', 'zoho_response': candidates_data}, status=status.HTTP_404_NOT_FOUND)
-        # Prepare resume folder
-        resume_folder = os.path.join(settings.BASE_DIR, 'data', 'resume')
-        os.makedirs(resume_folder, exist_ok=True)
-        results = []
-        # Step 3: For each candidate, get attachments and download resume using first attachment
-        for candidate in candidates:
-            candidate_id = candidate.get('id')
-            candidate_result = {'candidate_id': candidate_id, 'attachments': [], 'resume_saved': False}
-            # Get attachments
-            attach_url = f'https://recruit.zoho.com/recruit/v2/Candidates/{candidate_id}/Attachments'
-            attach_resp = requests.get(attach_url, headers=headers)
-            try:
-                attach_data = attach_resp.json()
-            except Exception:
-                attach_data = {'error': 'Invalid response from Zoho attachments.'}
-            attachments = attach_data.get('data', [])
-            File_Name=attachments[0].get('File_Name')
-            candidate_result['attachments'] = attachments
-            # Download resume using first attachment if available
-            if attachments:
-                attachment_id = attachments[0].get('id')
-                if attachment_id:
-                    file_url = f'https://recruit.zoho.com/recruit/v2/Candidates/{candidate_id}/Attachments/{attachment_id}'
-                    file_resp = requests.get(file_url, headers=headers, stream=True)
-                    content_type = file_resp.headers.get('Content-Type', '')
-                    if file_resp.status_code == 200 and not content_type.startswith('application/json'):
-                        # Get filename from Content-Disposition header, fallback to attachment id
-                        content_disp = file_resp.headers.get('Content-Disposition')
-                        filename = f'attachment_{File_Name}'
-                        if content_disp and 'filename=' in content_disp:
-                            import re
-                            match = re.search(r'filename="?([^";]+)"?', content_disp)
-                            if match:
-                                filename = match.group(1)
-                        filepath = os.path.join(resume_folder, filename)
-                        # Save file as received, in binary chunks, no type/extension change
-                        with open(filepath, 'wb') as f:
-                            for chunk in file_resp.iter_content(chunk_size=8192):
-                                if chunk:
-                                    f.write(chunk)
-                        candidate_result['resume_saved'] = True
-                        candidate_result['resume_path'] = filepath
-                    else:
-                        candidate_result['resume_saved'] = False
-                        candidate_result['resume_error'] = file_resp.text
-                else:
-                    candidate_result['resume_saved'] = False
-                    candidate_result['resume_error'] = 'No attachment_id found.'
+            refresh_token = ResponseBody.refresh_token
+            if refresh_token:
+                from .zoho_api_utils import get_zoho_access_token_from_refresh
+                tokens = get_zoho_access_token_from_refresh(refresh_token, client_id, client_secret)
+                access_token = tokens.get('access_token')
+                if not access_token:
+                    return Response({'error': 'Failed to obtain access token from refresh token', 'details': tokens}, status=status.HTTP_400_BAD_REQUEST)
+                SettingService.update_setting(setting_key='ZohoCreditional', data=tokens, ResponseBody=ResponseBody)
             else:
-                candidate_result['resume_saved'] = False
-                candidate_result['resume_error'] = 'No attachments found.'
-            results.append(candidate_result)
+                return Response({'error': 'Failed to obtain access token', 'details': tokens}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            SettingService.update_setting(setting_key='ZohoCreditional', data=tokens, ResponseBody=ResponseBody)
+
+        # Step 2: Get candidate list
+        candidates = get_zoho_candidates(access_token)
+        if not candidates:
+            return Response({'error': 'No candidates found'}, status=status.HTTP_404_NOT_FOUND)
+
+        # Prepare resume folder
+        resume_folder = prepare_resume_folder(settings.BASE_DIR)
+        # Step 3: Process candidates and download resumes
+        results = process_candidates_and_download_resumes(access_token, candidates, resume_folder)
         return Response({'results': results, 'resume_folder': resume_folder})
 
 

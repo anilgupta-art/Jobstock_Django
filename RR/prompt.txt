@@ -205,5 +205,12 @@ please create all valid url in router
 
 
 getting error "detail":"Authentication credentials were not provided" on function response=rest_api_call('POST','http://127.0.0.1:8000/zoho/api/zoho/refresh-token/', data) please resolve the issue
+
+
+
+git login command
+
+
+please breakdown the function with generic and reusable code of function "ZohoBulkResumeDownloadAPIView"
                                  
                                 
