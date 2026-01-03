@@ -19,7 +19,7 @@ def call_drf_post_view(view_class, url, data):
     response = view(request)
     return response
 
-def rest_api_call(method, url, data=None, headers=None, params=None, timeout=10):
+def rest_api_call(method, url, data=None, headers=None, params=None, timeout=30):
     """
     Generic function to make REST API calls using requests.
     Args:
@@ -28,7 +28,7 @@ def rest_api_call(method, url, data=None, headers=None, params=None, timeout=10)
         data: Data to send (dict for JSON body or form data)
         headers: Optional headers dict
         params: Optional query parameters dict
-        timeout: Timeout in seconds (default 10)
+        timeout: Timeout in seconds (default 30)
     Returns:
         requests.Response object
     """

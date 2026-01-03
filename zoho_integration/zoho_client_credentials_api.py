@@ -137,7 +137,7 @@ class ZohoRefreshTokenAPIView(APIView):
         except Exception:
             return Response({'error': 'Invalid response from Zoho.'}, status=status.HTTP_502_BAD_GATEWAY)
         if 'access_token' in token_resp:           
-            SettingService.update_setting(setting_key='ZohoCreditional', data=token_resp)
+            SettingService.update_setting(setting_key='ZohoCreditional', data=token_resp,ResponseBody=ResponseBody)
             return Response(token_resp, status=status.HTTP_200_OK)
         return Response(token_resp, status=status.HTTP_400_BAD_REQUEST)
 
@@ -398,17 +398,19 @@ class ZohoBulkResumeDownloadAPIView(APIView):
             }
             response = rest_api_call('POST', 'http://127.0.0.1:8000/zoho/api/zoho/refresh-token/', data, headers=headers)
             try:
-                tokens=response.json()
-                SettingService.update_setting(setting_key='ZohoCreditional', data=tokens)
+                #tokens=response.json()
+                tokens = json.loads(response.content.decode())
+
+                SettingService.update_setting(setting_key='ZohoCreditional', data=tokens,ResponseBody=ResponseBody)
                # print(response.json())
             except Exception:
                 print(response.text)
             access_token = tokens.get('access_token')             
             if access_token:
-                SettingService.update_setting(setting_key='ZohoCreditional', data=tokens)
+                SettingService.update_setting(setting_key='ZohoCreditional', data=tokens,ResponseBody=ResponseBody)
             #return Response({'error': 'Invalid response from Zoho token endpoint.'}, status=status.HTTP_502_BAD_GATEWAY)
         else:
-             SettingService.update_setting(setting_key='ZohoCreditional', data=tokens)
+             SettingService.update_setting(setting_key='ZohoCreditional', data=tokens,ResponseBody=ResponseBody)
         # Step 2: Get candidate list
         candidates_url = 'https://recruit.zoho.com/recruit/v2/Candidates'
         headers = {'Authorization': f'Zoho-oauthtoken {access_token}'}

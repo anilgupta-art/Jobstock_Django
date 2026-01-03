@@ -1,6 +1,7 @@
 from .repositories import SettingRepository
 from .schemas import SettingSerializer
 from django.core.cache import cache
+import types
 
 class SettingService:
     @staticmethod
@@ -52,13 +53,19 @@ class SettingService:
         return serializer.errors
 
     @staticmethod
-    def update_setting(setting_key, data):
+    def update_setting(setting_key, data, ResponseBody):
         setting = SettingRepository.get_by_key(setting_key)
         if not setting:
             return None
-        # Only update the ResponseBody field
-        #update_data = {'ResponseBody': data.get('ResponseBody')}
-        update_data = {'ResponseBody': data}
+        # Convert SimpleNamespace to dict if needed
+        if isinstance(ResponseBody, types.SimpleNamespace):
+            ResponseBody = vars(ResponseBody)
+        # Update ResponseBody fields from data
+        if 'access_token' in data:
+            ResponseBody['access_token'] = data['access_token']
+        if 'refresh_token' in data and data['refresh_token']:
+            ResponseBody['refresh_token'] = data['refresh_token']
+        update_data = {'ResponseBody': ResponseBody}
         serializer = SettingSerializer(setting, data=update_data, partial=True)
         if serializer.is_valid():
             SettingRepository.update(setting, serializer.validated_data)
