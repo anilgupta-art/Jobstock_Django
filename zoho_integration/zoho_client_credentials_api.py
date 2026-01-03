@@ -35,7 +35,7 @@ class ZohoAuthCodeTokenAPIView(APIView):
             openapi.Parameter('client_id', openapi.IN_QUERY, description="Zoho client ID",value="1000.KPFB56O12AVTZGSWB0WBMS5X2XI0LC",  type=openapi.TYPE_STRING, required=True),
             openapi.Parameter('client_secret', openapi.IN_QUERY, description="Zoho client secret",value="9c39beb5ee700593f3a445505e235989c05720152a", type=openapi.TYPE_STRING, required=True),
             openapi.Parameter('redirect_uri', openapi.IN_QUERY, description="Redirect URI",value="http://localhost:8000", type=openapi.TYPE_STRING, required=True),
-             openapi.Parameter('Scope', openapi.IN_QUERY, description="Scope",value="ZohoRecruit.modules.ALL", type=openapi.TYPE_STRING, required=True),
+             openapi.Parameter('Scope', openapi.IN_QUERY, description="Scope",value="ZohoRecruit.modules.ALL,ZohoRecruit.jobs.ALL", type=openapi.TYPE_STRING, required=True),
         ],
         responses={200: openapi.Response('Token response', openapi.Schema(
             type=openapi.TYPE_OBJECT,
@@ -325,7 +325,7 @@ class ZohoBulkResumeDownloadAPIView(APIView):
         from App.utils.json_read import dict_to_namespace
         from .zoho_api_utils import (
             get_zoho_access_token, get_zoho_candidates,
-            prepare_resume_folder, process_candidates_and_download_resumes
+            prepare_resume_folder, process_candidates_and_download_resumes,get_zoho_job_list
         )
         from .zoho_api_utils import get_zoho_credentials_and_params
         params = get_zoho_credentials_and_params(request)
@@ -355,6 +355,7 @@ class ZohoBulkResumeDownloadAPIView(APIView):
         else:
             SettingService.update_setting(setting_key='ZohoCreditional', data=tokens, ResponseBody=ResponseBody)
 
+        joblist=get_zoho_job_list(access_token)
         # Step 2: Get candidate list
         candidates = get_zoho_candidates(access_token)
         if not candidates:
