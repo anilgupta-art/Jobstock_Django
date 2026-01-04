@@ -366,6 +366,57 @@ class ZohoBulkResumeDownloadAPIView(APIView):
         # Step 3: Process candidates and download resumes
         results = process_candidates_and_download_resumes(access_token, candidates, resume_folder)
         return Response({'results': results, 'resume_folder': resume_folder})
+# Utility: Bulk resume download without DRF request (for scheduler/CLI)
+def zoho_bulk_resume_download_no_request():
+    """
+    Run Zoho bulk resume download logic without a DRF request object.
+    Loads credentials and params from .env/settings.
+    Returns a dict with results and resume folder path.
+    """
+    from global_settings_utils import get_setting_value
+    from App.utils.json_read import dict_to_namespace
+    from .zoho_api_utils import (
+        get_zoho_access_token, get_zoho_candidates,
+        prepare_resume_folder, process_candidates_and_download_resumes, get_zoho_job_list
+    )
+    from App.settings.services import SettingService
+    from django.conf import settings
 
+    # Load Zoho credentials from settings/.env
+    setting = get_setting_value('ReetchUSA', 'ZohoCreditional')
+    data = dict_to_namespace(setting.get('value') if setting else None)
+    ResponseBody = dict_to_namespace(setting.get('ResponseBody'))
+    grant_token = getattr(data, 'grant_token', None)
+    client_id = getattr(data, 'client_id', None)
+    client_secret = getattr(data, 'client_secret', None)
+    redirect_uri = getattr(data, 'redirect_uri', None)
 
+    # Step 1: Get access token
+    tokens = get_zoho_access_token(grant_token, client_id, client_secret, redirect_uri)
+    access_token = tokens.get('access_token')
+    # If no access_token, try refresh_token logic
+    if not access_token:
+        refresh_token = getattr(ResponseBody, 'refresh_token', None)
+        if refresh_token:
+            from .zoho_api_utils import get_zoho_access_token_from_refresh
+            tokens = get_zoho_access_token_from_refresh(refresh_token, client_id, client_secret)
+            access_token = tokens.get('access_token')
+            if not access_token:
+                return {'error': 'Failed to obtain access token from refresh token', 'details': tokens}
+            SettingService.update_setting(setting_key='ZohoCreditional', data=tokens, ResponseBody=ResponseBody)
+        else:
+            return {'error': 'Failed to obtain access token', 'details': tokens}
+    else:
+        SettingService.update_setting(setting_key='ZohoCreditional', data=tokens, ResponseBody=ResponseBody)
 
+    joblist = get_zoho_job_list(access_token)
+    # Step 2: Get candidate list
+    candidates = get_zoho_candidates(access_token)
+    if not candidates:
+        return {'error': 'No candidates found'}
+
+    # Prepare resume folder
+    resume_folder = prepare_resume_folder(settings.BASE_DIR)
+    # Step 3: Process candidates and download resumes
+    results = process_candidates_and_download_resumes(access_token, candidates, resume_folder)
+    return {'results': results, 'resume_folder': resume_folder}

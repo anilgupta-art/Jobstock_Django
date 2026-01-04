@@ -7,6 +7,8 @@ from datetime import datetime, timedelta
 import time
 import threading
 
+from drf_view_utils import get_basic_auth_headers
+
 load_dotenv()
 
 SCHEDULE_TIME = os.getenv('ADMIN_REQ_SCHEDULE_TIME', '07:00')  # Format: HH:MM
@@ -20,11 +22,12 @@ def call_bulk_resume_download():
     Calls the bulk resume download API endpoint with basic authentication.
     """
     try:
-        print(f"[admin_req] Calling API: {API_URL}")
-        response = requests.post(API_URL, auth=(API_USERNAME, API_PASSWORD))
-        print(f"[admin_req] API Response: {response.status_code} {response.content}")
+        print(f"[admin_req] Calling Zoho bulk resume download logic directly (no API call)...")
+        from zoho_integration.zoho_client_credentials_api import zoho_bulk_resume_download_no_request
+        result = zoho_bulk_resume_download_no_request()
+        print(f"[admin_req] Bulk resume download result: {result}")
     except Exception as e:
-        print(f"[admin_req] Error calling API: {e}")
+        print(f"[admin_req] Error in bulk resume download logic: {e}")
 
 
 def scheduler_loop():
