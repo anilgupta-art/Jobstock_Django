@@ -1,3 +1,7 @@
+import os
+from dotenv import load_dotenv
+
+import base64
 from rest_framework.test import APIRequestFactory
 from django.contrib.auth import get_user_model
 from rest_framework.authtoken.models import Token
@@ -64,6 +68,35 @@ def get_django_auth_token(username):
     token, created = Token.objects.get_or_create(user=user)
     return token.key
 
+    
+
+
 # Usage example (in any module):
 # from drf_view_utils import get_django_auth_token
 # token = get_django_auth_token('admin')
+
+def get_basic_auth_headers(username, password):
+    userpass = f"{username}:{password}"
+    basic_auth = base64.b64encode(userpass.encode()).decode()
+    return {
+        "Authorization": f"Basic {basic_auth}",
+        "Content-Type": "application/json"
+    }
+def build_absolute_api_url(api_url):
+    """
+    Prepends the DOMAIN from .env to a relative API URL if needed.
+    Args:
+        api_url (str): The API endpoint, can be relative or absolute.
+    Returns:
+        str: Absolute API URL.
+    Raises:
+        RuntimeError: If DOMAIN is not set in .env and api_url is relative.
+    """
+    if api_url.startswith("/"):
+        load_dotenv()
+        domain = os.getenv("DOMAIN")
+        if not domain:
+            raise RuntimeError("DOMAIN not set in .env")
+        return domain.rstrip("/") + api_url
+    return api_url
+
