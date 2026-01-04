@@ -131,55 +131,10 @@ li.active > .dropdown-toggle::after {
 
 
 </style>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-
-    const sidebar = document.querySelector(".dashboard-inner");
-
-    sidebar.addEventListener("click", function (e) {
-
-        /* ===== Parent Toggle ===== */
-        const toggle = e.target.closest(".dropdown-toggle");
-        if (toggle) {
-            e.preventDefault();
-
-            const parentLi = toggle.closest("li");
-
-            // Close other open menus
-            sidebar.querySelectorAll("> ul > li").forEach(li => {
-                if (li !== parentLi) li.classList.remove("active");
-            });
-
-            // Toggle current menu
-            parentLi.classList.toggle("active");
-            return;
-        }
-
-        /* ===== Submenu Click ===== */
-        const submenuLink = e.target.closest(".submenu a");
-        if (submenuLink) {
-
-            // Remove active from all submenu items
-            sidebar.querySelectorAll(".submenu li").forEach(li => {
-                li.classList.remove("active");
-            });
-
-            // Activate clicked submenu
-            const submenuLi = submenuLink.closest("li");
-            submenuLi.classList.add("active");
-
-            // Keep parent active/open
-            const parentLi = submenuLi.closest(".submenu").closest("li");
-            parentLi.classList.add("active");
-        }
-
-    });
-
-});
-</script>
 
 
-<!-- <script>
+
+ <script>
 document.addEventListener("DOMContentLoaded", function () {
 
     document.querySelectorAll(".dropdown-toggle").forEach(toggle => {
@@ -197,7 +152,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
-</script> -->
+</script> 
 
 
 

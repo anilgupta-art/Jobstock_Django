@@ -4065,7 +4065,7 @@ figure.single-brand.thumb-figure {
     margin-right: 20px;
     transition: all ease 0.4s;
 }
-
+.select2-container--default .select2-selection--single{display: none!important;}
 /*-----------------------------------
 	General Features Design 
 -----------------------------------*/
