@@ -307,7 +307,7 @@ class ZohoBulkResumeDownloadAPIView(APIView):
                 'client_id': openapi.Schema(type=openapi.TYPE_STRING,value="1000.KPFB56O12AVTZGSWB0WBMS5X2XI0LC", description='Zoho client ID'),
                 'client_secret': openapi.Schema(type=openapi.TYPE_STRING,value="9c39beb5ee700593f3a445505e235989c05720152a", description='Zoho client secret'),
                 'redirect_uri': openapi.Schema(type=openapi.TYPE_STRING,value="http://localhost:8000", description='Redirect URI'),
-                'Scope': openapi.Schema(type=openapi.TYPE_STRING,value="ZohoRecruit.modules.ALL", description='ZohoRecruit.modules.ALL'),
+                'Scope': openapi.Schema(type=openapi.TYPE_STRING,value="ZohoRecruit.modules.ALL,ZOHOPEOPLE.timetracker.ALL", description='ZohoRecruit.modules.ALL'),
             },
 #        {
 #   "grant_token": "1000.92b4b3020ffe34ac6c644ce3343db7fc.ca46a8d15c3b522428338d0126a92c0c",

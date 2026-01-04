@@ -204,6 +204,7 @@ def get_zoho_job_list(access_token, params=None):
         dict: Parsed JSON response from Zoho API (job list or error info).
     """
     url = 'https://recruit.zoho.com/recruit/v2/Jobs'
+    url='https://recruit.zoho.com/recruit/v2/settings/modules'
     headers = {'Authorization': f'Zoho-oauthtoken {access_token}'}
     response = requests.get(url, headers=headers, params=params)
     try:
