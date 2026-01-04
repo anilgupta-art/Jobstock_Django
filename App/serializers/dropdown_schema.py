@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from App.models.dropdown_model import DropdownGroup, DropdownMaster
+from App.models import DropdownGroup, DropdownMaster
 
 class DropdownMasterSchema(serializers.ModelSerializer):
     class Meta:

@@ -8,10 +8,9 @@ urlpatterns = [
     path("api/", include('App.urls_api_navigation')),
     path("api/resumes/", include('App.urls_api_resume')),
     path("api/menu/", include('App.urls_api_menu')),
-    #path('api/settings/', include('App.settings.urls')),  # adjust path as needed
+    path("api/settings/", include('App.urls_api_setting')),
     # Job Management (MVT & API)
     path("", include('App.urls_job_management')),
-    path('rpo/resume-list/', __import__('App.api.rpo_resume_list_api').api.rpo_resume_list_api.RPOResumeListAPI.as_view(), name='api_rpo_resume_list'),
     
     # Home and main pages
     path("", views.home_4, name="index"),

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from App.models import Setting
+from App.settings.models import Setting
 
 class SettingSerializer(serializers.ModelSerializer):
     class Meta:

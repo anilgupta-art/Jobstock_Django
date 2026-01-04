@@ -1,4 +1,4 @@
-from App.models.dropdown_model import DropdownGroup, DropdownMaster
+from App.models import DropdownGroup, DropdownMaster
 from typing import List
 from threading import Lock
 
