@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "django_celery_results",
     "django_celery_beat",
     "App.settings",
+    "admin_req"
 ]
 
 MIDDLEWARE = [

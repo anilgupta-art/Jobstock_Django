@@ -268,3 +268,26 @@ def upload_resume_to_rpo_api(filepath, user_id, source, username, password, api_
 
 # Example call (line 102 or wherever needed):
 # result = upload_resume_to_rpo_api(filepath, 1, 'zoho', 'rpo_admin', 'H@ppy123', 'http://127.0.0.1:8000/api/rpo/resume-upload/')
+def call_bulk_resume_download_api():
+    """
+    Calls the bulk resume download API endpoint with optional authentication.
+    Reads URL and credentials from .env for flexibility.
+    """
+    import os
+    import requests
+    from dotenv import load_dotenv
+    load_dotenv()
+    api_url = os.getenv('ADMIN_REQ_BULK_RESUME_API', 'http://localhost:8000/api/zoho/bulk-resume-download/')
+    username = os.getenv('ADMIN_REQ_API_USERNAME')
+    password = os.getenv('ADMIN_REQ_API_PASSWORD')
+    try:
+        print(f"[admin_req] Calling API: {api_url}")
+        if username and password:
+            response = requests.post(api_url, auth=(username, password))
+        else:
+            response = requests.post(api_url)
+        print(f"[admin_req] API Response: {response.status_code} {response.content}")
+        return response.status_code, response.content
+    except Exception as e:
+        print(f"[admin_req] Error calling API: {e}")
+        return None, str(e)
