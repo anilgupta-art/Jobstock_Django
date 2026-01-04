@@ -17,4 +17,5 @@ urlpatterns = [
     path('statistics/', api_get_statistics, name='api_get_statistics'),
     path('validate/', api_validate_files, name='api_validate_files'),
     path('rpo/resume-list/', __import__('App.api.rpo_resume_list_api').api.rpo_resume_list_api.RPOResumeListAPI.as_view(), name='api_rpo_resume_list'),
+    path('dropdown/', __import__('App.api.dropdown_router').api.dropdown_router.DropdownListAPI.as_view(), name='api_dropdown_list'),
 ]
