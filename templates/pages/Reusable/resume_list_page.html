@@ -1,78 +1,196 @@
 {% extends "Base/base.html" %}
 {% load static %}
 
-{% block extra_head %}
-
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-<style>
-    .select2-container .select2-selection--multiple { min-height: 38px; }
-    .resume-table th, .resume-table td { vertical-align: middle; }
-    .badge { font-size: 0.9em; }
-    .filter-bar { background: #f8f9fa; border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem; }
-</style>
-{% endblock %}
-
+{% block hero_content %}
 
 {% include 'Base/navbar.html' %}
-{% block hero_content %}
-<div class="container-fluid py-4">
-    <div class="filter-bar mb-3 p-4 rounded shadow-sm bg-white">
-        <form id="resume-filter-form" class="row g-3 align-items-end">
-            <div class="col-md-3">
-                <label for="filter-company" class="form-label mb-1">Company Name</label>
-                <select id="filter-company" name="company" class="form-select select2" multiple>
-                    {% for job in jobs %}
-                        {% if job %}
-                        <option value="{{ job }}">{{ job }}</option>
-                        {% endif %}
-                    {% endfor %}
-                </select>
+
+<!-- Resume List Page - RPO Admin Layout -->
+<div class="dashboard-wrap bg-light">
+    <a class="mobNavigation" data-bs-toggle="collapse" href="#MobNav" role="button" aria-expanded="false" aria-controls="MobNav">
+        <i class="fas fa-bars mr-2"></i>Dashboard Navigation
+    </a>
+    <div class="collapse" id="MobNav">
+        <div class="dashboard-nav">
+            <div class="dash-user-blocks pt-5">
+                <div class="jbs-grid-usrs-thumb">
+                    <div class="jbs-grid-yuo">
+                        <figure><img src="{% static 'app/img/l-12.png' %}" class="img-fluid circle" alt=""></figure>
+                    </div>
+                </div>
+                <div class="jbs-grid-usrs-caption mb-3">
+                    <div class="jbs-kioyer">
+                        <span class="label text-light bg-main">RPO Admin</span>
+                    </div>
+                    <div class="jbs-tiosk">
+                        <h4 class="jbs-tiosk-title">{{ request.user.get_full_name|default:request.user.username }}</h4>
+                        <div class="jbs-tiosk-subtitle"><span><i class="fa-solid fa-user-tie me-2"></i>RPO Administrator</span></div>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-3">
-                <label for="filter-jobtitle" class="form-label mb-1">Job Title</label>
-                <select id="filter-jobtitle" name="jobtitle" class="form-select select2" multiple>
-                    {% for job in jobs %}
-                        {% if job %}
-                        <option value="{{ job }}">{{ job }}</option>
-                        {% endif %}
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="col-md-2">
-                <label for="filter-source" class="form-label mb-1">Resume Source</label>
-                <select id="filter-source" name="resumesource" class="form-select select2" multiple>
-                    {% for source in resume_sources %}
-                        <option value="{{ source.id }}">{{ source.text }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="col-md-2">
-                <label for="filter-status" class="form-label mb-1">Resume Status</label>
-                <select id="filter-status" name="status" class="form-select select2" multiple>
-                    {% for status in status_options %}
-                        <option value="{{ status.value }}">{{ status.text }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="col-md-2">
-                <label for="filter-sort" class="form-label mb-1">Sort By</label>
-                <select id="filter-sort" name="sort" class="form-select">
-                    <option value="-created_at">Newest First</option>
-                    <option value="created_at">Oldest First</option>
-                    <option value="filename">Filename (A-Z)</option>
-                    <option value="-filename">Filename (Z-A)</option>
-                </select>
-            </div>
-            <div class="col-md-12 mt-3">
-                <button type="submit" class="btn btn-main w-100"><i class="fa fa-filter me-1"></i>Filter</button>
-            </div>
-        </form>
+            {% include 'Components/For-Employer/dashboard_nav.html' with dashboard_active='rpo_resume_list' %}
+        </div>
     </div>
 
-    <div id="resume-list-container">
-        {% include 'Components/Resume/resume_list_table.html' %}
+    <div class="dashboard-content">
+        <div class="dashboard-tlbar d-block mb-4">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12">
+                    <h1 class="mb-1 fs-3 fw-medium">Resume List</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item text-muted"><a href="{% url 'App:index' %}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'App:rpo_dashboard' %}" class="text-main">RPO Dashboard</a></li>
+                            <li class="breadcrumb-item active">Resume List</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-widg-bar d-block">
+            <!-- Statistics Row (optional, can be customized for resumes) -->
+            <div class="row gx-3 gy-3 mb-4">
+                <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="dashboard-flexwrap">
+                                <div class="dashboard-flexwrap-first">
+                                    <i class="fa-solid fa-file-alt fa-2x text-primary"></i>
+                                </div>
+                                <div class="dashboard-flexwrap-last">
+                                    <h4 class="mb-0 ft-bold fs-xl">{{ stats.total_resumes|default:0 }}</h4>
+                                    <span class="text-muted-2 ft-medium">Total Resumes</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="dashboard-flexwrap">
+                                <div class="dashboard-flexwrap-first">
+                                    <i class="fa-solid fa-check-circle fa-2x text-success"></i>
+                                </div>
+                                <div class="dashboard-flexwrap-last">
+                                    <h4 class="mb-0 ft-bold fs-xl text-success">{{ stats.active_resumes|default:0 }}</h4>
+                                    <span class="text-muted-2 ft-medium">Active Resumes</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="dashboard-flexwrap">
+                                <div class="dashboard-flexwrap-first">
+                                    <i class="fa-solid fa-calendar-week fa-2x text-info"></i>
+                                </div>
+                                <div class="dashboard-flexwrap-last">
+                                    <h4 class="mb-0 ft-bold fs-xl text-info">{{ stats.resumes_this_week|default:0 }}</h4>
+                                    <span class="text-muted-2 ft-medium">This Week</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="dashboard-flexwrap">
+                                <div class="dashboard-flexwrap-first">
+                                    <i class="fa-solid fa-calendar-alt fa-2x text-warning"></i>
+                                </div>
+                                <div class="dashboard-flexwrap-last">
+                                    <h4 class="mb-0 ft-bold fs-xl text-warning">{{ stats.resumes_this_month|default:0 }}</h4>
+                                    <span class="text-muted-2 ft-medium">This Month</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search & Filter Section (resume fields) -->
+            <div class="card mb-4">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0"><i class="fa-solid fa-filter me-2"></i>Search & Filter</h5>
+                </div>
+                <div class="card-body">
+                    <form method="GET" action="" id="resume-filter-form">
+                        <div class="row gx-3 gy-3">
+                            <div class="col-xl-3 col-lg-6 col-md-6">
+                                <label class="form-label">Company Name</label>
+                                <select id="filter-company" name="company" class="form-select select2" multiple>
+                                    {% for company in companies %}
+                                        <option value="{{ company }}">{{ company }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-xl-3 col-lg-6 col-md-6">
+                                <label class="form-label">Job Title</label>
+                                <select id="filter-jobtitle" name="jobtitle" class="form-select select2" multiple>
+                                    {% for jobtitle in jobtitles %}
+                                        <option value="{{ jobtitle }}">{{ jobtitle }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-xl-2 col-lg-6 col-md-6">
+                                <label class="form-label">Resume Source</label>
+                                <select id="filter-source" name="resumesource" class="form-select select2" multiple>
+                                    {% for source in resume_sources %}
+                                        <option value="{{ source.id }}">{{ source.text }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-xl-2 col-lg-6 col-md-6">
+                                <label class="form-label">Resume Status</label>
+                                <select id="filter-status" name="status" class="form-select select2" multiple>
+                                    {% for status in status_options %}
+                                        <option value="{{ status.value }}">{{ status.text }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-xl-2 col-lg-6 col-md-6">
+                                <label class="form-label">Sort By</label>
+                                <select id="filter-sort" name="sort" class="form-select">
+                                    <option value="-created_at">Newest First</option>
+                                    <option value="created_at">Oldest First</option>
+                                    <option value="filename">Filename (A-Z)</option>
+                                    <option value="-filename">Filename (Z-A)</option>
+                                </select>
+                            </div>
+                            <div class="col-xl-12 d-flex align-items-end mt-2">
+                                <button type="submit" class="btn btn-primary me-2">
+                                    <i class="fa-solid fa-search me-2"></i>Apply Filters
+                                </button>
+                                <a href="" class="btn btn-light">
+                                    <i class="fa-solid fa-redo me-2"></i>Reset
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Resume Table -->
+            <div class="card">
+                <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><i class="fa-solid fa-list me-2"></i>Resume Listings</h5>
+                    <span class="badge bg-primary">{{ total_count }} Resume{{ total_count|pluralize }}</span>
+                </div>
+                <div class="card-body p-0">
+                    <div id="resume-list-container">
+                        {% include 'Components/Resume/resume_list_table.html' %}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
 {% endblock %}
 
 {% block extra_js %}
