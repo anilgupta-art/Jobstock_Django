@@ -1699,6 +1699,7 @@ table.table tr th {
 	padding:10px 20px;
 	height:56px;
 	display:inline-flex;
+    width: fit-content !important;
 	align-items:center;
 	justify-content:center;
 	cursor: pointer;
@@ -1706,6 +1707,11 @@ table.table tr th {
 	-o-transition:all ease 0.4s;
 	transition:all ease 0.4s;
 	border-radius:0.4rem;
+}
+.dashboard-widg-bar .card .card-body .btn {
+    padding: 8px 5px;
+    font-size: 14px;
+    height: 40px;
 }
 
 .btn:focus, .btn:hover {
@@ -1973,13 +1979,13 @@ table.table tr th {
 .pagination>li>a, .pagination>li>span {
     position: relative;
     float: left;
-    padding: 0;
+    /* padding: 0; */
     margin: 5px;
     color: #0c3966;
     text-decoration: none;
-    background-color:transparent;
+    background-color: transparent;
     border-radius: 2px;
-    width: 37px;
+    /* width: 37px; */
     height: 37px;
     text-align: center;
     line-height: 1;
@@ -3053,8 +3059,9 @@ nav a {
 }
 .nav-menu.nav-menu-social>li.list-buttons a {
     top:0px;
-	padding:14px 20px;
+	padding:4px 15px;
     color:#ffffff !important;
+    height: 35px;
 }
 .nav-menu.nav-menu-social>li.list-buttons.light a {
     color:#08184b !important;
@@ -5623,7 +5630,11 @@ ul.shorting-list li a:hover, ul.shorting-list li a:focus, ul.shorting-list li a.
     font-weight: 500;
 	color:rgba(0,44,63,0.6);
 }
-
+.table-dark tbody h6 a{
+    font-size: 16px;
+    font-weight: 500;
+    color:#444444 ;
+}
 /*----------- Candidate Experience Design -----------*/
 .experinc-usr-groups {
     position: relative;
@@ -8974,7 +8985,11 @@ textarea {
   min-height:80px;
   max-height:90px;
 }
-
+.selection textarea {
+  min-height:auto;
+  margin-bottom: 5px;
+}
+.select2-container--default .select2-selection--multiple{margin-bottom: 5px;}
 .tags-container {
   margin-top: 15px;
   display: flex;
@@ -9755,7 +9770,7 @@ footer.skin-dark-footer h4{
     color: #ffffff;
 }
 footer.skin-dark-footer .footer-widget ul li a, footer.skin-dark-footer, footer.skin-dark-footer a, .skin-dark-footer .footer-widget p {
-    color:var(--darkfootercolor);
+    color:#fff;
     transition: all ease 0.4s;
     font-size:13px;
 }
@@ -10972,7 +10987,7 @@ a.cadmium-theme{background:#5F8D4E!important;}
     position: absolute;
     top: 5px;
     left: 4px;
-    z-index: 999;
+    z-index: 9;
     color: rgb(255, 255, 255);
     cursor: pointer;
     border-width: initial;
@@ -11002,7 +11017,7 @@ a.cadmium-theme{background:#5F8D4E!important;}
 .card-header.bg-white{background: #1f1c1c !important;}
 .card-header.bg-white h5, .card-header.bg-white i{color: #fff!important;}
 .table-responsive a.text-primary.fw-medium{color: rgb(8 68 157) !important;}
-.table-responsive tr td .badge.badge-secondary{background: #000000;}
+.table-responsive tr td .badge.badge-secondary{background: #000000;color: #fff;}
 .dashboard-content .card-header {
     background: #282828;
 }
@@ -11259,7 +11274,7 @@ a.cadmium-theme{background:#5F8D4E!important;}
 }
 
 .badge {
-  position: absolute;
+  /* position: absolute; */
   top: -12px;
   left: 20px;
   background: #f7cbd6;
@@ -11269,6 +11284,7 @@ a.cadmium-theme{background:#5F8D4E!important;}
   border-radius: 8px;
   font-weight: 600;
 }
+.badge.bg-success{color:#fff;}
 
 .tag {
   font-size: 14px;
