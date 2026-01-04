@@ -16,4 +16,5 @@ urlpatterns = [
     path('<int:resume_id>/delete/', api_delete_resume, name='api_delete_resume'),
     path('statistics/', api_get_statistics, name='api_get_statistics'),
     path('validate/', api_validate_files, name='api_validate_files'),
+    path('rpo/resume-list/', __import__('App.api.rpo_resume_list_api').api.rpo_resume_list_api.RPOResumeListAPI.as_view(), name='api_rpo_resume_list'),
 ]
