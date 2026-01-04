@@ -6,16 +6,29 @@
 
 {% include 'Base/navbar.html' %}
 			
+
+<style>
+	
+
+</style>
 <!-- Hero Banner Start -->
 <div class="image-cover hero-header" style="background:url({% static 'app/img/slider-5.jpg' %}) no-repeat;" data-overlay="6">
 	<div class="container">
 
 		<div class="inner-banner-text text-center">
-			<h1>Discover Great Job Offer<br>With JobStock</h1>
-			<p class="fs-6">Getting a new job is never easy. Check what new jobs we have in store for you onreetechusa</p>
+			<p class="fs-2">AI-first All-in-one recruiting software</p>
+			<h1>The only<span class="aifirst">AI-first </span> all-in-one recruiting platform</h1>
+
+			<p>Save time, money, and the headaches of juggling multiple tools. Gem brings together your ATS, CRM, sourcing, scheduling, and analytics — plus 800M+ profiles to source from — with AI built into every workflow.</p>
+			<button class="btn btn-info">Request a demo</button> 
+			<div class="ratting-logos">
+				<div data-coreui-read-only="true" data-coreui-toggle="rating" data-coreui-value="4"> 4.8/5 on</div>
+			</div>
+			
 		</div>
-		
-		<div class="full-search-2 mt-5">
+	
+
+		<!-- <div class="full-search-2 mt-5">
 			<div class="hero-search-content search-shadow colored">
 				
 				<div class="row classic-search-box m-0 gx-2">
@@ -78,7 +91,7 @@
 				</div>
 				
 			</div>
-		</div>
+		</div> -->
 			
 	</div>
 </div>
@@ -86,167 +99,573 @@
 
 <!-- Explore Categories Start -->
 <section>
-	<div class="container">
+	<div class="container-full">
 		
+<section class="py-5 bg-whitez bg-second min">
+  <div class="container overflow-hidden">
+	<div class="sec-heading center">
+		<h4 class="text-white mb-4">Trusted by 1,200+ talent acquisition teams</h4>
+		<!-- <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores</p> -->
+	</div>
+
+    <!-- FORWARD MARQUEE -->
+    <div class="marquee marquee-left mb-4">
+      <div class="marquee-track">
+        <img src="/static/app/img/brand/layar-white.svg" class="img-fluid">
+        <img src="/static/app/img/brand/mailchimp-white.svg" class="img-fluid">
+        <img src="/static/app/img/brand/forbes-white.svg" class="img-fluid">
+        <img src="/static/app/img/brand/fitbit-white.svg" class="img-fluid">
+        <img src="/static/app/img/brand/vidados-white.svg" class="img-fluid" >
+
+        <!-- duplicate -->
+        <img src="/static/app/img/brand/layar-white.svg" class="img-fluid">
+        <img src="/static/app/img/brand/mailchimp-white.svg" class="img-fluid">
+        <img src="/static/app/img/brand/forbes-white.svg" class="img-fluid">
+        <img src="/static/app/img/brand/fitbit-white.svg" class="img-fluid">
+        <img src="/static/app/img/brand/vidados-white.svg" class="img-fluid" >
+
+      </div>
+    </div>
+
+    <!-- REVERSE MARQUEE -->
+    <div class="marquee marquee-right">
+      <div class="marquee-track">
+        <img src="/static/app/img/brand/layar-white.svg" class="img-fluid">
+        <img src="/static/app/img/brand/mailchimp-white.svg" class="img-fluid">
+        <img src="/static/app/img/brand/forbes-white.svg" class="img-fluid">
+        <img src="/static/app/img/brand/fitbit-white.svg" class="img-fluid">
+        <img src="/static/app/img/brand/vidados-white.svg" class="img-fluid" >
+
+        <!-- duplicate -->
+        <img src="/static/app/img/brand/layar-white.svg" class="img-fluid">
+        <img src="/static/app/img/brand/mailchimp-white.svg" class="img-fluid">
+        <img src="/static/app/img/brand/forbes-white.svg" class="img-fluid">
+        <img src="/static/app/img/brand/fitbit-white.svg" class="img-fluid">
+        <img src="/static/app/img/brand/vidados-white.svg" class="img-fluid" >
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<section>
+	<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet"> -->
+
+<section class="tabssec py-5 ">
+  <div class="container">
+
+    <!-- TABS -->
+    <ul class="nav nav-pills platform-tabs mb-5 justify-content-center justify-content-lg-start"
+        id="platformTab" role="tablist">
+
+      <li class="nav-item">
+        <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#platform">
+          <i class="bi bi-grid-fill"></i> Platform
+        </button>
+      </li>
+
+      <li class="nav-item">
+        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#agentic">
+          <i class="bi bi-cpu"></i> Agentic AI
+        </button>
+      </li>
+
+      <li class="nav-item">
+        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#ats">
+          <i class="bi bi-file-earmark-text"></i> ATS
+        </button>
+      </li>
+
+      <li class="nav-item">
+        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#crm">
+          <i class="bi bi-people"></i> CRM
+        </button>
+      </li>
+
+      <li class="nav-item">
+        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#sourcing">
+          <i class="bi bi-search"></i> Sourcing
+        </button>
+      </li>
+
+      <li class="nav-item">
+        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#scheduling">
+          <i class="bi bi-calendar-check"></i> Scheduling
+        </button>
+      </li>
+
+      <li class="nav-item">
+        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#analytics">
+          <i class="bi bi-bar-chart"></i> Analytics
+        </button>
+      </li>
+
+      <li class="nav-item">
+        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#marketing">
+          <i class="bi bi-megaphone"></i> Talent Marketing
+        </button>
+      </li>
+    </ul>
+
+    <!-- TAB CONTENT -->
+    <div class="tab-content">
+
+      <!-- PLATFORM -->
+      <div class="tab-pane fade show active" id="platform">
+        <div class="row align-items-center g-5">
+
+          <div class="col-lg-6">
+            <h2 class="fw-bold mb-3">
+              Use products that work better together
+            </h2>
+            <p class="text-muted">
+             Experience the power of a truly connected recruiting platform — one consistent interface, unified data, smarter AI recommendations, and simplified permissions. Cut technology costs by 30-50% while boosting recruiter productivity up to 5x.
+            </p>
+            <p class="text-muted">
+              Cut technology costs by <strong>30–50%</strong> while boosting recruiter 
+              productivity up to <strong>5×</strong>.
+            </p>
+            <a href="#" class="fw-semibold text-decoration-none">
+              Learn More <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+
+          <div class="col-lg-6 text-center">
+            <div class="platform-graphic">
+				<img src="/static/app/img/brand/aio_marketecture.webp" class="img-fluid">
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- OTHER TABS (SAMPLE) -->
+      <div class="tab-pane fade" id="agentic">
+        <h4>Agentic AI</h4>
+        <p class="text-muted">AI-powered recruiting agents and workflows.</p>
+      </div>
+
+      <div class="tab-pane fade" id="ats">
+        <h4>ATS</h4>
+        <p class="text-muted">Application tracking and offer management.</p>
+      </div>
+
+      <div class="tab-pane fade" id="crm">
+        <h4>CRM</h4>
+        <p class="text-muted">Candidate relationship management.</p>
+      </div>
+
+      <div class="tab-pane fade" id="sourcing">
+        <h4>Sourcing</h4>
+        <p class="text-muted">Search and engage top talent faster.</p>
+      </div>
+
+      <div class="tab-pane fade" id="scheduling">
+        <h4>Scheduling</h4>
+        <p class="text-muted">AI-driven interview scheduling.</p>
+      </div>
+
+      <div class="tab-pane fade" id="analytics">
+        <h4>Analytics</h4>
+        <p class="text-muted">Pipeline and hiring performance insights.</p>
+      </div>
+
+      <div class="tab-pane fade" id="marketing">
+        <h4>Talent Marketing</h4>
+        <p class="text-muted">Career sites, events, and talent communities.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script> -->
+
+</section>
+
+<!-- Blog Grid -->
+<section class="mt-5 pb-5">
+	<div class="container">
+	
 		<div class="row justify-content-center">
 			<div class="col-xl-6 col-lg-7 col-md-10 text-center">
 				<div class="sec-heading center">
-					<h2>Explore Best Categories</h2>
-					<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores</p>
+					<h2>Solutions tailored to <span class="yourneed">your needs</span></h2>
+					<!-- <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores</p> -->
 				</div>
 			</div>
 		</div>
 		
-		<div class="row gx-4 gy-4 justify-content-center">
+		<div class="row g-xl-3 g-lg-3 g-md-3 g-3">
+
+			<!-- Components/Home/home-7/blog.html -->
+            
+    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+		<h4 class="colorred">For Startups</h4>
+        <div class="jobstock-grid-blog">
 			
-			<!-- Components/Home/index/categories.html -->
-            {% include 'Components/Home/index/categories.html' %}
+            <div class="jobstock-grid-blog-thumb">
+                <img src="/static/app/img/brand/solutions_img_aio_startups.webp" class="img-fluid" alt="">
+            </div>
+            <div class="jobstock-grid-blog-body">
+                <div class="jobstock-grid-body-header">
+                    <div class="jobstock-grid-title"><h3>Gem All-in-One</h3></div>
+					<p>1-100 EMPLOYEES</p>
+                </div>
+                <div class="jobstock-grid-body-middle mb-2">
+                    <p>Launch your company with the right talent using Gem’s all-in-one recruiting platform.</p>
+                </div>
+
+				 <a href="" class="lernmore">Learn More</a>
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+		<h4 class="greefntext ">For Growth </h4>
+        <div class="jobstock-grid-blog">
+            <div class="jobstock-grid-blog-thumb">
+                <img src="/static/app/img/brand/solutions_img_aio_growth.webp" class="img-fluid" alt="">
+            </div>
+            <div class="jobstock-grid-blog-body">
+                <div class="jobstock-grid-body-header">
+                    <div class="jobstock-grid-title"><h3>Gem All-in-One</h3></div>
+					<p>101-1000 EMPLOYEES</p>
+                </div>
+                <div class="jobstock-grid-body-middle mb-2">
+                    <p>Consolidate tools and reduce tech spend with an all-in-one recruiting platform, built for scale.</p>
+                </div>
+				 <a href="" class="lernmore">Learn More</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+		<h4 class="bluentext">For Enterprise</h4>
+        <div class="jobstock-grid-blog">
+            <div class="jobstock-grid-blog-thumb">
+                <img src="/static/app/img/brand/solutions_img_enterprise.webp" class="img-fluid" alt="">
+            </div>
+            <div class="jobstock-grid-blog-body">
+                <div class="jobstock-grid-body-header">
+                    <div class="jobstock-grid-title"><h3>Enhance Your Existing ATS</h3></div>
+					<p>1000+ EMPLOYEES</p>
+                </div>
+                <div class="jobstock-grid-body-middle mb-2">
+                    <p>Hire faster with AI-powered CRM, sourcing, scheduling, analytics, and more — all integrated with your ATS.</p>
+                </div>
+				 <a href="" class="lernmore">Learn More</a>
+            </div>
+        </div>
+    </div>
+
 			
 		</div>
 		
+	</div>		
+</section>
+
+<section class="mt-5">
+	<div class="container-fluid">
+		<div class="row justify-content-start">
+			<div class="col-xl-6 col-lg-7 col-md-10 text-left">
+				<div class="sec-heading ">
+					<h1> <span class="achievebg">Achieve </span>results with tech your team will love</h1>
+					<p>Gem is designed for simplicity. Recruiters spend less time figuring things out and more time making hires, faster.</p>
+					<a href="" class="lernmore">Learn More</a>
+				</div>
+			</div>
+		</div>
+
+	
+<div class="py-5 stats-section">
+    <div class="row text-left g-4">
+
+      <!-- Stat 1 -->
+      <div class="col-6 col-lg-3">
+        <h2 class="stat-number text-success">5x</h2>
+        <p class="stat-text">
+          recruiter productivity with<br>
+          AI and automation
+        </p>
+      </div>
+
+      <!-- Stat 2 -->
+      <div class="col-6 col-lg-3">
+        <h2 class="stat-number text-warning">50%</h2>
+        <p class="stat-text">
+          cost savings on tech,<br>
+          external sourcing, and ads
+        </p>
+      </div>
+
+      <!-- Stat 3 -->
+      <div class="col-6 col-lg-3">
+        <h2 class="stat-number text-danger">10 <span>day</span></h2>
+        <p class="stat-text">
+          reduction in average<br>
+          time-to-hire
+        </p>
+      </div>
+
+      <!-- Stat 4 -->
+      <div class="col-6 col-lg-3">
+        <h2 class="stat-number text-primary">4.8<span>/5</span></h2>
+        <p class="stat-text">
+          average G2 user rating<br>
+          (industry best)
+        </p>
+      </div>
+
+    </div>
+</div>
+
 	</div>	
 </section>
 <!-- Explore Categories End -->
 
+
+<section class="news-section">
+  <h2 class="section-title">Recent News</h2>
+
+  <div class="news-grid">
+
+    <!-- Card 1 -->
+    <div class="news-card light-card">
+      <div class="icon">🏆</div>
+      <h3>Accolades</h3>
+      <p>Gem celebrates multiple industry awards in 2024</p>
+      <a href="#" class="link">Read More →</a>
+      <div class="bg-white py-6 px-4 mt-2">
+        <h3>Demo Day: Discover how Gem works</h3>
+      <p class="tag">On-Demand</p>
+      <a href="#" class="link">Register now ▶</a>
+      </div>
+    </div>
+
+    
+    <!-- Card 3 -->
+    <div class="news-card image-card">
+     <img src="/static/app/img/brand/Webinardemoday.webp" class="img-fluid" alt="demo">
+      <h3>Demo Day: Gem's AI-first all-in-one recruiting platform</h3>
+      <a href="#" class="link">Read More →</a>
+    </div>
+
+    <!-- Card 4 (Highlighted) -->
+    <div class="news-card highlight-card">
+      <span class="badge">New</span>
+       <img src="/static/app/img/brand/commingsoon.svg" class="img-fluid" alt="Fraud Detection">
+      <h3>
+        Introducing Gem's Fraud Detection Agent: Stop fraud before it wastes your team's time
+      </h3>
+      <a href="#" class="link">Read More →</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!---*******faq-wrapper*******--->
+
+<section class="faq-bgfull ">
+  <div class="faq-wrapper">
+
+ 
+  <h2 class="text-center fw-bold mb-5">Frequently asked questions</h2>
+
+  <div class="accordion" id="faqAccordion">
+
+    <!-- Item 1 -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button" data-bs-toggle="collapse"
+                data-bs-target="#faq1">
+          What is Gem?
+        </button>
+      </h2>
+      <div id="faq1" class="accordion-collapse collapse show"
+           data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Gem is the only AI-first all-in-one recruiting platform.
+          It brings together your ATS, CRM, sourcing, scheduling,
+          and analytics — plus 800+ million profiles to source from —
+          with AI built into every workflow.
+        </div>
+      </div>
+    </div>
+
+    <!-- Item 2 -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed"
+                data-bs-toggle="collapse"
+                data-bs-target="#faq2">
+          Does Gem have an ATS?
+        </button>
+      </h2>
+      <div id="faq2" class="accordion-collapse collapse"
+           data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Yes, Gem includes a fully integrated ATS designed for modern
+          recruiting teams.
+        </div>
+      </div>
+    </div>
+
+    <!-- Item 3 -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed"
+                data-bs-toggle="collapse"
+                data-bs-target="#faq3">
+          Do I need Gem ATS in order to use Gem?
+        </button>
+      </h2>
+      <div id="faq3" class="accordion-collapse collapse"
+           data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          No, Gem can integrate with your existing ATS if needed.
+        </div>
+      </div>
+    </div>
+
+    <!-- Item 4 -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed"
+                data-bs-toggle="collapse"
+                data-bs-target="#faq4">
+          Can Gem replace my existing ATS?
+        </button>
+      </h2>
+      <div id="faq4" class="accordion-collapse collapse"
+           data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Yes, many teams choose Gem as a full ATS replacement.
+        </div>
+      </div>
+    </div>
+ 
+    <!-- Item 5 -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed"
+                data-bs-toggle="collapse"
+                data-bs-target="#faq5">
+          What makes Gem different from other applicant tracking systems (ATS)?
+        </button>
+      </h2>
+      <div id="faq5" class="accordion-collapse collapse"
+           data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Gem is AI-first with automation built into every recruiting workflow.
+        </div>
+      </div>
+    </div>
+
+    <!-- Item 6 -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed"
+                data-bs-toggle="collapse"
+                data-bs-target="#faq6">
+          What makes Gem different from other AI recruiting products?
+        </button>
+      </h2>
+      <div id="faq6" class="accordion-collapse collapse"
+           data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Gem combines sourcing, CRM, ATS, analytics, and AI agents in one platform.
+        </div>
+      </div>
+    </div>
+
+    <!-- Item 7 -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed"
+                data-bs-toggle="collapse"
+                data-bs-target="#faq7">
+          Is Gem an all-in-one recruiting platform?
+        </button>
+      </h2>
+      <div id="faq7" class="accordion-collapse collapse"
+           data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Yes, Gem is designed as a complete recruiting ecosystem.
+        </div>
+      </div>
+    </div>
+
+    <!-- Item 8 -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed"
+                data-bs-toggle="collapse"
+                data-bs-target="#faq8">
+          How much does Gem cost?
+        </button>
+      </h2>
+      <div id="faq8" class="accordion-collapse collapse"
+           data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Pricing varies based on company size and needs.
+        </div>
+      </div>
+    </div>
+
+    <!-- Item 9 -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed"
+                data-bs-toggle="collapse"
+                data-bs-target="#faq9">
+          Is Gem just a sourcing tool?
+        </button>
+      </h2>
+      <div id="faq9" class="accordion-collapse collapse"
+           data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          No, Gem covers the entire recruiting lifecycle.
+        </div>
+      </div>
+    </div>
+
+    <!-- Item 10 -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed"
+                data-bs-toggle="collapse"
+                data-bs-target="#faq10">
+          Does Gem have AI recruiting agents?
+        </button>
+      </h2>
+      <div id="faq10" class="accordion-collapse collapse"
+           data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Yes, Gem includes AI agents that automate sourcing and hiring tasks.
+        </div>
+      </div>
+    </div>
+
+  </div>
+   </div>
+</section>
 <!-- Valuable Step Start -->
-<section class="bg-second">
-	<div class="container">
-		
-		<div class="row justify-content-center">
-			<div class="col-xl-6 col-lg-7 col-md-10 text-center">
-				<div class="sec-heading center light">
-					<h2>Choose What You Need</h2>
-					<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores</p>
-				</div>
-			</div>
-		</div>
-		
-		<div class="row align-items-center gx-4 gy-4">
-		
-			<!-- Components/Home/home-2/need.html -->
-            {% include 'Components/Home/home-2/need.html' %}
-			
-		</div>
-		
-	</div>
-</section>
-<!-- Valuable Step End -->
 
-<!-- Featured Jobs Start -->
-<section>
-	<div class="container">
-		
-		<div class="row justify-content-center">
-			<div class="col-xl-6 col-lg-7 col-md-10 text-center">
-				<div class="sec-heading center">
-					<h2>Featured Jobs</h2>
-					<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores</p>
-				</div>
-			</div>
-		</div>
-		
-		<div class="row justify-content-center gx-xl-3 gx-3 gy-4">
-		
-			<!-- Components/Home/index/jobs.html -->
-            {% include 'Components/Home/index/jobs.html' %}				
-				
-		</div>
-		
-	</div>
-</section>
-<!-- Featured Jobs End -->
-
-<!-- Explore Top Companies Start -->
-<section class="gray-simple">
-	<div class="container">
-	
-		<div class="row justify-content-center">
-			<div class="col-xl-6 col-lg-7 col-md-10 text-center">
-				<div class="sec-heading center">
-					<h2>Explore Top Companies</h2>
-					<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores</p>
-				</div>
-			</div>
-		</div>
-	
-		<div class="row justify-content-center gx-xl-3 gx-3 gy-4">
-		
-			<!-- Components/Home/home-4/employer.html -->
-            {% include 'Components/Home/home-4/employer.html' %}						
-			
-		</div>
-		
-	</div>		
-</section>
-<!-- Explore Top Companies End -->
-
-<!-- Hire Experts Start -->
-<section>
-	<div class="container">
-	
-		<div class="row justify-content-center">
-			<div class="col-xl-6 col-lg-7 col-md-10 text-center">
-				<div class="sec-heading center">
-					<h2>Hire Talents & Experts</h2>
-					<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores</p>
-				</div>
-			</div>
-		</div>
-	
-		<div class="row justify-content-center gx-4 gy-4">
-		
-			<!-- Components/Home/home-5/candidate2.html -->
-            {% include 'Components/Home/home-5/candidate2.html' %}
-
-		</div>
-		
-	</div>		
-</section>
-<!-- Hire Experts End -->
-
-<!-- Side Caption Start -->
-<div class="position-relative">
-	<div class="container">
-		
-		<!-- Components/Home/home-5/platform.html -->
-        {% include 'Components/Home/home-5/platform.html' %}
-
-	</div>
-</div>
-<!-- Side Caption End -->
-
-<!-- Good Reviews By Customers -->
-<section>
-	<div class="container">
-	
-		<div class="row justify-content-center">
-			<div class="col-lg-7 col-md-10 text-center">
-				<div class="sec-heading center">
-					<h2>Good Reviews By Customers</h2>
-					<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores</p>
-				</div>
-			</div>
-		</div>
-		
-		<div class="row justify-content-center gx-4 gy-4">
-			
-			<!-- Components/Home/index/reviews.html -->
-			{% include 'Components/Home/index/reviews.html' %}
-			
-		</div>
-		
-	</div>	
-</section>
 <!-- Good Reviews By Customers -->
 
 <!-- Components/Home/home-5/find3.html -->
-{% include 'Components/Home/home-5/find3.html' %}
+<!-- {% include 'Components/Home/home-5/find3.html' %} -->
 
 <!-- Components/Home/index/log.html -->
-{% include 'Components/Home/index/log.html' %}
+<!-- {% include 'Components/Home/index/log.html' %} -->
 		
 <!-- Components/Home/home-3/filter.html -->
-{% include 'Components/Home/home-3/filter.html' %}			
+<!-- {% include 'Components/Home/home-3/filter.html' %}			 -->
 
 {% include 'Base/footer_reusable.html' %} 
 

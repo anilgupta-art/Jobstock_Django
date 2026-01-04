@@ -48,23 +48,6 @@
 </div>
 
 <style>
-/* Active parent menu */
-/* Submenu link base */
-.dashboard-inner .submenu li > a {
-    display: block;
-    padding: 10px 16px;
-    border-radius: 6px;
-    color: #065f46;
-    text-decoration: none;
-}
-
-
-.dashboard-inner .submenu li a.active  {
-    background-color: #bbf7d0;   /* green bg */
-    color: #065f46;
-    font-weight: 600;
-    border-left: 4px solid #059669;
-}
 
 
 /* 
@@ -100,9 +83,10 @@ li.active > .dropdown-toggle::after {
     border-radius: 10px;
 }
 */
-.dash-user-blocks{background: #ecedf0;padding-bottom: 5px;}
+
+
+/*.dash-user-blocks{background: #ecedf0;padding-bottom: 5px;}
 .dsidebar .dashboard-inner ul li a{
-    /* background: linear-gradient(90deg, rgb(177 11 11 / 10%), rgb(255 54 99 / 9%) 50%, #f9b9b9) !important; */
     background: linear-gradient(90deg, rgb(55 171 224 / 15%), rgb(103 176 224 / 40%) 50%, #4e95d9) !important;
     border-left: 3px solid transparent;
     color: #000 !important;
@@ -119,29 +103,101 @@ li.active > .dropdown-toggle::after {
 .badge-danger { background-color: #dc3545; color: #fff; }
 .badge-success { background-color: #28a745; color: #fff; }
 .badge-warning { background-color: #ffc107; color: #000; }
-.badge-info { background-color: #17a2b8; color: #fff; } 
+.badge-info { background-color: #17a2b8; color: #fff; } */
+/* Submenu hidden by default */
+/* Hide submenu by default */
+.dashboard-inner ul ul {
+    display: none;
+    padding-left: 18px;
+}
+
+/* Show submenu when parent li is active */
+.dashboard-inner li.active > ul {
+    display: block;
+}
+
+/* Parent active color */
+.dashboard-inner > ul > li.active > a {
+    background: #0d6efd;
+    color: #fff;
+}
+
+/* Submenu active color */
+.dashboard-inner ul ul li.active > a {
+    background: #198754;
+    color: #fff;
+    font-weight: 600;
+}
+
+
 </style>
 <script>
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener("DOMContentLoaded", function () {
 
-    document.querySelectorAll('.submenu li > a').forEach(link => {
-        link.addEventListener('click', function () {
+    const sidebar = document.querySelector(".dashboard-inner");
 
-            /* Remove active from all submenu items */
-            document.querySelectorAll('.submenu li')
-                .forEach(li => li.classList.remove('active'));
+    sidebar.addEventListener("click", function (e) {
 
-            /* Add active to clicked item */
-            this.closest('li').classList.add('active');
+        /* ===== Parent Toggle ===== */
+        const toggle = e.target.closest(".dropdown-toggle");
+        if (toggle) {
+            e.preventDefault();
 
-            /* Keep parent open */
-            const parent = this.closest('.submenu').closest('li');
-            if (parent) parent.classList.add('active');
-        });
+            const parentLi = toggle.closest("li");
+
+            // Close other open menus
+            sidebar.querySelectorAll("> ul > li").forEach(li => {
+                if (li !== parentLi) li.classList.remove("active");
+            });
+
+            // Toggle current menu
+            parentLi.classList.toggle("active");
+            return;
+        }
+
+        /* ===== Submenu Click ===== */
+        const submenuLink = e.target.closest(".submenu a");
+        if (submenuLink) {
+
+            // Remove active from all submenu items
+            sidebar.querySelectorAll(".submenu li").forEach(li => {
+                li.classList.remove("active");
+            });
+
+            // Activate clicked submenu
+            const submenuLi = submenuLink.closest("li");
+            submenuLi.classList.add("active");
+
+            // Keep parent active/open
+            const parentLi = submenuLi.closest(".submenu").closest("li");
+            parentLi.classList.add("active");
+        }
+
     });
 
 });
 </script>
+
+
+<!-- <script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    document.querySelectorAll(".dropdown-toggle").forEach(toggle => {
+        toggle.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            const currentLi = this.closest("li");
+
+            document.querySelectorAll(".dashboard-inner > ul > li").forEach(li => {
+                if (li !== currentLi) li.classList.remove("active");
+            });
+
+            currentLi.classList.toggle("active");
+        });
+    });
+
+});
+</script> -->
 
 
 
