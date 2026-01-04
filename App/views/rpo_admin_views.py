@@ -188,16 +188,11 @@ def rpo_resume_list(request):
     resumes = resumes_qs[offset:offset+limit]
 
     # For filter dropdowns
-    # Get distinct company names from Job table (used by resumes)
+    # Get distinct job titles from Job table (used by resumes)
     from App.models import Job
     companies = Job.objects.filter(
         id__in=ResumeProcessing.objects.exclude(job__isnull=True).values_list('job_id', flat=True)
-    ).values_list('company_logo', flat=True).distinct()
-    # If company name is a field, use it instead of company_logo
-    if not companies.exists():
-        companies = Job.objects.filter(
-            id__in=ResumeProcessing.objects.exclude(job__isnull=True).values_list('job_id', flat=True)
-        ).values_list('company_name', flat=True).distinct()
+    ).values_list('title', flat=True).distinct()
 
     # Get distinct job titles from resumes
     jobtitles = ResumeProcessing.objects.values_list('job__title', flat=True).distinct().exclude(job__title__isnull=True).exclude(job__title='')
