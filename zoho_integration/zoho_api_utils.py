@@ -152,7 +152,7 @@ def download_attachment_file(access_token, candidate_id, attachment_id, save_fol
         from drf_view_utils import build_absolute_api_url
         api_url = build_absolute_api_url("/zoho/api/rpo/resume-upload/")
         upload_result = upload_resume_to_rpo_api(
-            filepath, 1, "zoho", "rpo_admin", "H@ppy123", api_url
+            filepath, 1, "403", "rpo_admin", "H@ppy123", api_url
         )
         # Optionally, you can log or handle upload_result here
         return filepath
@@ -249,7 +249,7 @@ def upload_resume_to_rpo_api(filepath, user_id, source, username, password, api_
     headers = get_basic_auth_headers(username, password)
     if 'Content-Type' in headers:
         headers.pop('Content-Type')
-    data = {'user_id': user_id, 'source': source}
+    data = {'user_id': user_id, 'source': source,'jobid':114,'resume_sources':403}
     # Ensure file exists and is not empty
     if not os.path.isfile(filepath) or os.path.getsize(filepath) == 0:
         return {'error': 'Resume file does not exist or is empty.'}

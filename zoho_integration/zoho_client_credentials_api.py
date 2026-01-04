@@ -355,7 +355,7 @@ class ZohoBulkResumeDownloadAPIView(APIView):
         else:
             SettingService.update_setting(setting_key='ZohoCreditional', data=tokens, ResponseBody=ResponseBody)
 
-        joblist=get_zoho_job_list(access_token)
+       # joblist=get_zoho_job_list(access_token)
         # Step 2: Get candidate list
         candidates = get_zoho_candidates(access_token)
         if not candidates:
