@@ -146,5 +146,160 @@ please create a button Resume Upload on page (http://127.0.0.1:8000/job-detail/p
 based on jobid company name must be show like jobtitle(companyName) and also create field in table resume_process (jobid,resumesource) whenever we upload the resume this field must be save in resume_process table
 
 I upload a resume but not show filed in datbase (jobid,resumesource) please correct the code
+
+o 'rpo_admin' for menu
+[ERROR] 2026-01-04 20:12:52 navigation_service Error getting navigation stats: cannot import name 'JobApplication' from 'App.models' (C:\RandR\Jobstock_Django_v1.0.0\Jobstock_Django\App\models.py)
+[INFO] 2026-01-04 20:12:52 log "GET /rpo-resume-list/ HTTP/1.1" 200 4024
+
+
+please replace page "C:\RandR\Jobstock_Django_v1.0.0\Jobstock_Django\templates\pages\Reusable\resume_list_page.html" as page C:\RandR\Jobstock_Django_v1.0.0\Jobstock_Django\templates\pages\RPO-Admin\posted_jobs.html   so  UI looks and feel only layout not content match of C:\RandR\Jobstock_Django_v1.0.0\Jobstock_Django\templates\pages\RPO-Admin\posted_jobs.html
+
+please use the tag and prefix of router "router = DefaultRouter()"
+
+In setting djanho module for CRUD operation create new file for dropdown_model, dropdown_schema , dropdown_repository ,dropdown_services , dropdown_router
+ please write to rest api with swagger clear archetiture use the generic,reusable and small function
+like model, schema , repository ,services , router please add which is perfect of our system all code must be written in last and sure exiting code working
+we not require filter all function load in memory so we not require database hit in every time
+  resume_source_group = DropdownGroup.objects.get(text='ResumeSource', is_active=True)
+        resume_sources = DropdownMaster.objects.filter(group=resume_source_group, is_active=True).order_by('sort_order', 'text')
+		
+In setting module
+ please write to rest api with swagger clear archetiture use the generic,reusable and small function
+like model, schema , repository ,services , router please add which is perfect of our system all code must be written in last and sure exiting code working
+we not require filter all function load in memory so we not require database hit in every time
+  resume_source_group = DropdownGroup.objects.get(text='ResumeSource', is_active=True)
+        resume_sources = DropdownMaster.objects.filter(group=resume_source_group, is_active=True).order_by('sort_order', 'text')
+		
+in Admin_req module please convert to rest api with swagger clear archetiture use the generic,reusable and small function
+like model, schema , repository ,services , router please add which is perfect of our system all code must be written in last and sure exiting code working
+we not require filter all function load in memory so we not require database hit in every time
+  resume_source_group = DropdownGroup.objects.get(text='ResumeSource', is_active=True)
+        resume_sources = DropdownMaster.objects.filter(group=resume_source_group, is_active=True).order_by('sort_order', 'text')
+
+
+ please convert to rest api with swagger clear archetiture use the generic,reusable and small function
+like model, schema , repository ,services , router please add which is perfect of our system all code must be written in last and sure exiting code working
+
+rpo_resume_list
+
+
+						
+						please create a django rest api with swagger implement  that  AI ML read a email, reply the email, schedule a meeting how can do it in python and all hardcode value store in .env file  and also maintain the database     clear archetiture 
+like model, schema , repository ,services , router please add which is perfect of our system 
+
+please create a reusable function ZohoBulkResumeDownloadAPIView(APIView) and use here
+
+ please convert to rest api with swagger clear archetiture 
+like model, schema , repository ,services , router please add which is perfect of our system 
+
+rpo_resume_list
+
+
+please implement the real AI/ML integration  for read mail, reply mail, and schedule meeting basic of reply
+
+		
+
+		
+
+
+In setting djanho module create new file for dropdown_model, dropdown_schema , dropdown_repository ,dropdown_services , dropdown_router
+ please write to rest api with swagger clear archetiture use the generic,reusable and small function
+like model, schema , repository ,services , router please add which is perfect of our system all code must be written in last and sure exiting code working
+we not require filter all function load in memory so we not require database hit in every time
+  resume_source_group = DropdownGroup.objects.get(text='ResumeSource', is_active=True)
+        resume_sources = DropdownMaster.objects.filter(group=resume_source_group, is_active=True).order_by('sort_order', 'text')
+
+		
+
+
                                     
-                                
+i am creating a sofware project so I want calculate the resouce ,cost ,time requirement in excel sheet below are the details 
+Agents & Workflow
+Phase 1: Job Posting & Candidate Sourcing
+Client Action:
+Client posts a job description (JD).
+
+Agent 1: Sourcing & Matching Agent
+
+Parse & Optimize Job Description – Reformats JD to be portal-friendly.
+
+Multi-Channel Candidate Sourcing:
+
+150 portals (Dice, LinkedIn, Indeed) – automated resume fetching.
+
+100 candidates from job post responses.
+
+250 candidates from internal Zoho Recruit ATS database.
+
+Total Pool: ~600 candidates.
+
+Match & Rank – AI matches resumes to JD using semantic analysis, keyword matching, and skill mapping.
+
+Output: Top 200 candidates with >70% match score linked to the job requisition.
+
+Phase 2: Outreach & Screening
+Agent 2: Outreach & Engagement Agent
+
+Engage All 200 Matched Candidates via:
+
+Automated personalized emails.
+
+Send pre-written screening questions or test papers.
+
+AI-driven availability checks for interviews.
+
+Filtering: Candidates respond and are evaluated.
+
+Output: 50 candidates qualify for the next round.
+
+Phase 3: AI Interview
+Agent 3: Virtual Recruiter Agent
+
+Conduct AI-Driven Interviews:
+
+Audio/Video interface with candidates.
+
+Asks role-specific and behavioral questions.
+
+Analyzes verbal responses, tone, and content.
+
+Recording & Transcribing – Saves interview data for evaluation.
+
+Output: Interview recordings, transcripts, and initial performance scores.
+
+Phase 4: Evaluation & Reporting
+Agent 4: AI Manager Agent
+
+Rank Candidates based on:
+
+Resume match score.
+
+Screening test results.
+
+Interview performance (communication, relevance, confidence).
+
+Select Top 10 Candidates – Best overall fit for the role.
+
+Generate Client Dashboard:
+
+Candidate summaries.
+
+Scores across stages.
+
+Interview highlights/clips.
+
+Recommendation notes.
+
+Deliver Final Report to client for decision-making.
+
+Technology & Integration Highlights
+ATS Integration: Zoho Recruit for resume database and tracking.
+
+AI/ML Models: For resume parsing, ranking, and interview analysis.
+
+Automated Outreach: Email/LinkedIn integration for communication.
+
+Interview Platform: Video/Audio bot with NLP for conversational interviews.
+
+Dashboard: Real-time analytics for clients.
+
