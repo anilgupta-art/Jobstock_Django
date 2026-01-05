@@ -303,3 +303,21 @@ Interview Platform: Video/Audio bot with NLP for conversational interviews.
 
 Dashboard: Real-time analytics for clients.
 
+please write the hard code value in .env file and use it " url = (
+"mssql+pyodbc://sa:root%40123@192.168.150.135/aicrm2"
+"?driver=ODBC+Driver+18+for+SQL+Server"
+"&TrustServerCertificate=yes"
+)"
+
+git pull --no-rebase origin DAT-Linuxsetup
+docker logs 696863eba5d0
+docker run --env-file .env -d -p 8000:8000 aicrm_backhand
+docker run --env-file .env -d -p 8000:8000 aicrm_backhand
+docker build -t ai-crm-frontend:latest .
+In routers\customer_import_notification_db.py please write the progress web socket code please use the reference routers\user_push_notification_db.py please do the perfect which you perfect
+ docker build -t ai-crm-frontend:latest .
+docker images
+docker run -d --name ai-crm-frontend:latest -p 80:80
+docker run -d -p 80:80 --name ai-crm ai-crm-frontend:latet
+
+ git switch  origin/sr-uisetup
