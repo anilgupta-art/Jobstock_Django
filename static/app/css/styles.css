@@ -7674,15 +7674,9 @@ ul.shorting-list li a:hover, ul.shorting-list li a:focus, ul.shorting-list li a.
     flex-direction: column;
     text-align: center;
     width: 100%;
+    margin-bottom: 15px;
 }
-.call-action-wrap {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
-    width: 100%;
-}
+
 .call-action-form{
 	display:flex;
 	align-items: center;
