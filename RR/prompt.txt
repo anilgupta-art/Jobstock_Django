@@ -1,3 +1,6 @@
+1000.0R0T2UNJXKD6J42W9OSD889O460MJU/b995cc5ccc2a1e433dd3af9931f42f95d772c6c0e6
+1000.e110bb08c03b443f79218b1b71984025.6636ff384cc2de4acce0541c6126ccc9
+
 I am backhand and AI developer ,And my team member fronthand developer , I want my fronthand also run this project and work on html,css,js images,static, etc but not see the backhand code, so we reqire docker that access 
 html,css,js images,static, etc i mean fronthand code outside of docker if change that show in docker hosted , put not see python code or what is perfect way to do it, we have different location , only he run the batch file application host in docker
 please see the page all jobs come from database if click on edit employer-submit-job.html function show the job details, and there is delete asking are you sure if yes then delete, please write on MVT a pattern also include the service layer
@@ -26,6 +29,9 @@ please create the dynamic hierarchary multilevel menu bar based on user login i 
  in url (http://127.0.0.1:8000/candidate-profile/candidate1/) after resume upload there many process like extract data, store in database . we require same process here url(http://127.0.0.1:8000/rpo-resume-upload/) but here is multiple resume upload so one one wise here require 
  please`reuse the function all lo services so rest API and django template easily use , please chose the perfect method 
  always write the generic method
+ 
+ 
+ write a post api for change passwoed accespt the schema userID,CurrentPassword,NewPassword, please use the model,schema,repoistory,service,router
  
  
  
@@ -99,6 +105,113 @@ schema   \sql_app\sqlalchemy_schemas\
 repoistory  \sql_app\repositories\
 service \services\
 router \routers\
+
+
+please design the table as parent child  also add the base may be auditBase class so all functionality like is_deleted, is_active, etc show
+
+CREATE TABLE [dbo].[setting](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[setting_Group] [varchar](255) NOT NULL,
+	[setting_test] [varchar](255) NOT NULL,
+	[setting_value] [varchar](255) NOT NULL,
+)
+please create or update the model  , schema,repoistory service router validation of below table do the perfect which you want
+also update the main  
+Like user_push_notification_db functionality we require same functionality for database table "Customer"  so please write generic reusable code customer import create the config json etc file save , but all logic in services, and fellows or use existing code sqlmodel, schema router,services,etc  please do the best and perfect
+
+
+In this page "http://127.0.0.1:8000/resume-matching/match-details/9426/"  Candidate Information like(Phone,Email,location etc not show ) also add resume download button
+plese do the best UI and backhand
+
+I am working in cpu so what is requirement (hardware + sofware (apache,or MIT licences)
+you can do Wrute  Django multiple module (for small task then communicate of each other) for onlinyou calle video calling human and  system  or  (human to human )AI and ML ask some listed or auto generate question ask to human after calling finish. video recording file save in system
+please add for perfect for our system
+
+
+
+In this api @router.put("/{user_id}")
+async def update_user( user upload a image that is save with (userId.png) on /data/user/image also add a column in database image that store the path of image 
+
+
+
+In url http://127.0.0.1:8000/rpo-resume-list/ in any navigation menu item like (All Resumes,Process Resume,etc) it must be selected and highlight and not hide it would be show
+
+In this page "http://127.0.0.1:8000/resume-matching/" I want all dropdown multiselect and also filter capable please chane code for multi select in py please must be look and feel perfect add which system require
+I think provided dropdown is getting more space i want less space so ui interaction is not correct please do it for better ui
+
+it showing good but when we select more then one it height is increase we we require more UI perfect
+also add a dropdown icon when we click also dropdown option , you can also add a checkbox of dropdown iems
+
+currently remove item not remove when we also want search option inside the dropdown please add user interfacr best
+
+we want fixed width of each dropdown and remove icon and dropdown icon ui perfect when we dropdown   
+
+any thing reqire please add more but perfect
+please create a button Resume Upload on page (http://127.0.0.1:8000/job-detail/product-manager-100/?jobid=9) when click on button redirect to http://127.0.0.1:8000/rpo-resume-upload/jobID=9  Show the Job title based on jobid also create a multi select dropdown of resource source please fell and look very good 
+
+based on jobid company name must be show like jobtitle(companyName) and also create field in table resume_process (jobid,resumesource) whenever we upload the resume this field must be save in resume_process table
+
+I upload a resume but not show filed in datbase (jobid,resumesource) please correct the code
+
+on page URL "http://127.0.0.1:8000/rpo-resume-upload/?jobid=115"
+In Navigation Bar please change the order posted job,resume upload, All Resoume, Resume match and I also require Job then Company name 
+
+We not hard code change for this we want database table change for "The navigation bar now displays the order: Posted Jobs, Resume Upload, All Resume, Resume Match."
+
+Here you can also add in this url (http://127.0.0.1:8000/rpo-resume-list/) multiselect company name, job title, resume source, status with fiter option using ajex
+
+please do for perfect please add more perfection
+please insert the data  in database dropdown group status and  dropdownmaster Pending,Processing,Completed,Failed 
+
+please remove correct code please add more if require 
+please create a page with reusable component of resume list with filter,sorting, pagination with jquery ajex support UI must be perfect 
+also use the component 
+{% extends "Base/base.html" %}
+{% load static %}
+or more component
+
+Thanks Now page is showing
+pleaes correct the UI of page all thing of page like "http://localhost:8000/rpo-dashboard/" also add column in table company Name, Job title, Resume Source,Resume status,
+also include the multilevel filter of company Name, Job title, Resume Source,Resume status UI must be perfect 
+
+
+
+i am working with fast api i want this is host on excutable service that run on docker so no body access this code using PyInstaller 
+and I also want folder /data and /config  and file .env shareable
+
+
+without docker can be django or fast api project create the exe that will run as api if yes how to do it 
+
+please write a seperate Django module with MVT pattern and rest api  that support  zoho authencation and candiate details and  candidate resume download using clientId (abc) and clienct secrect (abcd) please keep variable in a Json file and that use it
+
+
+
+
+please write a rest API that get the authtoke, then candiatelist, then each candidate attachment , the download the resume in /data/resume/folder using the api  # path('api/zoho/client-credentials-token/', ZohoClientCredentialsTokenAPIView.as_view(), name='zoho_client_credentials_token'),
+    path('api/zoho/get-access-token/', ZohoAuthCodeTokenAPIView.as_view(), name='zoho_get_access_token'),
+    path('api/zoho/get-access-token-param/', ZohoAuthCodeTokenAPIView.as_view(), name='zoho_get_access_token_param'),
+    path('api/zoho/candidates/', ZohoCandidatesAPIView.as_view(), name='zoho_candidates'),
+    path('api/zoho/candidate-resume/', ZohoResumeDownloadAPIView.as_view(), name='zoho_candidate_resume'),
+    path('api/zoho/candidate-attachment/', ZohoCandidateAttachmentAPIView.as_view(), name='zoho_candidate_attachment'),
+     path('api/zoho/candidate-attachment-list/', ZohoCandidateAttachmentListAPIView.as_view(), name='zoho_candidate_attachment_list'),
+	 
+	 
+please create a django rest api with swagger implement  that setting, with CRUD operation that accepet request parameter and response parameter  and save in JSON format in table    clear archetiture 
+like model, schema , repository ,services , router
+
+
+
+please create all valid url in router
+
+
+getting error "detail":"Authentication credentials were not provided" on function response=rest_api_call('POST','http://127.0.0.1:8000/zoho/api/zoho/refresh-token/', data) please resolve the issue
+
+
+
+git login command
+
+
+please breakdown the function with generic and reusable code of function "ZohoBulkResumeDownloadAPIView"
 
 
 please design the table as parent child  also add the base may be auditBase class so all functionality like is_deleted, is_active, etc show
@@ -313,6 +426,10 @@ git pull --no-rebase origin DAT-Linuxsetup
 docker logs 696863eba5d0
 docker run --env-file .env -d -p 8000:8000 aicrm_backhand
 docker run --env-file .env -d -p 8000:8000 aicrm_backhand
+docker build -t aicrm_backhand .
+ docker run --env-file .env -d -p 8000:8000 aicrm_backhand
+ git clone https://rituranjang@bitbucket.org/audaxlabs/aicrm.git
+ docker run --env-file .env -d -p 8000:8000 aicrm_backhand
 docker build -t ai-crm-frontend:latest .
 In routers\customer_import_notification_db.py please write the progress web socket code please use the reference routers\user_push_notification_db.py please do the perfect which you perfect
  docker build -t ai-crm-frontend:latest .
@@ -321,3 +438,7 @@ docker run -d --name ai-crm-frontend:latest -p 80:80
 docker run -d -p 80:80 --name ai-crm ai-crm-frontend:latet
 
  git switch  origin/sr-uisetup
+ sudo  apt install python3.10-venv
+ sudo apt install python3-pip
+                                 
+                                

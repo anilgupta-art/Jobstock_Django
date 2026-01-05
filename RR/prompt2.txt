@@ -1,0 +1,329 @@
+I am backhand and AI developer ,And my team member fronthand developer , I want my fronthand also run this project and work on html,css,js images,static, etc but not see the backhand code, so we reqire docker that access 
+html,css,js images,static, etc i mean fronthand code outside of docker if change that show in docker hosted , put not see python code or what is perfect way to do it, we have different location , only he run the batch file application host in docker
+please see the page all jobs come from database if click on edit employer-submit-job.html function show the job details, and there is delete asking are you sure if yes then delete, please write on MVT a pattern also include the service layer
+
+
+In above html 
+1)these are group in first is Django Hiring Manager, 2 nd is Candidate, 3 is RPO Admin, so please white perfect database design 
+and use it function all value come from database and Django template use the rest api, we also require the common resuable response class so
+ other module use  call like { status code,Message,error,More error details ,data } etc please add if require more
+
+ please write all logic in services so rest API and django template easily use , please chose the perfect method 
+ 
+ please update which perfect for system
+  if user login with RPO_Admin group please provide Dashboard Navigation and create a new page for matching current dashboard  of User multiple resume upload (PDF,DOC,Docx,txt,etc ) all resume file save in Data/resume/currentdate/userName
+  please fellow djang MVT write all logic in services so rest API and django template easily use , please chose the perfect method 
+  please use same response class
+  
+  
+  
+please create the dynamic hierarchary multilevel menu bar based on user login i means autheration please deactive all execept Hire manager, RPO_Admin
+ please fellow djang MVT write all logic in services so rest API and django template easily use , please chose the perfect method 
+  please use same response class validation also require
+ templates\pages\candidate-resume.html
+ 
+ 
+ in url (http://127.0.0.1:8000/candidate-profile/candidate1/) after resume upload there many process like extract data, store in database . we require same process here url(http://127.0.0.1:8000/rpo-resume-upload/) but here is multiple resume upload so one one wise here require 
+ please`reuse the function all lo services so rest API and django template easily use , please chose the perfect method 
+ always write the generic method
+ 
+ 
+ 
+In URL "http://127.0.0.1:8000/rpo-resume-upload/" please update the navigation_item table  so we use only this "http://127.0.0.1:8000/rpo-dashboard/"
+please do the perfect which is best
+
+
+
+please add a menu navigation Posted Job   in RPO_Admin Group Analysis may be database table (app_job) the page (http://127.0.0.1:8000/job-detail/jr-php-developer/" ) here we show all posted job in table format( include the pagination,sorting searching,etc) validation also require
+like posted company posted date , expire date title etc create a hyperlink if click the redirect to associated url  like title is jr-php-developer the redirect page  details descrption ,
+please fellow djang MVT write all logic in services so rest API and django template easily use , please chose the perfect method 
+  please use same response class
+  please write the all generic and reusable method other componet so use
+  
+  
+  
+  I have posted job very details in table app_job field  and resume process data in table resume_process there are field (resume_test,resume_json,extracted_skils,years of experiences,sentimatic_score etc)
+  please find each resume is  best suitable candiate of  in percentage, plase create a table for this jobID, resume_id, percentage, sentimatic_score, why sucess, why fail, please add perfect solution please add more,
+  please use background process job generic and reusable and use djang MVT write all logic in services so rest API and django template easily use
+  
+  
+  please create the 100 files of  different resume include the (slils,city location,email phone no, Current CTC, Accepted CTC,Qualification hobbies exepericnes,education etc ) in format of pdf, txt,doc,docx and save in /data/
+  please insert the 100 Job post in table app_Job with different type requirement
+  
+  please insert a new row in navigation_item copy of ID=45 but title is Process Resume and URL_name =App:rpo_dashboard
+  
+  
+  Please correct the layout of table perfect layout , download the resume
+  
+  
+  insert the data in table Customer, with  First_name,Last_name Generate, and other field get from database table  SELECT *
+  FROM [aicrm2].[dbo].[Customer_back] 
+
+
+
+my database table name is "app_job" write the generic classes function and reusable and use djang MVT write all logic in services so rest API and django template easily .
+below web site job post and recive the resume  I want job post in below web sites and recive the resume from below web site
+JobElephant
+ZipRecruiter
+Indeed Employer
+LinkedIn Recruiter please do best for you
+
+
+
+In page http://127.0.0.1:8000/rpo-dashboard/ Process all pending button pass a parameter JobID from query string if Jobid is not None then only process JobID resume otherwise process all resume
+
+Add a button Find candidate (after Apply Job)  with same UI on ""http://127.0.0.1:8000/rpo-dashboard/""  other button(Apply Job,Save Job) hide  for Grroup (RPO_Admin) if click on it redirect to "http://127.0.0.1:8000/rpo-dashboard/" with parameter jobId from "http://127.0.0.1:8000/job-detail/product-manager-100/" i mean like output 
+"http://127.0.0.1:8000/rpo-dashboard/jobid=99" 
+
+
+please first backup then clean all database transaction entries for resume_upload, Process_resume ,resume job match also give the delete do the perfect which you want 
+
+
+
+please change on page http://127.0.0.1:8000/job-detail/product-manager-100/ whenever click on Find Candidate redirect to http://127.0.0.1:8000/resume-matching/?job=107
+http://127.0.0.1:8000/resume-matching/?job=107 associated with job ID
+
+
+please correct the count of (Total Matches,Excellent ,Good,Recommended etc) based on Job in parameter on page http://127.0.0.1:8000/resume-matching/?page=3&job=108
+
+In page (http://127.0.0.1:8000/resume-matching/?job=106) on candidate column show the candidate name,email,phone no below of each
+
+
+
+
+In this project  fellow the below file structure
+
+always use the path 
+model   \sql_app\sqlmodels\
+schema   \sql_app\sqlalchemy_schemas\
+repoistory  \sql_app\repositories\
+service \services\
+router \routers\
+
+
+please design the table as parent child  also add the base may be auditBase class so all functionality like is_deleted, is_active, etc show
+
+CREATE TABLE [dbo].[setting](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[setting_Group] [varchar](255) NOT NULL,
+	[setting_test] [varchar](255) NOT NULL,
+	[setting_value] [varchar](255) NOT NULL,
+)
+please create or update the model  , schema,repoistory service router validation of below table do the perfect which you want
+also update the main  
+Like user_push_notification_db functionality we require same functionality for database table "Customer"  so please write generic reusable code customer import create the config json etc file save , but all logic in services, and fellows or use existing code sqlmodel, schema router,services,etc  please do the best and perfect
+
+
+In this page "http://127.0.0.1:8000/resume-matching/match-details/9426/"  Candidate Information like(Phone,Email,location etc not show ) also add resume download button
+plese do the best UI and backhand
+
+I am working in cpu so what is requirement (hardware + sofware (apache,or MIT licences)
+you can do Wrute  Django multiple module (for small task then communicate of each other) for onlinyou calle video calling human and  system  or  (human to human )AI and ML ask some listed or auto generate question ask to human after calling finish. video recording file save in system
+please add for perfect for our system
+
+
+
+In this api @router.put("/{user_id}")
+async def update_user( user upload a image that is save with (userId.png) on /data/user/image also add a column in database image that store the path of image 
+
+
+
+In url http://127.0.0.1:8000/rpo-resume-list/ in any navigation menu item like (All Resumes,Process Resume,etc) it must be selected and highlight and not hide it would be show
+
+In this page "http://127.0.0.1:8000/resume-matching/" I want all dropdown multiselect and also filter capable please chane code for multi select in py please must be look and feel perfect add which system require
+I think provided dropdown is getting more space i want less space so ui interaction is not correct please do it for better ui
+
+it showing good but when we select more then one it height is increase we we require more UI perfect
+also add a dropdown icon when we click also dropdown option , you can also add a checkbox of dropdown iems
+
+currently remove item not remove when we also want search option inside the dropdown please add user interfacr best
+
+we want fixed width of each dropdown and remove icon and dropdown icon ui perfect when we dropdown   
+
+any thing reqire please add more but perfect
+please create a button Resume Upload on page (http://127.0.0.1:8000/job-detail/product-manager-100/?jobid=9) when click on button redirect to http://127.0.0.1:8000/rpo-resume-upload/jobID=9  Show the Job title based on jobid also create a multi select dropdown of resource source please fell and look very good 
+
+based on jobid company name must be show like jobtitle(companyName) and also create field in table resume_process (jobid,resumesource) whenever we upload the resume this field must be save in resume_process table
+
+I upload a resume but not show filed in datbase (jobid,resumesource) please correct the code
+
+o 'rpo_admin' for menu
+[ERROR] 2026-01-04 20:12:52 navigation_service Error getting navigation stats: cannot import name 'JobApplication' from 'App.models' (C:\RandR\Jobstock_Django_v1.0.0\Jobstock_Django\App\models.py)
+[INFO] 2026-01-04 20:12:52 log "GET /rpo-resume-list/ HTTP/1.1" 200 4024
+
+
+please replace page "C:\RandR\Jobstock_Django_v1.0.0\Jobstock_Django\templates\pages\Reusable\resume_list_page.html" as page C:\RandR\Jobstock_Django_v1.0.0\Jobstock_Django\templates\pages\RPO-Admin\posted_jobs.html   so  UI looks and feel only layout not content match of C:\RandR\Jobstock_Django_v1.0.0\Jobstock_Django\templates\pages\RPO-Admin\posted_jobs.html
+
+please use the tag and prefix of router "router = DefaultRouter()"
+
+In setting djanho module for CRUD operation create new file for dropdown_model, dropdown_schema , dropdown_repository ,dropdown_services , dropdown_router
+ please write to rest api with swagger clear archetiture use the generic,reusable and small function
+like model, schema , repository ,services , router please add which is perfect of our system all code must be written in last and sure exiting code working
+we not require filter all function load in memory so we not require database hit in every time
+  resume_source_group = DropdownGroup.objects.get(text='ResumeSource', is_active=True)
+        resume_sources = DropdownMaster.objects.filter(group=resume_source_group, is_active=True).order_by('sort_order', 'text')
+		
+In setting module
+ please write to rest api with swagger clear archetiture use the generic,reusable and small function
+like model, schema , repository ,services , router please add which is perfect of our system all code must be written in last and sure exiting code working
+we not require filter all function load in memory so we not require database hit in every time
+  resume_source_group = DropdownGroup.objects.get(text='ResumeSource', is_active=True)
+        resume_sources = DropdownMaster.objects.filter(group=resume_source_group, is_active=True).order_by('sort_order', 'text')
+		
+in Admin_req module please convert to rest api with swagger clear archetiture use the generic,reusable and small function
+like model, schema , repository ,services , router please add which is perfect of our system all code must be written in last and sure exiting code working
+we not require filter all function load in memory so we not require database hit in every time
+  resume_source_group = DropdownGroup.objects.get(text='ResumeSource', is_active=True)
+        resume_sources = DropdownMaster.objects.filter(group=resume_source_group, is_active=True).order_by('sort_order', 'text')
+
+
+ please convert to rest api with swagger clear archetiture use the generic,reusable and small function
+like model, schema , repository ,services , router please add which is perfect of our system all code must be written in last and sure exiting code working
+
+rpo_resume_list
+
+
+						
+						please create a django rest api with swagger implement  that  AI ML read a email, reply the email, schedule a meeting how can do it in python and all hardcode value store in .env file  and also maintain the database     clear archetiture 
+like model, schema , repository ,services , router please add which is perfect of our system 
+
+please create a reusable function ZohoBulkResumeDownloadAPIView(APIView) and use here
+
+ please convert to rest api with swagger clear archetiture 
+like model, schema , repository ,services , router please add which is perfect of our system 
+
+rpo_resume_list
+
+
+please implement the real AI/ML integration  for read mail, reply mail, and schedule meeting basic of reply
+
+		
+
+		
+
+
+In setting djanho module create new file for dropdown_model, dropdown_schema , dropdown_repository ,dropdown_services , dropdown_router
+ please write to rest api with swagger clear archetiture use the generic,reusable and small function
+like model, schema , repository ,services , router please add which is perfect of our system all code must be written in last and sure exiting code working
+we not require filter all function load in memory so we not require database hit in every time
+  resume_source_group = DropdownGroup.objects.get(text='ResumeSource', is_active=True)
+        resume_sources = DropdownMaster.objects.filter(group=resume_source_group, is_active=True).order_by('sort_order', 'text')
+
+		
+
+
+                                    
+i am creating a sofware project so I want calculate the resouce ,cost ,time requirement in excel sheet below are the details 
+Agents & Workflow
+Phase 1: Job Posting & Candidate Sourcing
+Client Action:
+Client posts a job description (JD).
+
+Agent 1: Sourcing & Matching Agent
+
+Parse & Optimize Job Description – Reformats JD to be portal-friendly.
+
+Multi-Channel Candidate Sourcing:
+
+150 portals (Dice, LinkedIn, Indeed) – automated resume fetching.
+
+100 candidates from job post responses.
+
+250 candidates from internal Zoho Recruit ATS database.
+
+Total Pool: ~600 candidates.
+
+Match & Rank – AI matches resumes to JD using semantic analysis, keyword matching, and skill mapping.
+
+Output: Top 200 candidates with >70% match score linked to the job requisition.
+
+Phase 2: Outreach & Screening
+Agent 2: Outreach & Engagement Agent
+
+Engage All 200 Matched Candidates via:
+
+Automated personalized emails.
+
+Send pre-written screening questions or test papers.
+
+AI-driven availability checks for interviews.
+
+Filtering: Candidates respond and are evaluated.
+
+Output: 50 candidates qualify for the next round.
+
+Phase 3: AI Interview
+Agent 3: Virtual Recruiter Agent
+
+Conduct AI-Driven Interviews:
+
+Audio/Video interface with candidates.
+
+Asks role-specific and behavioral questions.
+
+Analyzes verbal responses, tone, and content.
+
+Recording & Transcribing – Saves interview data for evaluation.
+
+Output: Interview recordings, transcripts, and initial performance scores.
+
+Phase 4: Evaluation & Reporting
+Agent 4: AI Manager Agent
+
+Rank Candidates based on:
+
+Resume match score.
+
+Screening test results.
+
+Interview performance (communication, relevance, confidence).
+
+Select Top 10 Candidates – Best overall fit for the role.
+
+Generate Client Dashboard:
+
+Candidate summaries.
+
+Scores across stages.
+
+Interview highlights/clips.
+
+Recommendation notes.
+
+Deliver Final Report to client for decision-making.
+
+Technology & Integration Highlights
+ATS Integration: Zoho Recruit for resume database and tracking.
+
+AI/ML Models: For resume parsing, ranking, and interview analysis.
+
+Automated Outreach: Email/LinkedIn integration for communication.
+
+Interview Platform: Video/Audio bot with NLP for conversational interviews.
+
+Dashboard: Real-time analytics for clients.
+
+please write the hard code value in .env file and use it " url = (
+"mssql+pyodbc://sa:root%40123@192.168.150.135/aicrm2"
+"?driver=ODBC+Driver+18+for+SQL+Server"
+"&TrustServerCertificate=yes"
+)"
+
+git pull --no-rebase origin DAT-Linuxsetup
+docker logs 696863eba5d0
+docker run --env-file .env -d -p 8000:8000 aicrm_backhand
+docker run --env-file .env -d -p 8000:8000 aicrm_backhand
+docker build -t aicrm_backhand .
+ docker run --env-file .env -d -p 8000:8000 aicrm_backhand
+ git clone https://rituranjang@bitbucket.org/audaxlabs/aicrm.git
+ docker run --env-file .env -d -p 8000:8000 aicrm_backhand
+docker build -t ai-crm-frontend:latest .
+In routers\customer_import_notification_db.py please write the progress web socket code please use the reference routers\user_push_notification_db.py please do the perfect which you perfect
+ docker build -t ai-crm-frontend:latest .
+docker images
+docker run -d --name ai-crm-frontend:latest -p 80:80
+docker run -d -p 80:80 --name ai-crm ai-crm-frontend:latet
+
+ git switch  origin/sr-uisetup
+ sudo  apt install python3.10-venv
+ sudo apt install python3-pip

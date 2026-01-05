@@ -40,11 +40,15 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "rest_framework.authtoken",
     "django_filters",
     "drf_yasg",
     "App",
+    "zoho_integration",
     "django_celery_results",
     "django_celery_beat",
+    "App.settings",
+    "admin_req"
 ]
 
 MIDDLEWARE = [

@@ -166,9 +166,12 @@ def rpo_resume_list(request):
     from App.models import ResumeProcessing, DropdownGroup, DropdownMaster
     resumes_qs = ResumeProcessing.objects.all()
 
-    # Only show resumes for this user (or all if superuser)
+    # Show all resumes uploaded by any user in rpo_admin group if current user is rpo_admin
     if not request.user.is_superuser:
-        resumes_qs = resumes_qs.filter(user=request.user)
+        if is_rpo_admin:
+            resumes_qs = resumes_qs.filter(user__groups__name='rpo_admin')
+        else:
+            resumes_qs = resumes_qs.filter(user=request.user)
 
     # Apply filters
     if job_filter:
@@ -185,7 +188,15 @@ def rpo_resume_list(request):
     resumes = resumes_qs[offset:offset+limit]
 
     # For filter dropdowns
-    jobs = ResumeProcessing.objects.values_list('job__title', flat=True).distinct().exclude(job__title__isnull=True).exclude(job__title='')
+    # Get distinct job titles from Job table (used by resumes)
+    from App.models import Job
+    companies = Job.objects.filter(
+        id__in=ResumeProcessing.objects.exclude(job__isnull=True).values_list('job_id', flat=True)
+    ).values_list('title', flat=True).distinct()
+
+    # Get distinct job titles from resumes
+    jobtitles = ResumeProcessing.objects.values_list('job__title', flat=True).distinct().exclude(job__title__isnull=True).exclude(job__title='')
+
     try:
         resume_source_group = DropdownGroup.objects.get(text='ResumeSource', is_active=True)
         resume_sources = DropdownMaster.objects.filter(group=resume_source_group, is_active=True).order_by('sort_order', 'text')
@@ -209,7 +220,8 @@ def rpo_resume_list(request):
         'has_prev': offset > 0,
         'next_offset': offset + limit,
         'prev_offset': max(0, offset - limit),
-        'jobs': jobs,
+        'companies': companies,
+        'jobtitles': jobtitles,
         'resume_sources': resume_sources,
         'status_options': status_options,
     }
