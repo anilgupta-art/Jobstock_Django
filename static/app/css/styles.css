@@ -8139,6 +8139,7 @@ span.mod-close {
     flex-direction: column;
     width: 100%;
 }
+.submenu .activecustom{background: #0b8260;color: #fff !important;margin-bottom: 10px;}  
 .single-tabs-group {
     display: block;
     border-bottom: 1px dashed #dde1e8;
