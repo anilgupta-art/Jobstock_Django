@@ -1,0 +1,1907 @@
+module.exports = [
+"[project]/.next-internal/server/app/employer-grid-1/page/actions.js [app-rsc] (server actions loader, ecmascript)", ((__turbopack_context__, module, exports) => {
+
+}),
+"[project]/src/app/favicon.ico.mjs { IMAGE => \"[project]/src/app/favicon.ico (static in ecmascript)\" } [app-rsc] (structured image object, ecmascript, Next.js Server Component)", ((__turbopack_context__) => {
+
+__turbopack_context__.n(__turbopack_context__.i("[project]/src/app/favicon.ico.mjs { IMAGE => \"[project]/src/app/favicon.ico (static in ecmascript)\" } [app-rsc] (structured image object, ecmascript)"));
+}),
+"[project]/src/app/layout.tsx [app-rsc] (ecmascript, Next.js Server Component)", ((__turbopack_context__) => {
+
+__turbopack_context__.n(__turbopack_context__.i("[project]/src/app/layout.tsx [app-rsc] (ecmascript)"));
+}),
+"[project]/src/app/data/data.ts [app-rsc] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "aboutData",
+    ()=>aboutData,
+    "blogData",
+    ()=>blogData,
+    "candidateData",
+    ()=>candidateData,
+    "categoryData",
+    ()=>categoryData,
+    "clientData",
+    ()=>clientData,
+    "companyReview",
+    ()=>companyReview,
+    "contact",
+    ()=>contact,
+    "footerCounter",
+    ()=>footerCounter,
+    "footerLink1",
+    ()=>footerLink1,
+    "footerLink2",
+    ()=>footerLink2,
+    "footerLink3",
+    ()=>footerLink3,
+    "footerSocial",
+    ()=>footerSocial,
+    "jobData",
+    ()=>jobData,
+    "privacyData",
+    ()=>privacyData,
+    "processData",
+    ()=>processData,
+    "requirements",
+    ()=>requirements,
+    "responsibilities",
+    ()=>responsibilities,
+    "teamTwo",
+    ()=>teamTwo
+]);
+const jobData = [
+    {
+        id: 1,
+        image: '/img/l-1.png',
+        name: 'Skype',
+        tag: [
+            'Featured',
+            'Urgent'
+        ],
+        jobtype: 'Enternship',
+        title: 'Jr. PHP Developer',
+        skills: 'CSS3, HTML5, Javascript, Bootstrap, Jquery',
+        value: '$5K - $8K',
+        open: '6 Open',
+        location: 'London, UK',
+        name2: 'Software & Consultancy',
+        rate: [
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star'
+        ],
+        review: '4.6'
+    },
+    {
+        id: 2,
+        image: '/img/l-2.png',
+        name: 'Pinterest',
+        tag: [
+            'Urgent'
+        ],
+        jobtype: 'Freelancer',
+        title: 'Exp. Project manager',
+        skills: 'CSS3, HTML5, Javascript, Bootstrap, Jquery',
+        value: '$6K - $10K',
+        open: '4 Open',
+        location: 'Tokyo, Japan',
+        name2: 'Photo Edditing Tools',
+        rate: [
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star'
+        ],
+        review: '4.7'
+    },
+    {
+        id: 3,
+        image: '/img/l-3.png',
+        name: 'Shopify',
+        tag: [
+            'Featured',
+            'Urgent'
+        ],
+        jobtype: 'Part Time',
+        title: 'Sr. WordPress Developer',
+        skills: 'CSS3, HTML5, Javascript, Bootstrap, Jquery',
+        value: '$5K - $8K',
+        open: '3 Open',
+        location: 'Paris, France',
+        name2: 'Web Browser & Tech',
+        rate: [
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active'
+        ],
+        review: '4.8'
+    },
+    {
+        id: 4,
+        image: '/img/l-4.png',
+        name: 'Deezroo',
+        tag: [
+            'Featured'
+        ],
+        jobtype: 'Full Time',
+        title: 'Jr. Laravel Developer',
+        skills: 'CSS3, HTML5, Javascript, Bootstrap, Jquery',
+        value: '$4.2K - $6K',
+        open: '2 Open',
+        location: 'Los Angeles, USA',
+        name2: 'Business Directory',
+        rate: [
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star'
+        ],
+        review: '4.5'
+    },
+    {
+        id: 5,
+        image: '/img/l-5.png',
+        name: 'Photoshop',
+        tag: [
+            'Urgent'
+        ],
+        jobtype: 'Freelancer',
+        title: 'Sr. UI/UX Designer',
+        skills: 'CSS3, HTML5, Javascript, Bootstrap, Jquery',
+        value: '$4K - $5.5K',
+        open: '5 Open',
+        location: 'Chicago, USA',
+        name2: 'Message & Video Reelas',
+        rate: [
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active'
+        ],
+        review: '4.9'
+    },
+    {
+        id: 6,
+        image: '/img/l-6.png',
+        name: 'Firefox',
+        tag: [
+            'Featured',
+            'Urgent'
+        ],
+        jobtype: 'Part Time',
+        title: 'Java & Python Developer',
+        skills: 'CSS3, HTML5, Javascript, Bootstrap, Jquery',
+        value: '$2K - $4K',
+        open: '4 Open',
+        location: 'Toronto, Canada',
+        name2: 'Portfolio Showcase',
+        rate: [
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star',
+            'fa-solid fa-star'
+        ],
+        review: '4.4'
+    },
+    {
+        id: 7,
+        image: '/img/l-7.png',
+        name: 'Air BNB',
+        tag: [
+            'Urgent'
+        ],
+        jobtype: 'Full Time',
+        title: 'Sr. Code Ignetor Developer',
+        skills: 'CSS3, HTML5, Javascript, Bootstrap, Jquery',
+        value: '$5K - $6K',
+        open: '3 Open',
+        location: 'San Francisco, USA',
+        name2: 'Chat & Video Calling',
+        rate: [
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active'
+        ],
+        review: '4.8'
+    },
+    {
+        id: 8,
+        image: '/img/l-8.png',
+        name: 'Snapchat',
+        tag: [
+            'Featured'
+        ],
+        jobtype: 'Enternship',
+        title: 'Sr. Magento Developer',
+        skills: 'CSS3, HTML5, Javascript, Bootstrap, Jquery',
+        value: '$3.2K - $5K',
+        open: '5 Open',
+        location: 'Singapore',
+        name2: 'Software & Consultancy',
+        rate: [
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star'
+        ],
+        review: '4.7'
+    },
+    {
+        id: 9,
+        image: '/img/l-9.png',
+        name: 'Dribbble',
+        tag: [
+            'Featured',
+            'Urgent'
+        ],
+        jobtype: 'Part Time',
+        title: 'Data Project Manager',
+        skills: 'CSS3, HTML5, Javascript, Bootstrap, Jquery',
+        value: '$10K - $15K',
+        open: '1 Open',
+        location: 'Hong Kong, China',
+        name2: 'Software & Consultancy',
+        rate: [
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active'
+        ],
+        review: '4.9'
+    },
+    {
+        id: 10,
+        image: '/img/l-10.png',
+        name: 'Skype',
+        tag: [
+            'Featured'
+        ],
+        jobtype: 'Full Time',
+        title: 'HTML5 To WordPress Developer',
+        skills: 'CSS3, HTML5, Javascript, Bootstrap, Jquery',
+        value: '$8K - $10K',
+        open: '4 Open',
+        location: 'Dubai, UAE',
+        name2: 'Photo Edditing Tools',
+        rate: [
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star'
+        ],
+        review: '4.6'
+    },
+    {
+        id: 11,
+        image: '/img/l-11.png',
+        name: 'Google',
+        tag: [
+            'Urgent'
+        ],
+        jobtype: 'Part Time',
+        title: 'Jr. Content Writer',
+        skills: 'CSS3, HTML5, Javascript, Bootstrap, Jquery',
+        value: '$4K - $5.5K',
+        open: '2 Open',
+        location: 'Berlin, Germany',
+        name2: 'Web Browser & Tech',
+        rate: [
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star'
+        ],
+        review: '4.7'
+    },
+    {
+        id: 12,
+        image: '/img/l-12.png',
+        name: 'Instgram',
+        tag: [
+            'Featured',
+            'Urgent'
+        ],
+        jobtype: 'Full Time',
+        title: 'Sr. Figma Designer',
+        skills: 'CSS3, HTML5, Javascript, Bootstrap, Jquery',
+        value: '$6K - $8K',
+        open: '3 Open',
+        location: 'Sydney, Australia',
+        name2: 'Business Directory',
+        rate: [
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star'
+        ],
+        review: '4.6'
+    },
+    {
+        id: 13,
+        image: '/img/l-1.png',
+        name: 'Skype',
+        tag: [
+            'Featured',
+            'Urgent'
+        ],
+        jobtype: 'Enternship',
+        title: 'Jr. PHP Developer',
+        skills: 'CSS3, HTML5, Javascript, Bootstrap, Jquery',
+        value: '$5K - $8K',
+        open: '6 Open',
+        location: 'London, UK',
+        name2: 'Software & Consultancy',
+        rate: [
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star'
+        ],
+        review: '4.6'
+    },
+    {
+        id: 14,
+        image: '/img/l-2.png',
+        name: 'Pinterest',
+        tag: [
+            'Featured',
+            'Urgent'
+        ],
+        jobtype: 'Freelancer',
+        title: 'Exp. Project manager',
+        skills: 'CSS3, HTML5, Javascript, Bootstrap, Jquery',
+        value: '$6K - $10K',
+        open: '4 Open',
+        location: 'Shanghai, China',
+        name2: 'Software & Consultancy',
+        rate: [
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star'
+        ],
+        review: '4.7'
+    },
+    {
+        id: 15,
+        image: '/img/l-3.png',
+        name: 'Shopify',
+        tag: [
+            'Featured',
+            'Urgent'
+        ],
+        jobtype: 'Part Time',
+        title: 'Sr. WordPress Developer',
+        skills: 'CSS3, HTML5, Javascript, Bootstrap, Jquery',
+        value: '$5K - $8K',
+        open: '3 Open',
+        location: 'Mumbai, India',
+        name2: 'Software & Consultancy',
+        rate: [
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star'
+        ],
+        review: '4.6'
+    }
+];
+const categoryData = [
+    {
+        icon: 'fa-solid fa-file-invoice',
+        title: 'Accounting & Finance',
+        job: '122 Active Jobs'
+    },
+    {
+        icon: 'fa-solid fa-caravan',
+        title: 'Accounting & Finance',
+        job: '78 Active Jobs'
+    },
+    {
+        icon: 'fa-solid fa-person-chalkboard',
+        title: 'Accounting & Finance',
+        job: '25 Active Jobs'
+    },
+    {
+        icon: 'fa-solid fa-user-graduate',
+        title: 'Accounting & Finance',
+        job: '212 Active Jobs'
+    },
+    {
+        icon: 'fa-solid fa-briefcase-medical',
+        title: 'Accounting & Finance',
+        job: '90 Active Jobs'
+    },
+    {
+        icon: 'fa-solid fa-burger',
+        title: 'Accounting & Finance',
+        job: '65 Active Jobs'
+    },
+    {
+        icon: 'fa-solid fa-jet-fighter',
+        title: 'Accounting & Finance',
+        job: '160 Active Jobs'
+    },
+    {
+        icon: 'fa-solid fa-mobile-screen-button',
+        title: 'Accounting & Finance',
+        job: '80 Active Jobs'
+    }
+];
+const processData = [
+    {
+        icon: 'fa-solid fa-file-shield text-main',
+        title: 'Search Job',
+        desc: 'Aliquam vestibulum cursus felis. In iaculis iaculis sapien ac condimentum. Vestibulum congue posuere lacus'
+    },
+    {
+        icon: 'fa-solid fa-paste text-main',
+        title: 'FIND JOB',
+        desc: 'Aliquam vestibulum cursus felis. In iaculis iaculis sapien ac condimentum. Vestibulum congue posuere lacus'
+    },
+    {
+        icon: 'fa-solid fa-unlock text-main',
+        title: 'Create Account',
+        desc: 'Aliquam vestibulum cursus felis. In iaculis iaculis sapien ac condimentum. Vestibulum congue posuere lacus'
+    },
+    {
+        icon: 'fa-solid fa-user-clock text-main',
+        title: 'HIRE EMPLOYEE',
+        desc: 'Aliquam vestibulum cursus felis. In iaculis iaculis sapien ac condimentum. Vestibulum congue posuere lacus'
+    },
+    {
+        icon: 'fa-solid fa-laptop-file text-main',
+        title: 'START WORK',
+        desc: 'Aliquam vestibulum cursus felis. In iaculis iaculis sapien ac condimentum. Vestibulum congue posuere lacus'
+    },
+    {
+        icon: 'fa-solid fa-business-time text-main',
+        title: 'Submit Bid',
+        desc: 'Aliquam vestibulum cursus felis. In iaculis iaculis sapien ac condimentum. Vestibulum congue posuere lacus'
+    },
+    {
+        icon: 'fa-solid fa-sack-dollar text-main',
+        title: 'PAY MONEY',
+        desc: 'Aliquam vestibulum cursus felis. In iaculis iaculis sapien ac condimentum. Vestibulum congue posuere lacus'
+    },
+    {
+        icon: 'fa-regular fa-face-laugh-wink text-main',
+        title: 'HAPPY USER',
+        desc: 'Aliquam vestibulum cursus felis. In iaculis iaculis sapien ac condimentum. Vestibulum congue posuere lacus'
+    }
+];
+const clientData = [
+    {
+        image: '/img/team-1.jpg',
+        name: 'Lucia E. Nugent',
+        position: 'CEO of Climber',
+        title: '"The best useful website"',
+        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim.'
+    },
+    {
+        image: '/img/team-2.jpg',
+        name: 'Brenda R. Smith',
+        position: 'Founder of Yeloower',
+        title: '"Ranking is the #1"',
+        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim.'
+    },
+    {
+        image: '/img/team-3.jpg',
+        name: 'Brian B. Wilkerson',
+        position: 'CEO of Mark Soft',
+        title: '"The website is eco friendly"',
+        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim.'
+    },
+    {
+        image: '/img/team-4.jpg',
+        name: 'Miguel L. Benbow',
+        position: 'Founder of Mitche LTD',
+        title: '"100% save and secure website"',
+        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim.'
+    },
+    {
+        image: '/img/team-5.jpg',
+        name: 'Hilda A. Sheppard',
+        position: 'CEO of Doodle',
+        title: '"Very developer friendly website"',
+        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim.'
+    }
+];
+const teamTwo = [
+    {
+        image: '/img/team-1.jpg',
+        name: 'Shaurya Preet',
+        position: 'Co-Founder'
+    },
+    {
+        image: '/img/team-2.jpg',
+        name: 'Shivangi Preet',
+        position: 'Content Writer'
+    },
+    {
+        image: '/img/team-3.jpg',
+        name: 'Yash Preet',
+        position: 'Content Writer'
+    },
+    {
+        image: '/img/team-4.jpg',
+        name: 'Dhananjay Preet',
+        position: 'CEO & Manager'
+    },
+    {
+        image: '/img/team-5.jpg',
+        name: 'Rahul Gilkrist',
+        position: 'App Designer'
+    },
+    {
+        image: '/img/team-6.jpg',
+        name: 'Adam Wilcard',
+        position: 'Web Developer'
+    },
+    {
+        image: '/img/team-7.jpg',
+        name: 'Hilda A. Sheppard',
+        position: 'Co-Founder'
+    },
+    {
+        image: '/img/team-8.jpg',
+        name: 'Lucia E. Nugent',
+        position: 'Co-Founder'
+    }
+];
+const footerSocial = [
+    'fa-brands fa-facebook',
+    'fa-brands fa-linkedin',
+    'fa-brands fa-google-plus',
+    'fa-brands fa-twitter',
+    'fa-brands fa-dribbble'
+];
+const footerLink1 = [
+    'Talent Marketplace',
+    'Payroll Services',
+    'Direct Contracts',
+    'Hire Worldwide',
+    'Hire in the USA',
+    'How to Hire'
+];
+const footerLink2 = [
+    'Free Business tools',
+    'Affiliate Program',
+    'Success Stories',
+    'Upwork Reviews',
+    'Resources',
+    'Help & Support'
+];
+const footerLink3 = [
+    'About Us',
+    'Leadership',
+    'Contact Us',
+    'Investor Relations',
+    'Trust, Safety & Security'
+];
+const footerCounter = [
+    {
+        title: 'Job Posted',
+        value: 12,
+        symbol: 'K'
+    },
+    {
+        title: 'Happy Customers',
+        value: 10,
+        symbol: 'M'
+    },
+    {
+        title: 'Freelancers',
+        value: 76,
+        symbol: 'K'
+    },
+    {
+        title: 'Companies',
+        value: 200,
+        symbol: '+'
+    }
+];
+const candidateData = [
+    {
+        id: 1,
+        image: '/img/team-1.jpg',
+        name: 'Kr. Shaurya Preet',
+        position: 'Sr. Web Designer',
+        review: '4.6',
+        rate: [
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star'
+        ],
+        amount: '70/H',
+        exp: '5 Years exp',
+        loction: 'London, UK'
+    },
+    {
+        id: 2,
+        image: '/img/team-2.jpg',
+        name: 'Elaine W. Cook',
+        position: 'Sr. Team Leader',
+        review: '4.9',
+        rate: [
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active'
+        ],
+        amount: '65/H',
+        exp: '7 Years exp',
+        loction: 'Tokyo, Japan'
+    },
+    {
+        id: 3,
+        image: '/img/team-3.jpg',
+        name: 'Raymond H. Cato',
+        position: 'UI/UX Designer',
+        review: '4.8',
+        rate: [
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star'
+        ],
+        amount: '50/H',
+        exp: '4 Years exp',
+        loction: 'Paris, France'
+    },
+    {
+        id: 4,
+        image: '/img/team-4.jpg',
+        name: 'Virginia R. McCain',
+        position: 'Laravel Developer',
+        review: '4.7',
+        rate: [
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active'
+        ],
+        amount: '55/H',
+        exp: '3 Years exp',
+        loction: 'Los Angeles, USA'
+    },
+    {
+        id: 5,
+        image: '/img/team-5.jpg',
+        name: 'Virginia A. Greer',
+        position: 'Shopify Developer',
+        review: '4.8',
+        rate: [
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active'
+        ],
+        amount: '60/H',
+        exp: '2 Years exp',
+        loction: 'Chicago, USA'
+    },
+    {
+        id: 6,
+        image: '/img/team-6.jpg',
+        name: 'Elvira J. Reese',
+        position: 'Front-End Developer',
+        review: '4.5',
+        rate: [
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star'
+        ],
+        amount: '50/H',
+        exp: '4 Years exp',
+        loction: 'Toronto, Canada'
+    },
+    {
+        id: 7,
+        image: '/img/team-7.jpg',
+        name: 'Stella Beauregard',
+        position: 'WordPress Developer',
+        review: '4.7',
+        rate: [
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star'
+        ],
+        amount: '45/H',
+        exp: '3 Years exp',
+        loction: 'San Francisco, USA'
+    },
+    {
+        id: 8,
+        image: '/img/team-8.jpg',
+        name: 'Carol M. Thompson',
+        position: 'Jr. Content Writer',
+        review: '4.4',
+        rate: [
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star'
+        ],
+        amount: '30/H',
+        exp: '1 Years exp',
+        loction: 'Singapore'
+    },
+    {
+        id: 9,
+        image: '/img/team-9.jpg',
+        name: 'Wanda D. Smith',
+        position: 'Sr. PHP Developer',
+        review: '4.5',
+        rate: [
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star'
+        ],
+        amount: '40/H',
+        exp: '2 Years exp',
+        loction: 'Hong Kong, China'
+    },
+    {
+        id: 10,
+        image: '/img/team-10.jpg',
+        name: 'Kr. Shaurya Preet',
+        position: 'Sr. Web Designer',
+        review: '4.6',
+        rate: [
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star'
+        ],
+        amount: '70/H',
+        exp: '5 Years exp',
+        loction: 'Dubai, UAE'
+    },
+    {
+        id: 11,
+        image: '/img/team-11.jpg',
+        name: 'Elaine W. Cook',
+        position: 'Sr. Team Leader',
+        review: '4.9',
+        rate: [
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active'
+        ],
+        amount: '65/H',
+        exp: '7 Years exp',
+        loction: 'Berlin, Germany'
+    },
+    {
+        id: 12,
+        image: '/img/team-12.jpg',
+        name: 'Raymond H. Cato',
+        position: 'UI/UX Designer',
+        review: '4.6',
+        rate: [
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star active',
+            'fa-solid fa-star'
+        ],
+        amount: '50/H',
+        exp: '4 Years exp',
+        loction: 'Mumbai, India'
+    }
+];
+const aboutData = [
+    {
+        title: '#1 Quality Job',
+        desc: `At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores`
+    },
+    {
+        title: 'Top Companies',
+        desc: `At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores`
+    },
+    {
+        title: 'International Jobs',
+        desc: `At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores`
+    },
+    {
+        title: 'No Extra Charges',
+        desc: `At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores`
+    }
+];
+const blogData = [
+    {
+        id: 1,
+        image: '/img/blog-3.jpg',
+        title: 'How To Work with jobstock Agency',
+        desc: `Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat`,
+        date: '10 Jul 2024'
+    },
+    {
+        id: 2,
+        image: '/img/blog-4.jpg',
+        title: 'Want To Earn Money with jobstock?',
+        desc: `Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat`,
+        date: '17 Jan 2024'
+    },
+    {
+        id: 3,
+        image: '/img/blog-5.jpg',
+        title: 'Get Credit Card from jobstock Agency',
+        desc: `Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat`,
+        date: '26 Feb 2024'
+    },
+    {
+        id: 4,
+        image: '/img/blog-6.jpg',
+        title: 'Want To Work with jobstock Agency?',
+        desc: `Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat`,
+        date: '10 Jul 2024'
+    },
+    {
+        id: 5,
+        image: '/img/blog-7.jpg',
+        title: 'How To Work with jobstock Agency',
+        desc: `Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat`,
+        date: '17 Jan 2024'
+    },
+    {
+        id: 6,
+        image: '/img/blog-8.jpg',
+        title: 'How To Work with jobstock Agency',
+        desc: `Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat`,
+        date: '17 Jan 2024'
+    }
+];
+const requirements = [
+    'Candidate must have a Bachelors or Masters degree in Computer. (B.tech, Bsc or BCA/MCA)',
+    'Candidate must have a good working knowledge of Javascript and Jquery.',
+    'Good knowledge of HTML and CSS is required.',
+    'Experience in Word press is an advantage',
+    'Jamshedpur, Jharkhand: Reliably commute or planning to relocate before starting work (Required)'
+];
+const responsibilities = [
+    'Write clean, maintainable and efficient code.',
+    'Design robust, scalable and secure features.',
+    'Collaborate with team members to develop and ship web applications within tight timeframes.',
+    'Work on bug fixing, identifying performance issues and improving application performance',
+    'Write unit and functional testcases.',
+    'Jamshedpur, Jharkhand: Reliably commute or planning to relocate before starting work (Required)'
+];
+const companyReview = [
+    {
+        icon: 'fa-solid fa-envelope-open-text',
+        title: 'shreethemes@gmail.com',
+        desc: 'Mail Address'
+    },
+    {
+        icon: 'fa-solid fa-phone-volume',
+        title: '855 606 8472',
+        desc: 'Phone No.'
+    },
+    {
+        icon: 'fa-regular fa-user',
+        title: 'Male',
+        desc: 'Gender'
+    },
+    {
+        icon: 'fa-solid fa-cake-candles',
+        title: '07 Apr 1992',
+        desc: 'Age'
+    },
+    {
+        icon: 'fa-solid fa-wallet',
+        title: '$750/month',
+        desc: 'Offerd Sallary'
+    },
+    {
+        icon: 'fa-solid fa-briefcase',
+        title: '5 Years',
+        desc: 'Experience'
+    },
+    {
+        icon: 'fa-solid fa-user-graduate',
+        title: 'Master Degree',
+        desc: 'Qualification'
+    },
+    {
+        icon: 'fa-solid fa-layer-group',
+        title: 'Fulltime, Remote, Freelance',
+        desc: 'Work Type'
+    }
+];
+const privacyData = [
+    {
+        title: 'Introduction to Privacy Policy',
+        desc1: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
+        desc2: `At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus`,
+        desc3: `On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish.`
+    },
+    {
+        title: 'Information we collect and how we use it',
+        desc1: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
+        desc2: `At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus`,
+        desc3: `On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish.`
+    },
+    {
+        title: 'Account information of Merchants',
+        desc1: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
+        desc2: `At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus`,
+        desc3: `On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish.`
+    },
+    {
+        title: 'Customer Information',
+        desc1: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
+        desc2: `At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus`,
+        desc3: `On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish.`
+    },
+    {
+        title: 'Activity',
+        desc1: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
+        desc2: `At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus`,
+        desc3: `On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish.`
+    },
+    {
+        title: 'Cookies',
+        desc1: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
+        desc2: `At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus`,
+        desc3: `On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish.`
+    },
+    {
+        title: 'Transfer of information',
+        desc1: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
+        desc2: `At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus`,
+        desc3: `On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish.`
+    },
+    {
+        title: 'Our Terms & Conditions',
+        desc1: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
+        desc2: `At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus`,
+        desc3: `On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish.`
+    }
+];
+const contact = [
+    {
+        icon: 'fa-solid fa-location-dot',
+        title: 'Hyderabad',
+        desc: 'Krishe Emerald, Whitefields, Kondapur, Hyderabad, Telangana 500081',
+        desc2: 'shreethemes@gmail.com'
+    },
+    {
+        icon: 'fa-solid fa-map-location-dot',
+        title: 'Bengaluru',
+        desc: 'Prestige Cube, Koramangala, Bengaluru, Karnataka 560029',
+        desc2: 'shreethemes@gmail.com'
+    },
+    {
+        icon: 'fa-solid fa-map-location',
+        title: 'Nagpur',
+        desc: 'B-101, Vedant Sapphire, Sneha Nagar, Nagpur, Maharashtra, 440015',
+        desc2: 'shreethemes@gmail.com'
+    }
+];
+}),
+"[project]/src/app/components/navbar/nav-bg-black.tsx [app-rsc] (client reference proxy) <module evaluation>", ((__turbopack_context__) => {
+"use strict";
+
+// This file is generated by next-core EcmascriptClientReferenceModule.
+__turbopack_context__.s([
+    "default",
+    ()=>__TURBOPACK__default__export__
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$server$2d$dom$2d$turbopack$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/rsc/react-server-dom-turbopack-server.js [app-rsc] (ecmascript)");
+;
+const __TURBOPACK__default__export__ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$server$2d$dom$2d$turbopack$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerClientReference"])(function() {
+    throw new Error("Attempted to call the default export of [project]/src/app/components/navbar/nav-bg-black.tsx <module evaluation> from the server, but it's on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.");
+}, "[project]/src/app/components/navbar/nav-bg-black.tsx <module evaluation>", "default");
+}),
+"[project]/src/app/components/navbar/nav-bg-black.tsx [app-rsc] (client reference proxy)", ((__turbopack_context__) => {
+"use strict";
+
+// This file is generated by next-core EcmascriptClientReferenceModule.
+__turbopack_context__.s([
+    "default",
+    ()=>__TURBOPACK__default__export__
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$server$2d$dom$2d$turbopack$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/rsc/react-server-dom-turbopack-server.js [app-rsc] (ecmascript)");
+;
+const __TURBOPACK__default__export__ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$server$2d$dom$2d$turbopack$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerClientReference"])(function() {
+    throw new Error("Attempted to call the default export of [project]/src/app/components/navbar/nav-bg-black.tsx from the server, but it's on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.");
+}, "[project]/src/app/components/navbar/nav-bg-black.tsx", "default");
+}),
+"[project]/src/app/components/navbar/nav-bg-black.tsx [app-rsc] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$navbar$2f$nav$2d$bg$2d$black$2e$tsx__$5b$app$2d$rsc$5d$__$28$client__reference__proxy$29$__$3c$module__evaluation$3e$__ = __turbopack_context__.i("[project]/src/app/components/navbar/nav-bg-black.tsx [app-rsc] (client reference proxy) <module evaluation>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$navbar$2f$nav$2d$bg$2d$black$2e$tsx__$5b$app$2d$rsc$5d$__$28$client__reference__proxy$29$__ = __turbopack_context__.i("[project]/src/app/components/navbar/nav-bg-black.tsx [app-rsc] (client reference proxy)");
+;
+__turbopack_context__.n(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$navbar$2f$nav$2d$bg$2d$black$2e$tsx__$5b$app$2d$rsc$5d$__$28$client__reference__proxy$29$__);
+}),
+"[project]/src/app/components/footer/footer-top-two.tsx [app-rsc] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "default",
+    ()=>FooterTopTwo
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/rsc/react-jsx-dev-runtime.js [app-rsc] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/client/app-dir/link.js [app-rsc] (ecmascript)");
+;
+;
+function FooterTopTwo() {
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
+        className: "bg-cover bg-main",
+        style: {
+            backgroundImage: `url('/img/footer-bg-dark.png')`,
+            backgroundRepeat: 'no-repeat'
+        },
+        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "container",
+            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "row justify-content-center",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "col-xl-7 col-lg-10 col-md-12 col-sm-12",
+                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "call-action-wrap",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "sec-heading center",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                                        className: "mb-3 lh-base text-light",
+                                        children: [
+                                            "Find The Perfect Job",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
+                                                fileName: "[project]/src/app/components/footer/footer-top-two.tsx",
+                                                lineNumber: 13,
+                                                columnNumber: 93
+                                            }, this),
+                                            "on JobStock That is Superb For You"
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/app/components/footer/footer-top-two.tsx",
+                                        lineNumber: 13,
+                                        columnNumber: 33
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                        className: "text-light fs-6",
+                                        children: "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/components/footer/footer-top-two.tsx",
+                                        lineNumber: 14,
+                                        columnNumber: 33
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/app/components/footer/footer-top-two.tsx",
+                                lineNumber: 12,
+                                columnNumber: 29
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "call-action-buttons mt-3",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
+                                        href: "#",
+                                        className: "btn btn-lg btn-dark fw-medium px-xl-5 px-lg-4 me-2",
+                                        children: "Upload resume"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/components/footer/footer-top-two.tsx",
+                                        lineNumber: 17,
+                                        columnNumber: 33
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
+                                        href: "#",
+                                        className: "btn btn-lg btn-whites fw-medium px-xl-5 px-lg-4 text-main",
+                                        children: "Join Our Team"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/components/footer/footer-top-two.tsx",
+                                        lineNumber: 18,
+                                        columnNumber: 33
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/app/components/footer/footer-top-two.tsx",
+                                lineNumber: 16,
+                                columnNumber: 29
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/app/components/footer/footer-top-two.tsx",
+                        lineNumber: 11,
+                        columnNumber: 25
+                    }, this)
+                }, void 0, false, {
+                    fileName: "[project]/src/app/components/footer/footer-top-two.tsx",
+                    lineNumber: 9,
+                    columnNumber: 21
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/src/app/components/footer/footer-top-two.tsx",
+                lineNumber: 8,
+                columnNumber: 17
+            }, this)
+        }, void 0, false, {
+            fileName: "[project]/src/app/components/footer/footer-top-two.tsx",
+            lineNumber: 7,
+            columnNumber: 13
+        }, this)
+    }, void 0, false, {
+        fileName: "[project]/src/app/components/footer/footer-top-two.tsx",
+        lineNumber: 6,
+        columnNumber: 9
+    }, this);
+}
+}),
+"[project]/src/app/components/footer/footer-light-two.tsx [app-rsc] (client reference proxy) <module evaluation>", ((__turbopack_context__) => {
+"use strict";
+
+// This file is generated by next-core EcmascriptClientReferenceModule.
+__turbopack_context__.s([
+    "default",
+    ()=>__TURBOPACK__default__export__
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$server$2d$dom$2d$turbopack$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/rsc/react-server-dom-turbopack-server.js [app-rsc] (ecmascript)");
+;
+const __TURBOPACK__default__export__ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$server$2d$dom$2d$turbopack$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerClientReference"])(function() {
+    throw new Error("Attempted to call the default export of [project]/src/app/components/footer/footer-light-two.tsx <module evaluation> from the server, but it's on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.");
+}, "[project]/src/app/components/footer/footer-light-two.tsx <module evaluation>", "default");
+}),
+"[project]/src/app/components/footer/footer-light-two.tsx [app-rsc] (client reference proxy)", ((__turbopack_context__) => {
+"use strict";
+
+// This file is generated by next-core EcmascriptClientReferenceModule.
+__turbopack_context__.s([
+    "default",
+    ()=>__TURBOPACK__default__export__
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$server$2d$dom$2d$turbopack$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/rsc/react-server-dom-turbopack-server.js [app-rsc] (ecmascript)");
+;
+const __TURBOPACK__default__export__ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$server$2d$dom$2d$turbopack$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerClientReference"])(function() {
+    throw new Error("Attempted to call the default export of [project]/src/app/components/footer/footer-light-two.tsx from the server, but it's on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.");
+}, "[project]/src/app/components/footer/footer-light-two.tsx", "default");
+}),
+"[project]/src/app/components/footer/footer-light-two.tsx [app-rsc] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$footer$2f$footer$2d$light$2d$two$2e$tsx__$5b$app$2d$rsc$5d$__$28$client__reference__proxy$29$__$3c$module__evaluation$3e$__ = __turbopack_context__.i("[project]/src/app/components/footer/footer-light-two.tsx [app-rsc] (client reference proxy) <module evaluation>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$footer$2f$footer$2d$light$2d$two$2e$tsx__$5b$app$2d$rsc$5d$__$28$client__reference__proxy$29$__ = __turbopack_context__.i("[project]/src/app/components/footer/footer-light-two.tsx [app-rsc] (client reference proxy)");
+;
+__turbopack_context__.n(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$footer$2f$footer$2d$light$2d$two$2e$tsx__$5b$app$2d$rsc$5d$__$28$client__reference__proxy$29$__);
+}),
+"[project]/src/app/components/scroll-to-top.tsx [app-rsc] (client reference proxy) <module evaluation>", ((__turbopack_context__) => {
+"use strict";
+
+// This file is generated by next-core EcmascriptClientReferenceModule.
+__turbopack_context__.s([
+    "default",
+    ()=>__TURBOPACK__default__export__
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$server$2d$dom$2d$turbopack$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/rsc/react-server-dom-turbopack-server.js [app-rsc] (ecmascript)");
+;
+const __TURBOPACK__default__export__ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$server$2d$dom$2d$turbopack$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerClientReference"])(function() {
+    throw new Error("Attempted to call the default export of [project]/src/app/components/scroll-to-top.tsx <module evaluation> from the server, but it's on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.");
+}, "[project]/src/app/components/scroll-to-top.tsx <module evaluation>", "default");
+}),
+"[project]/src/app/components/scroll-to-top.tsx [app-rsc] (client reference proxy)", ((__turbopack_context__) => {
+"use strict";
+
+// This file is generated by next-core EcmascriptClientReferenceModule.
+__turbopack_context__.s([
+    "default",
+    ()=>__TURBOPACK__default__export__
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$server$2d$dom$2d$turbopack$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/rsc/react-server-dom-turbopack-server.js [app-rsc] (ecmascript)");
+;
+const __TURBOPACK__default__export__ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$server$2d$dom$2d$turbopack$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerClientReference"])(function() {
+    throw new Error("Attempted to call the default export of [project]/src/app/components/scroll-to-top.tsx from the server, but it's on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.");
+}, "[project]/src/app/components/scroll-to-top.tsx", "default");
+}),
+"[project]/src/app/components/scroll-to-top.tsx [app-rsc] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$scroll$2d$to$2d$top$2e$tsx__$5b$app$2d$rsc$5d$__$28$client__reference__proxy$29$__$3c$module__evaluation$3e$__ = __turbopack_context__.i("[project]/src/app/components/scroll-to-top.tsx [app-rsc] (client reference proxy) <module evaluation>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$scroll$2d$to$2d$top$2e$tsx__$5b$app$2d$rsc$5d$__$28$client__reference__proxy$29$__ = __turbopack_context__.i("[project]/src/app/components/scroll-to-top.tsx [app-rsc] (client reference proxy)");
+;
+__turbopack_context__.n(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$scroll$2d$to$2d$top$2e$tsx__$5b$app$2d$rsc$5d$__$28$client__reference__proxy$29$__);
+}),
+"[project]/src/app/components/filter/job-filter-two.tsx [app-rsc] (client reference proxy) <module evaluation>", ((__turbopack_context__) => {
+"use strict";
+
+// This file is generated by next-core EcmascriptClientReferenceModule.
+__turbopack_context__.s([
+    "default",
+    ()=>__TURBOPACK__default__export__
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$server$2d$dom$2d$turbopack$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/rsc/react-server-dom-turbopack-server.js [app-rsc] (ecmascript)");
+;
+const __TURBOPACK__default__export__ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$server$2d$dom$2d$turbopack$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerClientReference"])(function() {
+    throw new Error("Attempted to call the default export of [project]/src/app/components/filter/job-filter-two.tsx <module evaluation> from the server, but it's on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.");
+}, "[project]/src/app/components/filter/job-filter-two.tsx <module evaluation>", "default");
+}),
+"[project]/src/app/components/filter/job-filter-two.tsx [app-rsc] (client reference proxy)", ((__turbopack_context__) => {
+"use strict";
+
+// This file is generated by next-core EcmascriptClientReferenceModule.
+__turbopack_context__.s([
+    "default",
+    ()=>__TURBOPACK__default__export__
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$server$2d$dom$2d$turbopack$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/rsc/react-server-dom-turbopack-server.js [app-rsc] (ecmascript)");
+;
+const __TURBOPACK__default__export__ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$server$2d$dom$2d$turbopack$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerClientReference"])(function() {
+    throw new Error("Attempted to call the default export of [project]/src/app/components/filter/job-filter-two.tsx from the server, but it's on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.");
+}, "[project]/src/app/components/filter/job-filter-two.tsx", "default");
+}),
+"[project]/src/app/components/filter/job-filter-two.tsx [app-rsc] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$filter$2f$job$2d$filter$2d$two$2e$tsx__$5b$app$2d$rsc$5d$__$28$client__reference__proxy$29$__$3c$module__evaluation$3e$__ = __turbopack_context__.i("[project]/src/app/components/filter/job-filter-two.tsx [app-rsc] (client reference proxy) <module evaluation>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$filter$2f$job$2d$filter$2d$two$2e$tsx__$5b$app$2d$rsc$5d$__$28$client__reference__proxy$29$__ = __turbopack_context__.i("[project]/src/app/components/filter/job-filter-two.tsx [app-rsc] (client reference proxy)");
+;
+__turbopack_context__.n(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$filter$2f$job$2d$filter$2d$two$2e$tsx__$5b$app$2d$rsc$5d$__$28$client__reference__proxy$29$__);
+}),
+"[project]/src/app/components/shorting.tsx [app-rsc] (client reference proxy) <module evaluation>", ((__turbopack_context__) => {
+"use strict";
+
+// This file is generated by next-core EcmascriptClientReferenceModule.
+__turbopack_context__.s([
+    "default",
+    ()=>__TURBOPACK__default__export__
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$server$2d$dom$2d$turbopack$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/rsc/react-server-dom-turbopack-server.js [app-rsc] (ecmascript)");
+;
+const __TURBOPACK__default__export__ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$server$2d$dom$2d$turbopack$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerClientReference"])(function() {
+    throw new Error("Attempted to call the default export of [project]/src/app/components/shorting.tsx <module evaluation> from the server, but it's on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.");
+}, "[project]/src/app/components/shorting.tsx <module evaluation>", "default");
+}),
+"[project]/src/app/components/shorting.tsx [app-rsc] (client reference proxy)", ((__turbopack_context__) => {
+"use strict";
+
+// This file is generated by next-core EcmascriptClientReferenceModule.
+__turbopack_context__.s([
+    "default",
+    ()=>__TURBOPACK__default__export__
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$server$2d$dom$2d$turbopack$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/rsc/react-server-dom-turbopack-server.js [app-rsc] (ecmascript)");
+;
+const __TURBOPACK__default__export__ = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$server$2d$dom$2d$turbopack$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerClientReference"])(function() {
+    throw new Error("Attempted to call the default export of [project]/src/app/components/shorting.tsx from the server, but it's on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.");
+}, "[project]/src/app/components/shorting.tsx", "default");
+}),
+"[project]/src/app/components/shorting.tsx [app-rsc] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$shorting$2e$tsx__$5b$app$2d$rsc$5d$__$28$client__reference__proxy$29$__$3c$module__evaluation$3e$__ = __turbopack_context__.i("[project]/src/app/components/shorting.tsx [app-rsc] (client reference proxy) <module evaluation>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$shorting$2e$tsx__$5b$app$2d$rsc$5d$__$28$client__reference__proxy$29$__ = __turbopack_context__.i("[project]/src/app/components/shorting.tsx [app-rsc] (client reference proxy)");
+;
+__turbopack_context__.n(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$shorting$2e$tsx__$5b$app$2d$rsc$5d$__$28$client__reference__proxy$29$__);
+}),
+"[project]/src/app/employer-grid-1/page.tsx [app-rsc] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "default",
+    ()=>EmployerGridOne
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/rsc/react-jsx-dev-runtime.js [app-rsc] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/client/app-dir/link.js [app-rsc] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/image.js [app-rsc] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$data$2f$data$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/data/data.ts [app-rsc] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$navbar$2f$nav$2d$bg$2d$black$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/components/navbar/nav-bg-black.tsx [app-rsc] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$footer$2f$footer$2d$top$2d$two$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/components/footer/footer-top-two.tsx [app-rsc] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$footer$2f$footer$2d$light$2d$two$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/components/footer/footer-light-two.tsx [app-rsc] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$scroll$2d$to$2d$top$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/components/scroll-to-top.tsx [app-rsc] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$filter$2f$job$2d$filter$2d$two$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/components/filter/job-filter-two.tsx [app-rsc] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$shorting$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/components/shorting.tsx [app-rsc] (ecmascript)");
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+function EmployerGridOne() {
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Fragment"], {
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$navbar$2f$nav$2d$bg$2d$black$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
+                fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                lineNumber: 33,
+                columnNumber: 9
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "page-title bg-main",
+                style: {
+                    backgroundImage: `url('/img/bg2.png')`,
+                    backgroundRepeat: 'no-repeat'
+                },
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "container",
+                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "row",
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "col-lg-12 col-md-12",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                                    className: "ipt-title",
+                                    children: "Employer Grid Style 01"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                    lineNumber: 39,
+                                    columnNumber: 25
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "breadcrumbs light",
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
+                                        "aria-label": "breadcrumb",
+                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("ol", {
+                                            className: "breadcrumb",
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                                                    className: "breadcrumb-item",
+                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
+                                                        href: "#",
+                                                        children: "Home"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                        lineNumber: 43,
+                                                        columnNumber: 69
+                                                    }, this)
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                    lineNumber: 43,
+                                                    columnNumber: 37
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                                                    className: "breadcrumb-item",
+                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
+                                                        href: "#",
+                                                        children: "Candidate"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                        lineNumber: 44,
+                                                        columnNumber: 69
+                                                    }, this)
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                    lineNumber: 44,
+                                                    columnNumber: 37
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                                                    className: "breadcrumb-item active",
+                                                    "aria-current": "page",
+                                                    children: "Employer Grid 01"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                    lineNumber: 45,
+                                                    columnNumber: 37
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                            lineNumber: 42,
+                                            columnNumber: 33
+                                        }, this)
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                        lineNumber: 41,
+                                        columnNumber: 29
+                                    }, this)
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                    lineNumber: 40,
+                                    columnNumber: 25
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                            lineNumber: 38,
+                            columnNumber: 21
+                        }, this)
+                    }, void 0, false, {
+                        fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                        lineNumber: 37,
+                        columnNumber: 17
+                    }, this)
+                }, void 0, false, {
+                    fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                    lineNumber: 36,
+                    columnNumber: 13
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                lineNumber: 35,
+                columnNumber: 9
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "container",
+                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "row",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "col-xxl-3 col-xl-4 col-lg-4 col-md-12 col-sm-12",
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$filter$2f$job$2d$filter$2d$two$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
+                                    fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                    lineNumber: 58,
+                                    columnNumber: 25
+                                }, this)
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                lineNumber: 57,
+                                columnNumber: 21
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "col-xxl-9 col-xl-8 col-lg-8 col-md-12 col-sm-12",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "row justify-content-center mb-4",
+                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "col-lg-12 col-md-12",
+                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                className: "item-shorting-box",
+                                                children: [
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                        className: "item-shorting clearfix",
+                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            className: "left-column",
+                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("h4", {
+                                                                className: "m-sm-0 mb-2",
+                                                                children: "Showing 1 - 10 of 20 Results"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                                lineNumber: 66,
+                                                                columnNumber: 70
+                                                            }, this)
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                            lineNumber: 66,
+                                                            columnNumber: 41
+                                                        }, this)
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                        lineNumber: 65,
+                                                        columnNumber: 37
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$shorting$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
+                                                        fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                        lineNumber: 68,
+                                                        columnNumber: 37
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                lineNumber: 64,
+                                                columnNumber: 33
+                                            }, this)
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                            lineNumber: 63,
+                                            columnNumber: 29
+                                        }, this)
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                        lineNumber: 62,
+                                        columnNumber: 25
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "row justify-content-start gx-3 gy-4",
+                                        children: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$data$2f$data$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jobData"].map((item, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                className: "col-xl-4 col-lg-6 col-md-6 col-sm-12",
+                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    className: "emp-grid-blocs border",
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            className: "emp-grid-thumbs",
+                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
+                                                                href: `/employer-detail/${item.id}`,
+                                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("figure", {
+                                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
+                                                                        src: item.image,
+                                                                        width: 85,
+                                                                        height: 85,
+                                                                        className: "img-fluid",
+                                                                        alt: ""
+                                                                    }, void 0, false, {
+                                                                        fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                                        lineNumber: 78,
+                                                                        columnNumber: 63
+                                                                    }, this)
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                                    lineNumber: 78,
+                                                                    columnNumber: 55
+                                                                }, this)
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                                lineNumber: 78,
+                                                                columnNumber: 12
+                                                            }, this)
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                            lineNumber: 77,
+                                                            columnNumber: 11
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            className: "emp-grid-captions",
+                                                            children: [
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                    className: "emplors-job-types-wrap",
+                                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                        className: "text-sm-muted",
+                                                                        children: item.name2
+                                                                    }, void 0, false, {
+                                                                        fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                                        lineNumber: 82,
+                                                                        columnNumber: 52
+                                                                    }, this)
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                                    lineNumber: 82,
+                                                                    columnNumber: 12
+                                                                }, this),
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                    className: "emplors-job-title-wrap mb-1",
+                                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("h4", {
+                                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
+                                                                            href: `/employer-detail/${item.id}`,
+                                                                            className: "emplors-job-title",
+                                                                            children: item.name
+                                                                        }, void 0, false, {
+                                                                            fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                                            lineNumber: 84,
+                                                                            columnNumber: 17
+                                                                        }, this)
+                                                                    }, void 0, false, {
+                                                                        fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                                        lineNumber: 84,
+                                                                        columnNumber: 13
+                                                                    }, this)
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                                    lineNumber: 83,
+                                                                    columnNumber: 12
+                                                                }, this),
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                    className: "emplors-job-mrch-lists",
+                                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                        className: "single-mrch-lists",
+                                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                            children: [
+                                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
+                                                                                    className: "fa-solid fa-location-dot me-1"
+                                                                                }, void 0, false, {
+                                                                                    fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                                                    lineNumber: 88,
+                                                                                    columnNumber: 20
+                                                                                }, this),
+                                                                                item.location
+                                                                            ]
+                                                                        }, void 0, true, {
+                                                                            fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                                            lineNumber: 88,
+                                                                            columnNumber: 14
+                                                                        }, this)
+                                                                    }, void 0, false, {
+                                                                        fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                                        lineNumber: 87,
+                                                                        columnNumber: 13
+                                                                    }, this)
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                                    lineNumber: 86,
+                                                                    columnNumber: 12
+                                                                }, this)
+                                                            ]
+                                                        }, void 0, true, {
+                                                            fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                            lineNumber: 81,
+                                                            columnNumber: 11
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            className: "emp-grid-footrs",
+                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                className: "emp-flexio",
+                                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                    className: "label px-4 py-2 text-main bg-light-main",
+                                                                    children: [
+                                                                        item.open,
+                                                                        " position"
+                                                                    ]
+                                                                }, void 0, true, {
+                                                                    fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                                    lineNumber: 94,
+                                                                    columnNumber: 40
+                                                                }, this)
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                                lineNumber: 94,
+                                                                columnNumber: 12
+                                                            }, this)
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                            lineNumber: 93,
+                                                            columnNumber: 11
+                                                        }, this)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                    lineNumber: 76,
+                                                    columnNumber: 10
+                                                }, this)
+                                            }, index, false, {
+                                                fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                lineNumber: 75,
+                                                columnNumber: 33
+                                            }, this))
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                        lineNumber: 73,
+                                        columnNumber: 25
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "row",
+                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "col-lg-12 col-md-12 col-sm-12",
+                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
+                                                "aria-label": "Page navigation example",
+                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
+                                                    className: "pagination",
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                                                            className: "page-item",
+                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
+                                                                className: "page-link",
+                                                                href: "#",
+                                                                "aria-label": "Previous",
+                                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                    "aria-hidden": "true",
+                                                                    children: "«"
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                                    lineNumber: 109,
+                                                                    columnNumber: 49
+                                                                }, this)
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                                lineNumber: 108,
+                                                                columnNumber: 45
+                                                            }, this)
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                            lineNumber: 107,
+                                                            columnNumber: 41
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                                                            className: "page-item",
+                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
+                                                                className: "page-link",
+                                                                href: "#",
+                                                                children: "1"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                                lineNumber: 112,
+                                                                columnNumber: 67
+                                                            }, this)
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                            lineNumber: 112,
+                                                            columnNumber: 41
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                                                            className: "page-item",
+                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
+                                                                className: "page-link",
+                                                                href: "#",
+                                                                children: "2"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                                lineNumber: 113,
+                                                                columnNumber: 67
+                                                            }, this)
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                            lineNumber: 113,
+                                                            columnNumber: 41
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                                                            className: "page-item active",
+                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
+                                                                className: "page-link",
+                                                                href: "#",
+                                                                children: "3"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                                lineNumber: 114,
+                                                                columnNumber: 74
+                                                            }, this)
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                            lineNumber: 114,
+                                                            columnNumber: 41
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                                                            className: "page-item",
+                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
+                                                                className: "page-link",
+                                                                href: "#",
+                                                                children: "4"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                                lineNumber: 115,
+                                                                columnNumber: 67
+                                                            }, this)
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                            lineNumber: 115,
+                                                            columnNumber: 41
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                                                            className: "page-item",
+                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
+                                                                className: "page-link",
+                                                                href: "#",
+                                                                children: "5"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                                lineNumber: 116,
+                                                                columnNumber: 67
+                                                            }, this)
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                            lineNumber: 116,
+                                                            columnNumber: 41
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                                                            className: "page-item",
+                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
+                                                                className: "page-link",
+                                                                href: "#",
+                                                                children: "6"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                                lineNumber: 117,
+                                                                columnNumber: 67
+                                                            }, this)
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                            lineNumber: 117,
+                                                            columnNumber: 41
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                                                            className: "page-item",
+                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
+                                                                className: "page-link",
+                                                                href: "#",
+                                                                "aria-label": "Next",
+                                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                    "aria-hidden": "true",
+                                                                    children: "»"
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                                    lineNumber: 120,
+                                                                    columnNumber: 49
+                                                                }, this)
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                                lineNumber: 119,
+                                                                columnNumber: 45
+                                                            }, this)
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                            lineNumber: 118,
+                                                            columnNumber: 41
+                                                        }, this)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                    lineNumber: 106,
+                                                    columnNumber: 41
+                                                }, this)
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                                lineNumber: 105,
+                                                columnNumber: 33
+                                            }, this)
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                            lineNumber: 104,
+                                            columnNumber: 29
+                                        }, this)
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                        lineNumber: 103,
+                                        columnNumber: 25
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                                lineNumber: 61,
+                                columnNumber: 21
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                        lineNumber: 56,
+                        columnNumber: 17
+                    }, this)
+                }, void 0, false, {
+                    fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                    lineNumber: 55,
+                    columnNumber: 13
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                lineNumber: 54,
+                columnNumber: 9
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$footer$2f$footer$2d$top$2d$two$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
+                fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                lineNumber: 132,
+                columnNumber: 9
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$footer$2f$footer$2d$light$2d$two$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
+                fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                lineNumber: 134,
+                columnNumber: 9
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$scroll$2d$to$2d$top$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
+                fileName: "[project]/src/app/employer-grid-1/page.tsx",
+                lineNumber: 136,
+                columnNumber: 9
+            }, this)
+        ]
+    }, void 0, true);
+}
+}),
+"[project]/src/app/employer-grid-1/page.tsx [app-rsc] (ecmascript, Next.js Server Component)", ((__turbopack_context__) => {
+
+__turbopack_context__.n(__turbopack_context__.i("[project]/src/app/employer-grid-1/page.tsx [app-rsc] (ecmascript)"));
+}),
+"[externals]/next/dist/shared/lib/no-fallback-error.external.js [external] (next/dist/shared/lib/no-fallback-error.external.js, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("next/dist/shared/lib/no-fallback-error.external.js", () => require("next/dist/shared/lib/no-fallback-error.external.js"));
+
+module.exports = mod;
+}),
+];
+
+//# sourceMappingURL=%5Broot-of-the-server%5D__2ff1e6ea._.js.map
